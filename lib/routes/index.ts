@@ -31,7 +31,6 @@ const getLanding = (req: express.Request, res: express.Response) => {
  * @param {express.Request} req Request object.
  * @param {express.Response} res Response object.
  */
-
 const getAbout = (req: express.Request, res: express.Response) => {
 
   res.render('about', {
@@ -47,7 +46,6 @@ const getAbout = (req: express.Request, res: express.Response) => {
  * @param {express.Request} req Request object.
  * @param {express.Response} res Response object.
  */
-
 const getContact = (req: express.Request, res: express.Response) => {
 
   res.render('contact', {
