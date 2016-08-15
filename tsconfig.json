@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "declaration": false,
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "noLib": false,
+        "outDir": "dist",
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "sourceMap": false,
+        "target": "es6"
+    },
+    "exclude": [
+        "./node_modules/",
+        "./typings"
+    ],
+    "files": [
+        "./index.ts",
+        "./lib/logging/index.ts",
+        "./lib/routes/index.ts",
+        "./lib/server/index.ts"
+    ]
+}
