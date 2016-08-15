@@ -8,6 +8,10 @@ const server = require('./lib/server');
 // Set the default environment to be `development`
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+/**
+ * Starts the application.
+ * @param {Object} options Options to use when starting the application.
+ */
 const start = (options) => {
   options = options || {};
 
@@ -17,6 +21,9 @@ const start = (options) => {
   server.start(options);
 };
 
+/**
+ * Stops the application.
+ */
 const stop = () => {
   log.info('Stopping Naamio.');
   server.stop();

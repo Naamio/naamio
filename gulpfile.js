@@ -12,6 +12,9 @@ const tsProject = ts.createProject("./lib/assets/ts/tsconfig.json");
 // Minifiers
 const uglify = require('gulp-uglify');
 const minifyCSS = require('gulp-cssnano');
+const jsdoc = require('gulp-jsdoc3');
+
+const srcCode = ['./**/*.js', '!./node_modules/**/*.js', './package.json'];
 
 gulp.task("transpile", () => {
     return tsProject.src()
@@ -88,6 +91,15 @@ gulp.task('lint', () => {
     return gulp.src('lib/assets/js/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
+});
+
+/**
+ * Document the project.
+ */
+gulp.task('doc', function (cb) {
+    const config = require('./doc/jsdoc-config.json');
+    gulp.src(['README.md'].concat(srcCode), {read: false})
+        .pipe(jsdoc(config, cb));
 });
 
 /**

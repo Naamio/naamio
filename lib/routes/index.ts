@@ -7,16 +7,14 @@ import * as express from "express";
 const router = express.Router();
 
 /**
- * # getLanding
- * 
  * Retrieves the landing page for the app.
- * 
- * @param: req Request object.
- * @param: res Response object.
+ * @version 0.2.0
+ * @param {express.Request} req Request object.
+ * @param {express.Request} res Response object.
  */
-const getLanding = (req, res) => {
-  if (typeof req.user == 'undefined') {
-    req.user = false;
+const getLanding = (req: express.Request, res: express.Response) => {
+  if (typeof (<any>req).user == 'undefined') {
+    (<any>req).user = false;
   }
 
   res.render('home', {

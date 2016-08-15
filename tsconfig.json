@@ -7,7 +7,7 @@
         "noLib": false,
         "outDir": "dist",
         "preserveConstEnums": true,
-        "removeComments": true,
+        "removeComments": false,
         "sourceMap": false,
         "target": "es6"
     },

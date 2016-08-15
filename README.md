@@ -1,4 +1,4 @@
-# Omnijar.Studio
+# Naamio
 
 ![Codeship Status](https://www.codeship.io/projects/df8daeb0-44f0-0134-496a-460fa3f2896d/status "Codeship Status")
 
