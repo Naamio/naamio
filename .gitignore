@@ -1,7 +1,7 @@
 node_modules/
 built/*
 dist/*
-publish/*
+doc/publish/*
 typings/*
 tests/cases/rwc/*
 tests/cases/test262/*
