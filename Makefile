@@ -46,3 +46,6 @@ run: build
 	./.build/debug/Naamio
 
 .PHONY: run
+
+test: build
+	$(SWIFT_TOOLCHAIN)/swift test

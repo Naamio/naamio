@@ -28,20 +28,26 @@
 * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
-import Foundation
+import XCTest
 
-import Kitura
+class TestServer: XCTestCase {
 
-import LoggerAPI
-import HeliumLogger
+    static var allTests: [(String, (TestErrors) -> () throws -> Void)] {
+        return [
+            ("testServerStartup", testServerStartup)
+        ]
+    }
+    
+    override func setUp() {
+        doSetUp()
+    }
 
-#if os(Linux)
-    import Glibc
-#endif
+    override func tearDown() {
+        doTearDown()
+    }
 
-// Using an implementation for a Logger.
-Log.logger = HeliumLogger()
-
-// All Web apps need a router to define routes.
-let router:Router = Router()
-let server:Server = Server()
+    func testServerStartup {
+        // Set up server for this test
+        let server:Server = Server()
+    }
+}

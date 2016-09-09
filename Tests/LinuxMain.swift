@@ -28,20 +28,18 @@
 * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
-import Foundation
+import XCTest
 
-import Kitura
+@testable import KituraTests
 
-import LoggerAPI
-import HeliumLogger
-
-#if os(Linux)
-    import Glibc
-#endif
-
-// Using an implementation for a Logger.
-Log.logger = HeliumLogger()
-
-// All Web apps need a router to define routes.
-let router:Router = Router()
-let server:Server = Server()
+XCTMain([
+    testCase(TestContentType.allTests),
+    testCase(TestErrors.allTests),
+    testCase(TestRequests.allTests),
+    testCase(TestResponse.allTests),
+    testCase(TestMultiplicity.allTests),
+    testCase(TestCookies.allTests),
+    testCase(TestSubrouter.allTests),
+    testCase(TestRouteRegex.allTests),
+    testCase(TestStaticFileServer.allTests)
+])
