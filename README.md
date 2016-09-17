@@ -9,14 +9,15 @@ produce web apps using TypeScript.
 
 ## The Stack
 
-The app has been built to run on Node.js using TypeScript
-on both the server and client. The reason for this is to
+The app has been built in Swift using [Kitura](https://github.com/IBM-Swift/Kitura)
+on the server and TypeScript on the client. The reason for this is to
 enable consistent and easily-manageable code to be written
 in a modern style across tiers, with the TypeScript 
 transpilation abstracting the complexities of browser
-implementations and the Node.js roadmap. This is a 
-sacrifice between minimising dependencies and simplifying
-development.
+implementations and Swift providing an easy-to-deploy 
+self-maintaining runtime. This is a sacrifice between 
+minimising dependencies and simplifying development on
+the client.
 
 The front-end uses XHTML 5.1 rather than HTML. This enables
 further extensibility of a strict DOM that can be traversed
