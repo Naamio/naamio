@@ -5,15 +5,12 @@ let package = Package(
     targets: [
         Target(
             name: "Naamio",
-            dependencies: ["NaamioServer"]),
+            dependencies: [.Target(name: "NaamioServer")]),
         Target(
             name: "NaamioServer",
-            dependencies: [])
-    ],
+            dependencies: [])],
     dependencies: [
-        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 1, minor: 1),
+        .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 1, minor: 2),
         .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/IBM-Swift/Kitura-MustacheTemplateEngine.git", majorVersion: 1, minor: 1),
-    ],
-    exclude: ["Makefile"]
-)
+        .Package(url: "https://github.com/IBM-Swift/Kitura-MustacheTemplateEngine.git", majorVersion: 1, minor: 1)],
+    exclude: ["Makefile"])
