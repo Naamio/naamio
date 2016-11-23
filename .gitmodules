@@ -1,3 +1,6 @@
 [submodule "content/themes/Kumadori"]
 	path = content/themes/Kumadori
 	url = git@github.com:OmnijarStudio/Kumadori.git
+[submodule "Resources/content/themes/Pakkeli"]
+	path = Resources/content/themes/Pakkeli
+	url = git@github.com:OmnijarStudio/Pakkeli.git
