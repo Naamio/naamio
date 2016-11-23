@@ -36,7 +36,7 @@ import KituraMustache
 import LoggerAPI
 import HeliumLogger
 
-func defineRoutes() {
+func defineRoutes(router: Router) {
     // Variable to post/put data to.
     var name: String?
 

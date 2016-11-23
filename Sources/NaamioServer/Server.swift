@@ -30,19 +30,31 @@
 
 import Foundation
 
+import LoggerAPI
+import HeliumLogger
+
 import Kitura
 import KituraMustache
 
-public class Server {
+enum ServerMode {
+
+    case production
     
+    case development
+}
 
-    init() {
+public class Server {
 
+    public init() {
+        // Using an implementation for a Logger.
+        Log.logger = HeliumLogger()
     }
 
-    func start() {
+    public func start() {
+        let router = Router()
+
         //do {
-        defineRoutes()
+        defineRoutes(router: router)
         //} catch {
         //    exit(1)
         //}

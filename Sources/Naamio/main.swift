@@ -29,19 +29,23 @@
 **/
 
 import Foundation
+import NaamioServer
 
-import Kitura
+func getEnvironmentVar(_ name: String) -> String? {
+    guard let rawValue = getenv(name) else { 
+        return nil 
+    }
+    
+    return String(utf8String: rawValue)
+}
 
-import LoggerAPI
-import HeliumLogger
+func setEnvironmentVar(name: String, value: String, overwrite: Bool = true) {
+    setenv(name, value, overwrite ? 1 : 0)
+}
 
-#if os(Linux)
-    import Glibc
-#endif
+// Set default environment to development.
+setEnvironmentVar(name: "NAAMIO_ENV", value: "development", overwrite: false)
 
-// Using an implementation for a Logger.
-Log.logger = HeliumLogger()
-
-// All Web apps need a router to define routes.
-let router:Router = Router()
 let server:Server = Server()
+
+server.start()
