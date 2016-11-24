@@ -28,24 +28,6 @@
 * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
-import Foundation
-import NaamioCore
-
-func getEnvironmentVar(_ name: String) -> String? {
-    guard let rawValue = getenv(name) else { 
-        return nil 
-    }
+class Logging {
     
-    return String(utf8String: rawValue)
 }
-
-func setEnvironmentVar(name: String, value: String, overwrite: Bool = true) {
-    setenv(name, value, overwrite ? 1 : 0)
-}
-
-// Set default environment to development.
-setEnvironmentVar(name: "NAAMIO_ENV", value: "development", overwrite: false)
-
-let server:Server = Server()
-
-server.start()

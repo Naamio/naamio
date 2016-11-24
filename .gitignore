@@ -2,6 +2,9 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## OS Specific
+.DS_Store
+
 ## Build generated
 build/
 DerivedData/
@@ -9,6 +12,7 @@ DerivedData/
 .build
 .vagrant
 Packages
+*.xcodeproj
 *.pkg
 
 ## Various settings

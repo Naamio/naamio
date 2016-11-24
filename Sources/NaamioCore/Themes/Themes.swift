@@ -30,39 +30,15 @@
 
 import Foundation
 
-import LoggerAPI
-import HeliumLogger
+class Themes {
 
-import Kitura
-import KituraMustache
+    private static let themeFolder = "themes"
 
-enum ServerMode {
+    static func load() {
+        let resources = Resources()
 
-    case production
-    
-    case development
-}
+        let themePath = resources.getFilePath(for: themeFolder)
 
-public class Server {
-
-    public init() {
-        // Using an implementation for a Logger.
-        Log.logger = HeliumLogger()
-    }
-
-    public func start() {
-        let router = Router()
-
-        //do {
-        defineRoutes(router: router)
-        //} catch {
-        //    exit(1)
-        //}
-
-        // Add HTTP Server to listen on port 8090
-        Kitura.addHTTPServer(onPort: 8090, with: router)
-
-        // start the framework - the servers added until now will start listening
-        Kitura.run()
+        print("Theme path: \(themePath)")
     }
 }

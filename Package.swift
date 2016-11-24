@@ -5,9 +5,9 @@ let package = Package(
     targets: [
         Target(
             name: "Naamio",
-            dependencies: [.Target(name: "NaamioServer")]),
+            dependencies: [.Target(name: "NaamioCore")]),
         Target(
-            name: "NaamioServer",
+            name: "NaamioCore",
             dependencies: [])],
     dependencies: [
         .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 1, minor: 2),

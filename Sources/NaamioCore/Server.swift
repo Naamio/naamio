@@ -29,23 +29,42 @@
 **/
 
 import Foundation
-import NaamioCore
 
-func getEnvironmentVar(_ name: String) -> String? {
-    guard let rawValue = getenv(name) else { 
-        return nil 
-    }
+import LoggerAPI
+import HeliumLogger
+
+import Kitura
+import KituraMustache
+
+enum ServerMode {
+
+    case production
     
-    return String(utf8String: rawValue)
+    case development
 }
 
-func setEnvironmentVar(name: String, value: String, overwrite: Bool = true) {
-    setenv(name, value, overwrite ? 1 : 0)
+public class Server {
+
+    public init() {
+        // Using an implementation for a Logger.
+        Log.logger = HeliumLogger()
+    }
+
+    public func start() {
+        let router = Router()
+
+        Themes.load()
+
+        //do {
+        defineRoutes(router: router)
+        //} catch {
+        //    exit(1)
+        //}
+
+        // Add HTTP Server to listen on port 8090
+        Kitura.addHTTPServer(onPort: 8090, with: router)
+
+        // start the framework - the servers added until now will start listening
+        Kitura.run()
+    }
 }
-
-// Set default environment to development.
-setEnvironmentVar(name: "NAAMIO_ENV", value: "development", overwrite: false)
-
-let server:Server = Server()
-
-server.start()
