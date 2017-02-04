@@ -39,7 +39,7 @@ Package-Builder/build/Makefile:
 
 build:
 	@echo --- Building Naamio
-	$(SWIFT_TOOLCHAIN)/swift build
+	swift build
 
 run: build
 	@echo --- Invoking Naamio executable
