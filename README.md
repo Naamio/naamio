@@ -1,6 +1,6 @@
 # Naamio
 
-![Codeship Status](https://www.codeship.io/projects/df8daeb0-44f0-0134-496a-460fa3f2896d/status "Codeship Status")
+[![build status](https://gitlab.com/OmnijarStudio/naamio/badges/master/build.svg)](https://gitlab.com/OmnijarStudio/naamio/commits/master)
 
 Naamio is the primary web app engine for 
 [Omnijar Studio](https://omnijar.studio "Omnijar Studio")

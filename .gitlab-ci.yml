@@ -1,0 +1,20 @@
+image: ibmcom/swift-ubuntu:latest
+
+stages:
+  - build   
+  - test
+
+build_all:
+  stage: build
+  script:
+    - make build
+  tags:
+    - docker
+    
+test_service:
+  stage: test
+  script:
+    - make build 
+    - make run
+  tags:
+    - docker
