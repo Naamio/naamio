@@ -28,26 +28,29 @@
 * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
 
+@testable import NaamioCore
 import XCTest
 
 class TestServer: XCTestCase {
 
-    static var allTests: [(String, (TestErrors) -> () throws -> Void)] {
+    let server:Server = Server()
+
+    /*static var allTests: [(String, (TestErrors) -> () throws -> Void)] {
         return [
             ("testServerStartup", testServerStartup)
         ]
-    }
+    }*/
     
     override func setUp() {
-        doSetUp()
+        super.setUp()
     }
 
     override func tearDown() {
-        doTearDown()
+        super.tearDown()
     }
 
-    func testServerStartup {
+    func testServerStartup() {
         // Set up server for this test
-        let server:Server = Server()
+        
     }
 }
