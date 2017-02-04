@@ -1,20 +1,41 @@
 image: ibmcom/swift-ubuntu:latest
 
 stages:
-  - build   
   - test
+  - build
 
-build_all:
-  stage: build
+review_service:
+  stage: test
   script:
+    - echo "Reviewing Naamio service" 
     - make build
-  tags:
-    - docker
-    
+    - make test
+  only:
+    - branches
+  except: 
+    - master
+
 test_service:
   stage: test
   script:
-    - make build 
-    - make run
+    - echo "Testing Naamio service"
+    - make test
   tags:
     - docker
+  only:
+    - master
+  artifacts:
+    paths:
+    - .build/debug
+
+build_release:
+  stage: build
+  script:
+    - echo "Building release artifact for Naamio"
+    - swift build -c release
+  tags:
+    - release
+  when:
+    - manual
+  only:
+    - release    
