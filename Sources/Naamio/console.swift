@@ -52,7 +52,7 @@ class ConsoleIO {
 
     /// Prints the usage for the system.
     class func printUsage() {
-        let executableName = (CommandLine.arguments[0] as NSString).lastPathComponent
+        let executableName = NSString(string: CommandLine.arguments[0]).lastPathComponent
         
         print("usage:")
         print("\(executableName) -a string1 string2")
