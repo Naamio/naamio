@@ -28,7 +28,7 @@
 
 # Makefile
 export NAAMIO_CI_BUILD_SCRIPTS_DIR=Package-Builder/build
-export SWIFT_TOOLCHAIN=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2016-09-06-a.xctoolchain/usr/bin
+# export SWIFT_TOOLCHAIN=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2016-09-06-a.xctoolchain/usr/bin
 export PATH := $(PATH):$(SWIFT_TOOLCHAIN)
 
 -include Package-Builder/build/Makefile
@@ -48,4 +48,4 @@ run: build
 .PHONY: run
 
 test: build
-	$(SWIFT_TOOLCHAIN)/swift test
+	swift test
