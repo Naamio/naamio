@@ -35,11 +35,11 @@ class TestServer: XCTestCase {
 
     let server:Server = Server()
 
-    /*static var allTests: [(String, (TestErrors) -> () throws -> Void)] {
+    static var allTests: [(String, (TestServer) -> () throws -> Void)] {
         return [
             ("testServerStartup", testServerStartup)
         ]
-    }*/
+    }
     
     override func setUp() {
         super.setUp()

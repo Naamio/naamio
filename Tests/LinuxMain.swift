@@ -30,16 +30,8 @@
 
 import XCTest
 
-@testable import KituraTests
+@testable import NaamioTests
 
 XCTMain([
-    testCase(TestContentType.allTests),
-    testCase(TestErrors.allTests),
-    testCase(TestRequests.allTests),
-    testCase(TestResponse.allTests),
-    testCase(TestMultiplicity.allTests),
-    testCase(TestCookies.allTests),
-    testCase(TestSubrouter.allTests),
-    testCase(TestRouteRegex.allTests),
-    testCase(TestStaticFileServer.allTests)
+    testCase(TestServer.allTests)
 ])
