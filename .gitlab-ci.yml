@@ -35,7 +35,6 @@ build_release:
     - swift build -c release
   tags:
     - release
-  when:
-    - manual
+  when: manual
   only:
     - release    
