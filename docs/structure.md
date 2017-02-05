@@ -4,11 +4,12 @@
 The concept behind the system is this: you give it text 
 written in your favorite markup language, be that Markdown, 
 Stencil, or just plain XHTML, and it churns that through a 
-layout or a series of layout files. Throughout that process 
-you can tweak how you want the site URLs to look, what data 
-gets displayed in the layout, and more. This is all done 
-through editing text files; the resulting web application 
-is the final product.
+layout or a series of layout files. 
+
+Throughout that process you can tweak how you want the 
+site URLs to look, what data gets displayed in the 
+layout, and more. This is all done through editing text
+files; the resulting web application is the final product.
 
 A basic Naamio site usually looks something like this (with
 a little inspiration from Jekyll's documentation):
@@ -74,3 +75,20 @@ Where optimizations cannot currently be made, namely in pre-compilation
 of sources, such as LESS, SASS, and TypeScript, `Naamio` still supports 
 the addition of such sources into the repository and will ensure that those
 sources are treated as "raw", and are thus ignored.
+
+An overview of each of these folders and files is as follows:
+
+<table>
+    <tr>
+        <th>File / Directory</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>_config.yml</td>
+        <td>
+            Stores configuration data. Many of these options can be 
+            specified from the command line executable but it’s easier 
+            to specify them here so you don’t have to remember them.
+        </td>
+    </tr>
+</table>
