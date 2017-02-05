@@ -51,7 +51,6 @@ a little inspiration from Jekyll's documentation):
     |           ├── footer.html
     |           └── header.html
     |
-    ├── public
     └── .metadata
 
 Folders prefixed with underscores (`_`) are intended to be used for raw 
@@ -89,6 +88,53 @@ An overview of each of these folders and files is as follows:
             Stores configuration data. Many of these options can be 
             specified from the command line executable but it’s easier 
             to specify them here so you don’t have to remember them.
+        </td>
+    </tr>
+    <tr>
+        <td>_data</td>
+        <td>
+            Well-formatted site data should be placed here. The `Naamio`
+            engine will autoload all data files in this directory, 
+            and they will be accessible via `site.data`.
+        </td>
+    </tr>
+    <tr>
+        <td>_drafts</td>
+        <td>
+            Drafts are unpublished posts. The format of these files 
+            is without a date: title.MARKUP. Learn how to work with drafts. 
+        </td>
+    </tr>
+    <tr>
+        <td>_pages</td>
+        <td>
+            Anything placed within the `_pages` directory is retained
+            structurally. Markdown and Stencil files will be processed,
+            and then hosted statically by `Naamio` at the root (`/`) of
+            the application.
+        </td>
+    </tr>
+    <tr>
+        <td>_posts</td>
+        <td>
+            Your dynamic content, so to speak. The naming convention of 
+            these files is important, and must follow the format: 
+            `YEAR-MONTH-DAY-title.MARKUP`. The permalinks can be 
+            customized for each post, but the date and markup language 
+            are determined solely by the file name. 
+        </td>
+    </tr>
+    <tr>
+        <td>themes</td>
+        <td>
+            The themes folder allows the designer to select a single
+            theme when running `Naamio`. If only one theme exists within
+            this folder, then that theme is selected by default. No further
+            configuration is necessary. However, if a designer wishes
+            to design a new theme, whilst retaining an older theme until
+            finished, then both can exist in parallel, with one being 
+            set on the live environment, and the other being set 
+            on the local host. 
         </td>
     </tr>
 </table>
