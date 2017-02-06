@@ -93,9 +93,8 @@ An overview of each of these folders and files is as follows:
     <tr>
         <td>_data</td>
         <td>
-            Well-formatted site data should be placed here. The `Naamio`
-            engine will autoload all data files in this directory, 
-            and they will be accessible via `site.data`.
+            Well-formatted site data should be placed here. The <code>Naamio</code>
+            engine will autoload all data files in this directory.
         </td>
     </tr>
     <tr>
@@ -110,8 +109,8 @@ An overview of each of these folders and files is as follows:
         <td>
             Anything placed within the `_pages` directory is retained
             structurally. Markdown and Stencil files will be processed,
-            and then hosted statically by `Naamio` at the root (`/`) of
-            the application.
+            and then hosted statically by <code>Naamio</code> at the 
+            root (<code>/</code>) of the application.
         </td>
     </tr>
     <tr>
@@ -119,7 +118,7 @@ An overview of each of these folders and files is as follows:
         <td>
             Your dynamic content, so to speak. The naming convention of 
             these files is important, and must follow the format: 
-            `YEAR-MONTH-DAY-title.MARKUP`. The permalinks can be 
+            <code>YEAR-MONTH-DAY-title.MARKUP</code>. The permalinks can be 
             customized for each post, but the date and markup language 
             are determined solely by the file name. 
         </td>
@@ -128,7 +127,7 @@ An overview of each of these folders and files is as follows:
         <td>themes</td>
         <td>
             The themes folder allows the designer to select a single
-            theme when running `Naamio`. If only one theme exists within
+            theme when running <code>Naamio</code>. If only one theme exists within
             this folder, then that theme is selected by default. No further
             configuration is necessary. However, if a designer wishes
             to design a new theme, whilst retaining an older theme until

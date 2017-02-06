@@ -29,54 +29,8 @@
 **/
 
 import Foundation
+import JavaScriptCore
 
-import LoggerAPI
-import HeliumLogger
-
-import Kitura
-import KituraMustache
-
-/// Available modes for `Naamio` to operate under. 
-enum ServerMode {
-
-    /// Production is the most lightweight and performant mode, with
-    /// minimal verbosity.
-    case production
+public class Config {
     
-    /// Development provides debugging options, verbose logging, 
-    /// and the ability to hot-switch between themes.
-    case development
-}
-
-/// # Server 
-///
-/// Operates the main server entry-point for `Naamio`, initializing
-/// default configuration, logging, and staging modes.
-public class Server {
-
-    /// Initializes the `Server` object, configuring logging and 
-    /// miscellaneous settings.
-    public init() {
-        // Using an implementation for a Logger.
-        Log.logger = HeliumLogger()
-    }
-
-    /// Starts the `Naamio` web application server. 
-    public func start() {
-        let router = Router()
-
-        Themes.load()
-
-        //do {
-        defineRoutes(router: router)
-        //} catch {
-        //    exit(1)
-        //}
-
-        // Add HTTP Server to listen on port 8090
-        Kitura.addHTTPServer(onPort: 8090, with: router)
-
-        // start the framework - the servers added until now will start listening
-        Kitura.run()
-    }
 }
