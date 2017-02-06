@@ -29,8 +29,25 @@
 **/
 
 import Foundation
-import JavaScriptCore
 
-public class Config {
-    
+/// # Configuration
+/// Manages the configuration for `Naamio`. 
+public class Configuration {
+
+    /// Defaults for `Naamio` configuration.
+    static let defaults = DefaultConfiguration()
+
+}
+
+/// Default configuration for `Naamio`.
+struct DefaultConfiguration {
+
+    /// Default search paths to look for static files.
+    static let searchPaths = ["Resources/content/", 
+                              "content"]
+
+    /// Initializes a new `DefaultConfiguration` object.
+    fileprivate init() {
+
+    }
 }
