@@ -43,7 +43,7 @@ public class Configuration {
 struct DefaultConfiguration {
 
     /// Default search paths to look for static files.
-    static let searchPaths = ["Resources/content/", 
+    let searchPaths = ["Resources/content/", 
                               "content"]
 
     /// Initializes a new `DefaultConfiguration` object.
