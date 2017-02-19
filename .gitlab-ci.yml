@@ -1,8 +1,9 @@
 
 variables:
   DOCKER_DRIVER: overlay
-  CONTAINER_TEST_IMAGE: registry.gitlab.com/omnijarstudio/naamio:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/omnijarstudio/naamio:latest
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 cache:
   untracked: true
@@ -32,23 +33,6 @@ build-app:
   only:
     - release   
 
-release-image:
-  image: docker:latest
-  stage: release
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  script:
-    - docker build --pull -t $CONTAINER_TEST_IMAGE -f Dockerfile .
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_IMAGE:latest
-    - docker push $CONTAINER_IMAGE:latest
-  when: manual
-  tags:
-    - docker
-  only: 
-    - release
-
 review-app:
   image: ibmcom/swift-ubuntu:latest
   stage: test
@@ -74,6 +58,23 @@ test-app:
   artifacts:
     paths:
     - .build/debug
+
+release-image:
+  image: docker:latest
+  stage: release
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  script:
+    - docker build --pull -t $CONTAINER_TEST_IMAGE -f Dockerfile .
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_IMAGE:latest
+    - docker push $CONTAINER_IMAGE:latest
+  when: manual
+  tags:
+    - docker
+  only: 
+    - release
 
 #release-image:
 #  image: docker:latest
