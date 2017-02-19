@@ -32,22 +32,29 @@ import Foundation
 
 /// # Configuration
 /// Manages the configuration for `Naamio`. 
-public class Configuration {
+public class Config {
+
+    /// MARK: - Static Properties
 
     /// Defaults for `Naamio` configuration.
     static let defaults = DefaultConfiguration()
 
+    /// MARK: - Instance Properties
+
+    init() {
+
+    }
 }
 
 /// Default configuration for `Naamio`.
 struct DefaultConfiguration {
 
-    /// Default search paths to look for static files.
-    let searchPaths = ["Resources/content/", 
-                              "content"]
+    /// Search paths to look for static files.
+    let searchPaths: ["Resources/content/", 
+                       "content"]
 
     /// Initializes a new `DefaultConfiguration` object.
-    fileprivate init() {
+    init() {
 
     }
 }
