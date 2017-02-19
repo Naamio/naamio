@@ -50,8 +50,8 @@ public class Config {
 struct DefaultConfiguration {
 
     /// Search paths to look for static files.
-    let searchPaths: ["Resources/content/", 
-                       "content"]
+    //let searchPaths: ["Resources/content/", 
+    //                   "content"]
 
     /// Initializes a new `DefaultConfiguration` object.
     init() {
