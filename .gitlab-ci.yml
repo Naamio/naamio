@@ -1,0 +1,94 @@
+
+variables:
+  DOCKER_DRIVER: overlay
+  CONTAINER_TEST_IMAGE: registry.gitlab.com/omnijarstudio/naamio:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/omnijarstudio/naamio:latest
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_NAME"
+  #paths:
+   # - .build/
+
+stages:
+  - build
+  - test
+  - release
+  #- deploy
+
+build-app:
+  image: ibmcom/swift-ubuntu:latest
+  stage: build
+  script:
+    - echo "Building release artifact for Naamio"
+    - swift build -c release
+  artifacts:
+    paths:
+    - .build/release
+    expire_in: 1 week
+  tags:
+    - release
+  when: manual
+  only:
+    - release   
+
+release-image:
+  image: docker:latest
+  stage: release
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  script:
+    - docker build --pull -t $CONTAINER_TEST_IMAGE -f Dockerfile .
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_IMAGE:latest
+    - docker push $CONTAINER_IMAGE:latest
+  when: manual
+  only: 
+    - release
+
+review-app:
+  image: ibmcom/swift-ubuntu:latest
+  stage: test
+  script:
+    - echo "Reviewing Naamio service" 
+    - make build
+    - make test
+  only:
+    - branches
+  except: 
+    - master
+
+test-app:
+  image: ibmcom/swift-ubuntu:latest
+  stage: test
+  script:
+    - echo "Testing Naamio service"
+    - make test
+  tags:
+    - docker
+  only:
+    - master
+  artifacts:
+    paths:
+    - .build/debug
+
+#release-image:
+#  image: docker:latest
+#  stage: release
+#  script:
+#    - docker pull $CONTAINER_TEST_IMAGE
+#    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+#    - docker push $CONTAINER_RELEASE_IMAGE
+#  only:
+#    - release
+
+#deploy:
+#  image: ibmcom/swift-ubuntu:latest
+#  stage: deploy
+#  script:
+#    - ./deploy.sh
+#  only:
+#    - master
+
+ 
