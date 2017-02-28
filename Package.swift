@@ -1,7 +1,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Naamio",
+    name: "naamio",
     targets: [
         Target(
             name: "Naamio",
