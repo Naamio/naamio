@@ -22,7 +22,7 @@ build-app:
   stage: build
   script:
     - echo "Building release artifact for Naamio"
-    - swift build -c release -Xcc -fblocks -Xswiftc -static-stdlib -Xlinker -L/usr/local/lib 
+    - swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib 
   artifacts:
     paths:
     - .build/release
