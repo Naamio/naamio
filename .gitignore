@@ -14,6 +14,7 @@ DerivedData/
 Packages
 *.xcodeproj
 *.pkg
+Package.pins
 
 ## Various settings
 *.pbxuser

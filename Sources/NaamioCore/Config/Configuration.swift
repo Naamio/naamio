@@ -35,26 +35,14 @@ import Foundation
 public class Config {
 
     /// MARK: - Static Properties
-
-    /// Defaults for `Naamio` configuration.
-    static let defaults = DefaultConfiguration()
-
+    
+    
+    /// Settings are static configuration parameters 
+    /// used during the programs runtime.
+    public static var settings: [String: Any] = ["naamio.env"   :  "development",
+                                                 "naamio.port"  :  8090,
+                                                 "naamio.theme" :  "theme"]
+    
     /// MARK: - Instance Properties
 
-    init() {
-
-    }
-}
-
-/// Default configuration for `Naamio`.
-struct DefaultConfiguration {
-
-    /// Search paths to look for static files.
-    //let searchPaths: ["Resources/content/", 
-    //                   "content"]
-
-    /// Initializes a new `DefaultConfiguration` object.
-    init() {
-
-    }
 }

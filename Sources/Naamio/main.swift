@@ -49,9 +49,9 @@ func setEnvironmentVar(name: String, value: String, overwrite: Bool = true) {
 
 // Set default environment to development.
 setEnvironmentVar(name: "NAAMIO_ENV", value: "development", overwrite: false)
+setEnvironmentVar(name: "NAAMIO_TEMPLATES", value: "../pakkeli/partials/", overwrite: false)
+setEnvironmentVar(name: "NAAMIO_PORT", value: "8090", overwrite: false)
 
-ConsoleIO.printUsage()
-
-let server:Server = Server()
-
-server.start()
+Log.logger = ConsoleLogger()
+Console.loadConfig()
+Server.start()

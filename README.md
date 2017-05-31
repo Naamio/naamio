@@ -7,6 +7,14 @@ Naamio is the primary web app engine for
 It can be extended with themes and applets to rapidly
 produce web apps using TypeScript.
 
+## Features
+
+* [Activity Streams](http://activitystrea.ms/)
+* HMAC Support
+* Salmon Protocol
+* [WebFinger](https://www.packetizer.com/ws/webfinger/)
+* [WebSub](https://w3c.github.io/websub/) support for Atom & RSS
+
 ## The Stack
 
 The app has been built in Swift using [Kitura](https://github.com/IBM-Swift/Kitura)

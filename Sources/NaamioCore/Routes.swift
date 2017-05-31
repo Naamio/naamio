@@ -31,20 +31,34 @@
 import Foundation
 
 import Kitura
-import KituraMustache
-
-import LoggerAPI
-import HeliumLogger
+import NaamioTemplateEngine
 
 func defineRoutes(router: Router) {
     // Variable to post/put data to.
     var name: String?
+    
+    let mte = NaamioTemplateEngine()
 
     // This route executes the echo middleware
     router.all(middleware: BasicAuthMiddleware())
 
     router.all("/static", middleware: StaticFileServer())
-
+    
+    router.setDefault(templateEngine: NaamioTemplateEngine())
+    
+    for template in Templating.templates {
+        let templateName = NSString(string: template).deletingPathExtension
+        
+        let context: [String: Any] = [
+            "meta_title": "Naamio",
+            "count": 4
+        ]
+        
+        router.get("/\(templateName)") { _, response, next in
+            try response.render(templateName, context: context)
+        }
+    }
+    
     router.get("/hello") { _, response, next in
         response.headers["content-type"] = "text/plain; charset=utf-8"
         let fName = name ?? "World"
@@ -52,14 +66,14 @@ func defineRoutes(router: Router) {
     }
 
     // This route accepts POST requests
-    router.post("/hello") {request, response, next in 
+    router.post("/hello") { request, response, next in
         response.headers["content-type"] = "text/plain; charset=utf-8"
         name = try request.readString()
         try response.send("Got a POST request").end()
     }
 
     // This route accepts DELETE requests
-    router.delete("/hello") {request, response, next in
+    router.delete("/hello") { request, response, next in
         response.headers["content-type"] = "text/plain; charset=utf-8"
         name = nil
         try response.send("Got a DELETE request").end()
@@ -102,10 +116,6 @@ func defineRoutes(router: Router) {
         try response.send("I come afterward...\n").end()
     }
 
-    // Support for Mustache implemented for OSX only yet
-    #if !os(Linux)
-    router.setDefault(templateEngine: MustacheTemplateEngine())
-
     router.get("/trimmer") { _, response, next in
         defer {
             next()
@@ -122,11 +132,9 @@ func defineRoutes(router: Router) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         context["format"] = dateFormatter
-
+        
         try response.render("document", context: context).end()
     }
-    #endif
-
     // Handles any errors that get set
     router.error { request, response, next in 
         response.headers["content-type"] = "text/plain; charset=utf-8"

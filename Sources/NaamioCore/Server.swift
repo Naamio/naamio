@@ -30,53 +30,67 @@
 
 import Foundation
 
-import LoggerAPI
-import HeliumLogger
-
 import Kitura
 import KituraMustache
 
 /// Available modes for `Naamio` to operate under. 
-enum ServerMode {
+public enum ServerMode: String {
 
     /// Production is the most lightweight and performant mode, with
     /// minimal verbosity.
-    case production
+    case production = "production"
     
     /// Development provides debugging options, verbose logging, 
     /// and the ability to hot-switch between themes.
-    case development
+    case development = "development"
+    
+    init(value: String) {
+        switch value {
+        case "development": self = .development
+        case "production": self = .production
+        default: self = .development
+        }
+    }
 }
 
-/// # Server 
+/// # Server
 ///
 /// Operates the main server entry-point for `Naamio`, initializing
 /// default configuration, logging, and staging modes.
 public class Server {
+    
+    /// Mode at which the server is running. Useful for 
+    /// development purposes as the server can be used as
+    /// an instant feedback agent whilst designing and developing
+    /// aspects of an application.
+    public static var mode: ServerMode = .development
 
     /// Initializes the `Server` object, configuring logging and 
     /// miscellaneous settings.
     public init() {
-        // Using an implementation for a Logger.
-        Log.logger = HeliumLogger()
+        
     }
 
     /// Starts the `Naamio` web application server. 
-    public func start() {
+    public class func start() {        
         let router = Router()
 
-        Themes.load()
+        Templating.load()
+        
+        // Set default view path to template path.
+        router.viewsPath = Templating.path
 
-        //do {
         defineRoutes(router: router)
-        //} catch {
-        //    exit(1)
-        //}
 
         // Add HTTP Server to listen on port 8090
         Kitura.addHTTPServer(onPort: 8090, with: router)
 
         // start the framework - the servers added until now will start listening
         Kitura.run()
+    }
+    
+    /// Translates the option to the enum value.
+    public class func getServerMode(_ mode: String) -> (mode: ServerMode, value: String) {
+        return (ServerMode(value: mode), mode)
     }
 }
