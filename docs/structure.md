@@ -27,31 +27,31 @@ a little inspiration from Jekyll's documentation):
     ├── _posts
     |   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
     |   └── 2009-04-26-barcamp-boston-4-roundup.md
-    ├── templates
-    |   └── my-theme
-    |       ├── assets
-    |       |   ├── scripts   
-    |       |   |   ├── js
-    |       |   |   |   ├── d3.js
-    |       |   |   |   └── mail.js
-    |       |   |   └── ts
-    |       |   |       ├── app.ts
-    |       |   |       └── branding.ts
-    |       |   ├── images
-    |       |   |   ├── rasters
-    |       |   |   └── vectors
-    |       |   └── styles
-    |       |       ├── css
-    |       |       |   ├── base.css
-    |       |       |   └── screen.css
-    |       |       └── fonts
+    ├── assets
+    |   ├── scripts
+    |   |   ├── js
+    |   |   |   ├── d3.js
+    |   |   |   └── mail.js
+    |   |   └── ts
+    |   |       ├── app.ts
+    |   |       └── branding.ts
+    |   ├── images
+    |   |   ├── rasters
+    |   |   └── vectors
+    |   └── styles
+    |       ├── css
+    |       |   ├── base.css
+    |       |   └── screen.css
+    |       └── fonts
+    ├── stencils
     |       ├── layouts
     |       |   ├── default.html
     |       |   └── post.html
-    |       └── partials
-    |           ├── footer.html
-    |           └── header.html
-    |
+    |       ├── partials
+    |       |   ├── footer.html
+    |       |   └── header.html
+    |       ├── home.html
+    |       └── contact.html
     └── .metadata
 ```
 
