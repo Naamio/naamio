@@ -31,7 +31,6 @@
 import Foundation
 
 import Kitura
-import KituraMustache
 
 /// Available modes for `Naamio` to operate under. 
 public enum ServerMode: String {
@@ -80,10 +79,12 @@ public class Server {
         // Set default view path to template path.
         router.viewsPath = Templating.path
 
-        defineRoutes(router: router)
+        Routes.defineRoutes(router: router)
 
         // Add HTTP Server to listen on port 8090
-        Kitura.addHTTPServer(onPort: 8090, with: router)
+        let port = Config.settings["naamio.port"] as? Int ?? 8090
+        
+        Kitura.addHTTPServer(onPort: port, with: router)
 
         // start the framework - the servers added until now will start listening
         Kitura.run()

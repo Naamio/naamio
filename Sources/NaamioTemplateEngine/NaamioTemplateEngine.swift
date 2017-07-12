@@ -30,8 +30,11 @@
 
 
 import KituraTemplateEngine
-import Stencil
+import Malline
 import PathKit
+import Foundation
+
+
 
 public class NaamioTemplateEngine: TemplateEngine {
     public var fileExtension: String { return "stencil" }
@@ -44,13 +47,34 @@ public class NaamioTemplateEngine: TemplateEngine {
     public func render(filePath: String, context: [String: Any]) throws -> String {
         let templatePath = Path(filePath)
         let templateDirectory = templatePath.parent()
-        
+
         let loader = FileSystemLoader(paths: [templateDirectory])
+        `extension`.registerFilter("assets", filter: assetsFilter)
         let environment = Environment(loader: loader, extensions: [`extension`])
         var context = context
         context["loader"] = loader
         
-        return try environment.renderTemplate(name: templatePath.lastComponent,  context: context)
+        return try environment.renderStencil(name: templatePath.lastComponent,  context: context)
+    }
+    
+    func assetsFilter(value: Any?, arguments: [Any?]) throws -> Any? {
+        var path: String
+        
+        if let value = arguments.first as? String {
+            path = value
+        } else {
+            throw StencilSyntaxError("Assets tag must be called with a String argument")
+        }
+        
+        path = "/assets" + path
+        
+        /*
+        if let value = value as? String {
+            return "/assets" + value
+        }
+ */
+        
+        return path
     }
     
     /*public func render(filePath: String, context: [String: Any]) throws -> String {

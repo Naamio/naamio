@@ -14,8 +14,9 @@ files; the resulting web application is the final product.
 A basic Naamio site usually looks something like this (with
 a little inspiration from Jekyll's documentation):
 
+```
     .
-    ├── _config.yml
+    ├── naamio.yml
     ├── _data
     |   └── members.yml
     ├── _drafts
@@ -26,7 +27,7 @@ a little inspiration from Jekyll's documentation):
     ├── _posts
     |   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
     |   └── 2009-04-26-barcamp-boston-4-roundup.md
-    ├── themes
+    ├── templates
     |   └── my-theme
     |       ├── assets
     |       |   ├── scripts   
@@ -52,6 +53,7 @@ a little inspiration from Jekyll's documentation):
     |           └── header.html
     |
     └── .metadata
+```
 
 Folders prefixed with underscores (`_`) are intended to be used for raw 
 original data, where as folders prefixed with periods (`.`) are intended

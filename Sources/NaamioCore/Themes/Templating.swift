@@ -34,7 +34,7 @@ import Foundation
 /// and provide it in a structured method to the end-user.
 class Templating {
     
-    private static let templateSuffix = "mustache"
+    private static let templateSuffix = "stencil"
     
     static var templates: [String] = {
         let resources = Resources()
@@ -44,12 +44,12 @@ class Templating {
 
     /// The path of the templates.
     static var path: String {
-        return Config.settings["naamio.templates"] as! String
+        return Config.settings["naamio.templates"] as? String ?? "_templates/leaf"
     }
 
     /// Loads the templates into memory for safe and efficient
     /// processing at runtime.
     static func load() {
-
+        
     }
 }

@@ -62,7 +62,7 @@ class Console {
         Console.readArgs()
         
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_ENV") ?? "development", forKey: "naamio.env")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_TEMPLATES") ?? "content/themes/leaf", forKey: "naamio.templates")
+        Config.settings.updateValue(getEnvironmentVar("NAAMIO_TEMPLATES") ?? "_templates/leaf", forKey: "naamio.templates")
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_SOURCE") ?? "public", forKey: "naamio.source")
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_PORT") ?? "8090", forKey: "naamio.port")
     }
@@ -81,7 +81,9 @@ class Console {
             case "s":
                 setEnvironmentVar(name: "NAAMIO_SOURCE", value: CommandLine.arguments[index+1], overwrite: false)
             case "t":
-                setEnvironmentVar(name: "NAAMIO_THEME", value: CommandLine.arguments[index+1], overwrite: false)
+                setEnvironmentVar(name: "NAAMIO_TEMPLATES", value: CommandLine.arguments[index+1], overwrite: false)
+            case "p":
+                setEnvironmentVar(name: "NAAMIO_PORT", value: CommandLine.arguments[index+1], overwrite: false)
             default: break
             }
         }
@@ -91,6 +93,7 @@ class Console {
     class func printUsage() {
         let executableName = NSString(string: CommandLine.arguments[0]).lastPathComponent
         let usageString = "Usage: \(executableName) [-e <environment>] [-h] [-s <source>] [-t <templates>]\n" +
+                          "                         [-p <port>]" +
                           "  e: Environment mode (i.e. \"development\" or \"production\")\n" +
                           "  s: Source of the app content (default is \"public\" folder in current working directory)\n" +
                           "  t: Theme to load (as a path; can be relative, or git repository)\n"
