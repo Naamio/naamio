@@ -1,7 +1,7 @@
 /**
  * Omnijar Seneca License 1.0
  *
- * Copyright (c) 2016 Omnijar Studio Oy
+ * Copyright (c) 2017 Omnijar Studio Oy
  * All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -30,15 +30,3 @@
 
 import Foundation
 
-import Kitura
-
-class HeadersMiddleware: RouterMiddleware {
-    func handle(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Headers"] = "accept, content-type"
-        response.headers["Access-Control-Allow-Methods"] = "GET,HEAD,POST,DELETE,OPTIONS,PUT"
-        response.headers["Server"] = "Naamio/0.2.0"
-        response.headers["X-Powered-By"] = "Naamio/0.2.0"
-        next()
-    }
-}

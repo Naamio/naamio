@@ -34,7 +34,7 @@ import Foundation
 /// and provide it in a structured method to the end-user.
 class Templating {
     
-    private static let templateSuffix = "stencil"
+    private static let templateSuffix = "html"
     
     static var templates: [String] = {
         let resources = Resources()

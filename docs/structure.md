@@ -67,7 +67,7 @@ Ghost, to deliver a performant, rich, and dynamic application platform,
 whilst staying as true to its mission of being simple as possible.
 
 `Naamio` intends to optimize assets, such as JavaScript, Cascading Style Sheets,
-rasters, and vectors. Therefore, providing those within the theme will enable 
+rasters, and vectors. Therefore, providing those within the template will enable 
 `Naamio` to run optimization routines on the assets dynamically based on demand.
 In this way, `Naamio` differs from other site generators and hosts where optimizations
 are commonly made prior to deployment, based on the designer's assumptions.

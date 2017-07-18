@@ -28,50 +28,33 @@
  * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
-import KituraTemplateEngine
-import Malline
-import PathKit
 import Foundation
+import Malline
 
-public class NaamioTemplateEngine: TemplateEngine {
-    public var fileExtension: String { return "html" }
-    private let `extension`: Extension
+class AssetTag : TagType {
+    let assetName: Variable
     
-    public init(extension: Extension = Extension()) {
-        self.`extension` = `extension`
-    }
-    
-    public func render(filePath: String, context: [String: Any]) throws -> String {
-        let templatePath = Path(filePath)
-        let templateDirectory = templatePath.parent()
-
-        let loader = FileSystemLoader(paths: [templateDirectory])
-        `extension`.registerTag("asset", parser: AssetTag.parse)
-        let environment = Environment(loader: loader, extensions: [`extension`])
-        var context = context
-        context["loader"] = loader
+    class func parse(_ parser: TokenParser, token: Token) throws -> TagType {
+        let bits = token.components()
         
-        return try environment.renderStencil(name: templatePath.lastComponent,  context: context)
-    }
-    
-    func assetsFilter(value: Any?, arguments: [Any?]) throws -> Any? {
-        var path: String
-        
-        if let value = arguments.first as? String {
-            path = value
-        } else {
-            throw StencilSyntaxError("Asset tag must be called with a String argument")
+        guard bits.count == 2 else {
+            throw StencilSyntaxError("'asset' tag takes one argument, the asset file to be included")
         }
         
-        path = "/assets" + path
-        
-        /*
-        if let value = value as? String {
-            return "/assets" + value
+        return AssetTag(assetName: Variable(bits[1]))
+    }
+    
+    init(assetName: Variable) {
+        self.assetName = assetName
+    }
+    
+    func render(_ context: Context) throws -> String {
+        guard let assetName = try self.assetName.resolve(context) as? String else {
+            throw StencilSyntaxError("'\(self.assetName)' could not be resolved as a string")
         }
- */
         
-        return path
+        let assetPath = "/assets" + assetName
+        
+        return assetPath
     }
 }
-

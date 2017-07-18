@@ -84,7 +84,7 @@ class Routes {
             
             Log.info("Registering template '/\(templateName)")
             
-            router.get("/\(templateName)") { _, response, next in
+            router.get("/\(templateName)") { request, response, next in
                 defer {
                     next()
                 }
@@ -97,10 +97,36 @@ class Routes {
                             "title": templateName
                         ],
                         "partials": [
-                            "header": false,
-                            "footer": false
+                            "header": true,
+                            "footer": true
+                        ]
+                    ]
+                    
+                    try response.render(templateName, context: context).end()
+                } catch {
+                    Log.error("Failed to render template \(error)")
+                }
+            }
+            
+            router.get("/\(templateName)/:id") { request, response, next in
+                defer {
+                    next()
+                }
+                do {
+                    let context: [String: Any] = [
+                        "meta": [
+                            "title": "Naamio"
                         ],
-                        "count": 4
+                        "page": [
+                            "title": templateName
+                        ],
+                        "partials": [
+                            "header": true,
+                            "footer": true
+                        ],
+                        "data": [
+                            "id": request.parameters["id"]
+                        ]
                     ]
                     
                     try response.render(templateName, context: context).end()
@@ -110,82 +136,6 @@ class Routes {
             }
         }
         
-        router.get("/hello") { _, response, next in
-            response.headers["content-type"] = "text/plain; charset=utf-8"
-            let fName = name ?? "World"
-            try response.send("Hello \(fName), from Omnijar!").end()
-        }
-        
-        // This route accepts POST requests
-        router.post("/hello") { request, response, next in
-            response.headers["content-type"] = "text/plain; charset=utf-8"
-            name = try request.readString()
-            try response.send("Got a POST request").end()
-        }
-        
-        // This route accepts DELETE requests
-        router.delete("/hello") { request, response, next in
-            response.headers["content-type"] = "text/plain; charset=utf-8"
-            name = nil
-            try response.send("Got a DELETE request").end()
-        }
-        
-        // Error handling example
-        router.get("/error") { _, response, next in
-            Log.error("Example of error being set")
-            response.status(.internalServerError)
-            response.error = NSError(domain: "RouterTestDomain", code: 1, userInfo: [:])
-            next()
-        }
-        
-        // Redirection example
-        router.get("/redir") { _, response, next in
-            try response.redirect("http://www.ibm.com")
-            next()
-        }
-        
-        // Reading parameters
-        // Accepts user as a parameter
-        router.get("/users/:user") { request, response, next in
-            response.headers["content-type"] = "text/html"
-            let p1 = request.parameters["user"] ?? "(nil)"
-            try response.send(
-                "<!DOCTYPE html><html><body>" +
-                    "<b>User:</b> \(p1)" +
-                "</body></html>\n\n").end()
-        }
-        
-        // Uses multiple handler blocks
-        router.get("/multi", handler: { request, response, next in
-            response.send("I'm here!\n")
-            next()
-        }, { request, response, next in
-            response.send("Me too!\n")
-            next()
-        })
-        router.get("/multi") { request, response, next in
-            try response.send("I come afterward...\n").end()
-        }
-        
-        router.get("/trimmer") { _, response, next in
-            defer {
-                next()
-            }
-            
-            var context: [String: Any] = [
-                "name": "Arthur",
-                "date": NSDate(),
-                "realDate": NSDate().addingTimeInterval(60*60*24*3),
-                "late": true
-            ]
-            
-            // Let template format dates with `{{format(...)}}`
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            context["format"] = dateFormatter
-            
-            try response.render("document", context: context).end()
-        }
         // Handles any errors that get set
         router.error { request, response, next in
             response.headers["content-type"] = "text/plain; charset=utf-8"
@@ -203,7 +153,21 @@ class Routes {
             if response.statusCode == .unknown {
                 // Remove this wrapping if statement, if you want to handle requests to / as well
                 if request.originalURL != "/" && request.originalURL != "" {
-                    try response.status(.notFound).send("Route '\(request.originalURL)' not found in application!").end()
+                    let context: [String: Any] = [
+                        "meta": [
+                            "title": "Oops!"
+                        ],
+                        "not-found": request.originalURL,
+                        "page": [
+                            "title": "404"
+                        ],
+                        "partials": [
+                            "header": true,
+                            "footer": true
+                        ]
+                    ]
+                    
+                    try response.status(.notFound).render("40x", context: context).end()
                 }
             }
             next()
