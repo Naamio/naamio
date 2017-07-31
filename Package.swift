@@ -21,7 +21,6 @@ let package = Package(
         .Package(url: "https://github.com/IBM-Swift/HeliumLogger.git", majorVersion: 1, minor: 7),
         .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 1, minor: 7),
         .Package(url: "https://github.com/IBM-Swift/Kitura-Markdown", majorVersion: 0, minor: 9),
-        .Package(url: "https://github.com/OmnijarStudio/malline", majorVersion: 0, minor: 2)//,
-        //.Package(url: "https://github.com/ReactiveX/RxSwift", majorVersion: 3, minor: 6)
+        .Package(url: "https://github.com/OmnijarStudio/malline", majorVersion: 0, minor: 2)
     ],
     exclude: ["Makefile"])
