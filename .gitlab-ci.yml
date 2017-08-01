@@ -1,4 +1,3 @@
-
 variables:
   DOCKER_DRIVER: overlay
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
@@ -6,8 +5,9 @@ variables:
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 cache:
-  untracked: true
   key: "$CI_PROJECT_NAME"
+  untracked: false
+  policy: push
   #paths:
    # - .build/
 
