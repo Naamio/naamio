@@ -1,4 +1,4 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 import PackageDescription
 
 private func getTargetPath(_ name: String, for type: String) -> String {
@@ -53,10 +53,10 @@ let coreTargets: [Target] = [
     .target(
         name: "NaamioCore",
         dependencies: [
-            .byNameItem(name: "Kitura"),
-            .byNameItem(name: "KituraMarkdown"),
-            .byNameItem(name: "Loki"),
-            .byNameItem(name: "Viila"),
+            "Kitura",
+            "KituraMarkdown",
+            "Loki",
+            "Viila",
         ],
         path: getSourcePath("Core")
     ),
@@ -106,7 +106,7 @@ let coreTargets: [Target] = [
         name: "NaamioStore",
         dependencies: [
             .target(name: "NaamioCore"),
-            .byNameItem(name: "SwiftKuerySQLite")
+            "SwiftKuerySQLite"
         ],
         path: getSourcePath("Store")
     )
@@ -116,14 +116,15 @@ let serviceTargets: [Target] = [
     .target(
         name: "NaamioAPI",
         dependencies: [
-            .byNameItem(name: "Palvelu")
+            .target(name: "NaamioCore"),
+            "Palvelu"
         ],
         path: getSourcePath("API")
     ),
     .target(
         name: "NaamioClient",
         dependencies: [
-            .byNameItem(name: "NaamioAPI")
+            "NaamioAPI"
         ],
         path: getSourcePath("Client")
     ),
@@ -140,23 +141,23 @@ let serviceTargets: [Target] = [
             .target(name: "NaamioMeta"),
             .target(name: "NaamioMetrics"),
             .target(name: "NaamioScheduling"),
-            .byNameItem(name: "Palvelu")
+            "Palvelu"
         ],
         path: getSourcePath("Service")
     ),
     .target(
         name: "NaamioTemplateEngine",
         dependencies: [
-            .byNameItem(name: "Kitura"),
-            .byNameItem(name: "Malline"),
-            .target(name: "NaamioCore")
+            "Kitura",
+            "Malline",
+            "NaamioCore"
         ],
         path: getSourcePath("Template")
     ),
     .target(
         name: "NaamioWeb",
         dependencies: [
-            .byNameItem(name: "KituraMarkdown"),
+            "KituraMarkdown",
             .target(name: "NaamioAnalytics"),
             .target(name: "NaamioAPI"),
             .target(name: "NaamioContent"),
@@ -168,7 +169,7 @@ let serviceTargets: [Target] = [
             .target(name: "NaamioMetrics"),
             .target(name: "NaamioScheduling"),
             .target(name: "NaamioTemplateEngine"),
-            .byNameItem(name: "Palvelu")
+            "Palvelu"
         ],
         path: getSourcePath("Web")
     ),
