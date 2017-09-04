@@ -14,7 +14,7 @@ test:
   stage: test
   before_script:
     # Install dependencies
-    - apt-get install sqlite3 libsqlite3-dev
+    - apt-get update -y && apt-get install sqlite3 libsqlite3-dev
   script:
     - echo "Testing service"
     - make test
@@ -32,7 +32,7 @@ review:
   stage: test
   before_script:
     # Install dependencies
-    - apt-get install sqlite3 libsqlite3-dev
+    - apt-get update -y && apt-get install sqlite3 libsqlite3-dev
   script:
     - echo "Reviewing service" 
     - make test
