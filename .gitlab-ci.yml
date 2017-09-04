@@ -53,6 +53,8 @@ build:linux:
     # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
     - mkdir -p ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    # Install dependencies
+    - apt-get install sqlite3 libsqlite3-dev
   script:
     - echo "Building release artifact."
     - swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib 
