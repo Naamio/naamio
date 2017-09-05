@@ -6,12 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.4.0] - 2018-06
+## [0.4.0] - 2018-12
 ### Added
 - Naamio templates add i18n support
 - Naamio adds Helm configs
 
-## [0.2.0] - 2018-04
+## [0.2.0] - 2018-10
 ### Added
 - Naamio adds Activity API
 - Naamio adds RBAC API
