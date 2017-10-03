@@ -18,7 +18,7 @@ stages:
   #- deploy
 
 build-app:
-  image: ibmcom/swift-ubuntu:latest
+  image: ibmcom/swift-ubuntu:4.0
   stage: build
   script:
     - echo "Building release artifact for Naamio"
@@ -34,7 +34,7 @@ build-app:
     - release   
 
 review-app:
-  image: ibmcom/swift-ubuntu:latest
+  image: ibmcom/swift-ubuntu:4.0
   stage: test
   script:
     - echo "Reviewing Naamio service" 

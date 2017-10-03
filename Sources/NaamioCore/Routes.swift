@@ -46,12 +46,27 @@ class Routes {
         router.add(templateEngine: KituraMarkdown())
         
         router.get("/") { _, response, next in
-            let context: [String: Any] = [
-                "meta_title": "Naamio",
-                "count": 4
-            ]
-            
-            try response.render("home", context: context).end()
+            defer {
+                next()
+            }
+            do {
+                let context: [String: Any] = [
+                    "meta": [
+                        "title": "Naamio"
+                    ],
+                    "page": [
+                        "title": "Home"
+                    ],
+                    "partials": [
+                        "header": true,
+                        "footer": true
+                    ]
+                ]
+                
+                try response.render("index", context: context).end()
+            } catch {
+                Log.error("Failed to render template \(error)")
+            }
         }
         
         for template in Templating.templates {
