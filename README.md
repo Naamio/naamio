@@ -4,7 +4,11 @@
 [![macOS](https://img.shields.io/badge/os-macOS-green.svg?style=flat)]()
 [![Linux](https://img.shields.io/badge/os-linux-green.svg?style=flat)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)](https://opensource.org/licenses/MIT)
+<<<<<<< HEAD
 [![Twitter: @hellonaamio](https://img.shields.io/badge/contact-@hellonaamio-blue.svg?style=flat)](https://twitter.com/hellonaamio)
+=======
+[![Twitter: @hellonaamio](https://img.shields.io/badge/contact-@omnijarstudio-blue.svg?style=flat)](https://twitter.com/hellonaamio)
+>>>>>>> Patched logging.
 
 Naamio is the primary web app engine for [Omnijar Studio](https://omnijar.studio "Omnijar Studio"). It has since been extended and developed into a community project under the group name: Naamio (Cloud). It can be extended with templates and applets to rapidly produce web apps.
 
