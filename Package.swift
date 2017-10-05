@@ -18,13 +18,13 @@ let package = Package(
         )
     ],
     dependencies: [
-          .package(url: "https://github.com/IBM-Swift/HeliumLogger", from: "1.7.1"),
-          .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.0.0"),
-          .package(url: "https://github.com/IBM-Swift/Kitura-Markdown", from: "0.9.1"),
+          .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.1"),
+          .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.3.0"),
+          .package(url: "https://github.com/IBM-Swift/Kitura-Markdown.git", from: "1.0.0"),
           .package(url: "https://github.com/IBM-Swift/SwiftyRequest.git", .upToNextMajor(from: "1.0.0")),
-          .package(url: "https://github.com/Naamio/Loki", .upToNextMajor(from: "0.2.0")),
-          .package(url: "https://github.com/Naamio/Malline", .upToNextMajor(from: "0.2.0")),
-          .package(url: "https://github.com/Naamio/Viila", .upToNextMajor(from: "0.2.0"))
+          .package(url: "https://github.com/Naamio/Loki.git", .upToNextMajor(from: "0.4.0")),
+          .package(url: "https://github.com/Naamio/Malline.git", .upToNextMajor(from: "0.4.0")),
+          .package(url: "https://github.com/Naamio/Viila.git", .upToNextMajor(from: "0.2.3"))
     ],
     targets: [
         .target(

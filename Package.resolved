@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
         "state": {
           "branch": null,
-          "revision": "fbd08641c8689626a65d7eb0e826085cf4c54788",
-          "version": "0.12.90"
+          "revision": "c7847a9b002de2589d113a199ddb01f1d8b4ac89",
+          "version": "1.0.6"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSSLService.git",
         "state": {
           "branch": null,
-          "revision": "05ece03dcfc6683ff05c9db446948793fc5dd68e",
-          "version": "0.12.80"
+          "revision": "f5c64deabd74c0842842020f7e9c048733829f6d",
+          "version": "1.0.6"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/CCurl.git",
         "state": {
           "branch": null,
-          "revision": "f481bd86e58787824cc1c1ec1786e03b67831f38",
-          "version": "0.4.1"
+          "revision": "2a431e3a5fb8d004aa7d4d1bebb5d511f568c43e",
+          "version": "1.0.0"
         }
       },
       {
@@ -38,8 +38,26 @@
         }
       },
       {
+        "package": "Core",
+        "repositoryURL": "https://github.com/vapor/core.git",
+        "state": {
+          "branch": null,
+          "revision": "a909eccc41941faac6fb9e511cdb9a5cb30a05de",
+          "version": "3.1.7"
+        }
+      },
+      {
+        "package": "Crypto",
+        "repositoryURL": "https://github.com/vapor/crypto",
+        "state": {
+          "branch": null,
+          "revision": "1b8c2ba5a42f1adf2aa812204678d8b16466fa59",
+          "version": "3.1.2"
+        }
+      },
+      {
         "package": "HeliumLogger",
-        "repositoryURL": "https://github.com/IBM-Swift/HeliumLogger",
+        "repositoryURL": "https://github.com/IBM-Swift/HeliumLogger.git",
         "state": {
           "branch": null,
           "revision": "2afeb4c02f5a48a7fbd081fe8607b91eeebd7ecb",
@@ -48,20 +66,20 @@
       },
       {
         "package": "Kitura",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura",
+        "repositoryURL": "https://github.com/IBM-Swift/Kitura.git",
         "state": {
           "branch": null,
-          "revision": "3d42897fa83537b97592512a7a85af61e9ce53ea",
-          "version": "2.2.0"
+          "revision": "a6370711527d6e46c3b61e9c6693e7ee179b6176",
+          "version": "2.3.1"
         }
       },
       {
         "package": "KituraMarkdown",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-Markdown",
+        "repositoryURL": "https://github.com/IBM-Swift/Kitura-Markdown.git",
         "state": {
           "branch": null,
-          "revision": "2c6b847f1fc8119de72a36a7af6fd581e0e35991",
-          "version": "0.9.1"
+          "revision": "552c025c839ea79c96ea52cf7228737e48a98ee4",
+          "version": "1.0.0"
         }
       },
       {
@@ -69,8 +87,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
         "state": {
           "branch": null,
-          "revision": "d781655dcee403504e4f1eeaf3f62b12d78d8230",
-          "version": "2.0.1"
+          "revision": "755c39febb661d5da85e1ec9fcf98721c420af0a",
+          "version": "2.1.0"
         }
       },
       {
@@ -78,8 +96,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-TemplateEngine.git",
         "state": {
           "branch": null,
-          "revision": "8e75a213bf4dd7b5effd03848335e344535969aa",
-          "version": "1.7.2"
+          "revision": "d43155da4dadd91c1d34d76e317571dc54655594",
+          "version": "1.7.4"
         }
       },
       {
@@ -87,8 +105,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/KituraContracts.git",
         "state": {
           "branch": null,
-          "revision": "4195ce3e6748420ff5c659d5ebba7b5dd4434df0",
-          "version": "0.0.18"
+          "revision": "9d3e5b8cb8d2cb5cd32936d094218d954beeed7d",
+          "version": "0.0.24"
         }
       },
       {
@@ -96,26 +114,62 @@
         "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
         "state": {
           "branch": null,
-          "revision": "6b62fe66da9b8794d6581e5c341710eea3173cd4",
-          "version": "1.7.1"
+          "revision": "5041f2673aa75d6e973d9b6bd3956bc5068387c8",
+          "version": "1.7.3"
         }
       },
       {
         "package": "Loki",
-        "repositoryURL": "https://github.com/Naamio/Loki",
+        "repositoryURL": "https://github.com/Naamio/Loki.git",
         "state": {
           "branch": null,
-          "revision": "4ce1ac1360cc2639833fcc4220886b9c4f8f3abe",
-          "version": "0.2.0"
+          "revision": "c60bc5f2edfeca40dbc8808d6f3e9aac80be09dd",
+          "version": "0.4.0"
         }
       },
       {
         "package": "Malline",
-        "repositoryURL": "https://github.com/Naamio/Malline",
+        "repositoryURL": "https://github.com/Naamio/Malline.git",
         "state": {
           "branch": null,
-          "revision": "e9ba32acc381ec796bcd962c23e55af885ec146c",
-          "version": "0.2.0"
+          "revision": "6491851616d77c7b9c06310c4aa2e8d137467c88",
+          "version": "0.4.0"
+        }
+      },
+      {
+        "package": "swift-nio",
+        "repositoryURL": "https://github.com/apple/swift-nio.git",
+        "state": {
+          "branch": null,
+          "revision": "bad7c297427b5efedb96c4044f9e57b42881e9ea",
+          "version": "1.7.0"
+        }
+      },
+      {
+        "package": "swift-nio-ssl",
+        "repositoryURL": "https://github.com/apple/swift-nio-ssl.git",
+        "state": {
+          "branch": null,
+          "revision": "38955a5f806a952daf2b16fbfe9aa529749cf1dd",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "swift-nio-ssl-support",
+        "repositoryURL": "https://github.com/apple/swift-nio-ssl-support.git",
+        "state": {
+          "branch": null,
+          "revision": "c02eec4e0e6d351cd092938cf44195a8e669f555",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "swift-nio-zlib-support",
+        "repositoryURL": "https://github.com/apple/swift-nio-zlib-support.git",
+        "state": {
+          "branch": null,
+          "revision": "37760e9a52030bb9011972c5213c3350fa9d41fd",
+          "version": "1.0.0"
         }
       },
       {
@@ -123,17 +177,17 @@
         "repositoryURL": "https://github.com/IBM-Swift/SwiftyRequest.git",
         "state": {
           "branch": null,
-          "revision": "3fb065123864051f6c93fea88bdee67858215715",
-          "version": "1.1.1"
+          "revision": "82d49d1bde19c4acfc63c276b67c8a25ac434e52",
+          "version": "1.1.2"
         }
       },
       {
         "package": "Viila",
-        "repositoryURL": "https://github.com/Naamio/Viila",
+        "repositoryURL": "https://github.com/Naamio/Viila.git",
         "state": {
           "branch": null,
-          "revision": "60777a37063e9da7ec8dc2a2c0f8469a18b1b132",
-          "version": "0.2.1"
+          "revision": "e244055f25424c06fbe1c1747dc02a60ab4130ac",
+          "version": "0.2.3"
         }
       }
     ]

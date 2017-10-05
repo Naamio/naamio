@@ -27,12 +27,13 @@ build: clean
 	@echo --- Building Naamio
 	swift build
 
-test: build
+test: clean
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
 	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/* ${TEST_RESOURCES_DIRECTORY}
-	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)_templates/ && \
-	echo Testing template at "$${NAAMIO_TEMPLATES}" && \
+	export NAAMIO_TEMPLATES=${TEST_RESOURCES_DIRECTORY}_templates/ && \
+	echo Testing template at $${NAAMIO_TEMPLATES} && \
 	swift test
+	#docker run -v $$(pwd):/tmp/naamio -w /tmp/naamio -it ibmcom/swift-ubuntu:4.1 swift test
 
 run: build
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
@@ -42,7 +43,7 @@ run: build
 	./.build/debug/Naamio
 
 build-release: clean
-	docker run -v $$(pwd):/tmp/naamio -w /tmp/naamio -it ibmcom/swift-ubuntu:4.0 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib -Xswiftc -whole-module-optimization
+	docker run -v $$(pwd):/tmp/naamio -w /tmp/naamio -it ibmcom/swift-ubuntu:4.1 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib -Xswiftc -whole-module-optimization
 
 clean-container:
 

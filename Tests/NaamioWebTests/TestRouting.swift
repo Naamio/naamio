@@ -46,53 +46,39 @@ class TestRouting: XCTestCase {
     func testKnownRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>User:</b> </body></html>"
 
-        measure {
-            runGetResponseTest(path: "/users", expectedResponseText: responseText)
-        }
+        runGetResponseTest(path: "/users", expectedResponseText: responseText)
     }
 
     func testKnownSubRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>Tauno:</b> </body></html>"
 
-        measure {
-            runGetResponseTest(path: "/products/tauno", expectedResponseText: responseText)
-        }
+        runGetResponseTest(path: "/products/tauno", expectedResponseText: responseText)
     }
 
     func testKnownIdRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>Bob:</b> </body></html>"
 
-        measure {
-            runGetResponseTest(path: "/profiles/bob", expectedResponseText: responseText)
-        }
+        runGetResponseTest(path: "/profiles/bob", expectedResponseText: responseText)
     }
 
     func testKnownSubSubRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>Tauno:</b> </body></html>"
 
-        measure {
-            runGetResponseTest(path: "/components/acme/acme-button")
-        }
+        runGetResponseTest(path: "/components/acme/acme-button")
     }
 
     func testKnownSubRootRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>Profiles:</b> </body></html>"
 
-        measure {
-            runGetResponseTest(path: "/profiles", expectedResponseText: responseText)
-        }
+        runGetResponseTest(path: "/profiles", expectedResponseText: responseText)
     }
 
     func testRootRoute() {
-        measure {
-            runGetResponseTest(path: "/")
-        }
+        runGetResponseTest(path: "/")
     }
 
     func testUnknownRoute() {
-        measure {
-            self.runTestUnknownPath(path: "aaa")
-        }
+        self.runTestUnknownPath(path: "aaa")
     }
 
     // MARK: - Test Boilerplate

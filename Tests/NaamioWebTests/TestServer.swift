@@ -35,11 +35,9 @@ class TestServer: XCTestCase {
     // MARK: - Tests
 
     func testServerStartup() {
-        measure {
-            performServerTest { expectation in
-                self.performRequest("get", path: "/", expectation: expectation) { response in
-                    expectation.fulfill()
-                }
+        performServerTest { expectation in
+            self.performRequest("get", path: "/", expectation: expectation) { response in
+                expectation.fulfill()
             }
         }
     }

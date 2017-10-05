@@ -55,7 +55,7 @@ public class NaamioTemplateEngine: TemplateEngine {
     }
 
     public func cacheTemplate(filePath: String) throws -> Stencil {
-        let templatePath = Path(filePath)
+        let templatePath = Path("\(filePath).html")
         
         guard templatePath.isFile else {
             throw NaamioTemplateEngineError.notValidTemplate

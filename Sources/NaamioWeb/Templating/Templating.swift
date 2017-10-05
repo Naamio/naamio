@@ -33,7 +33,7 @@ class Templating {
             templates = try TemplateLoader(withPath: path).load()
             try self.cacheTemplates()
         } catch {
-            Log.error("Cannot load templates")
+            Log.error("Cannot cache templates")
         }
         
     }
