@@ -1,8 +1,16 @@
 // swift-tools-version:4.0
 import PackageDescription
 
-private func getTargetPath(_ path: String) -> String {
-    return "Sources/\(path)"
+private func getTargetPath(_ name: String, for type: String) -> String {
+    return "\(type)/\(name)"
+}
+
+private func getSourcePath(_ name: String) -> String {
+    return getTargetPath(name, for: "Sources")
+}
+
+private func getTestPath(_ name: String) -> String {
+    return getTargetPath(name, for: "Tests")
 }
 
 let package = Package(
@@ -36,14 +44,14 @@ let package = Package(
                 .target(name: "NaamioCore"),
                 .target(name: "NaamioWeb")
             ],
-            path: getTargetPath("Console")
+            path: getSourcePath("Console")
         ),
         .target(
             name: "NaamioControl",
             dependencies: [
                 
             ],
-            path: getTargetPath("Control")
+            path: getSourcePath("Control")
         ),
         .target(
             name: "NaamioCore",
@@ -53,14 +61,14 @@ let package = Package(
                 .byNameItem(name: "Loki"),
                 .byNameItem(name: "Viila"),
             ],
-            path: getTargetPath("Core")
+            path: getSourcePath("Core")
         ),
         .target(
             name: "NaamioService",
             dependencies: [
                 .target(name: "NaamioCore")
             ],
-            path: getTargetPath("Service")
+            path: getSourcePath("Service")
         ),
         .target(
             name: "NaamioTemplateEngine",
@@ -69,7 +77,7 @@ let package = Package(
                 .byNameItem(name: "Malline"),
                 .target(name: "NaamioCore")
             ],
-            path: getTargetPath("Template")
+            path: getSourcePath("Template")
         ),
         .target(
             name: "NaamioWeb",
@@ -77,15 +85,17 @@ let package = Package(
                 .byNameItem(name: "KituraMarkdown"),
                 .target(name: "NaamioTemplateEngine")
             ],
-            path: getTargetPath("Web")
+            path: getSourcePath("Web")
         ),
         .testTarget(
-            name: "NaamioTests",
-            dependencies: ["NaamioCore"]
+            name: "NaamioConsoleTests",
+            dependencies: ["NaamioConsole"],
+            path: getTestPath("Console")
         ),
         .testTarget(
             name: "NaamioWebTests",
-            dependencies: ["NaamioWeb"]
+            dependencies: ["NaamioWeb"],
+            path: getTestPath("Web")
         )
     ]
 )
