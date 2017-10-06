@@ -29,15 +29,6 @@
         }
       },
       {
-        "package": "CircuitBreaker",
-        "repositoryURL": "https://github.com/IBM-Swift/CircuitBreaker.git",
-        "state": {
-          "branch": null,
-          "revision": "81581e3fb094ab4879aa2c5ce54201f1dbce0a7f",
-          "version": "5.0.1"
-        }
-      },
-      {
         "package": "Core",
         "repositoryURL": "https://github.com/vapor/core.git",
         "state": {
@@ -53,15 +44,6 @@
           "branch": null,
           "revision": "1b8c2ba5a42f1adf2aa812204678d8b16466fa59",
           "version": "3.1.2"
-        }
-      },
-      {
-        "package": "HeliumLogger",
-        "repositoryURL": "https://github.com/IBM-Swift/HeliumLogger.git",
-        "state": {
-          "branch": null,
-          "revision": "2afeb4c02f5a48a7fbd081fe8607b91eeebd7ecb",
-          "version": "1.7.1"
         }
       },
       {
@@ -137,6 +119,15 @@
         }
       },
       {
+        "package": "Palvelu",
+        "repositoryURL": "/Users/pjlaszkowicz/Workspaces/Omnijar/Naamio/palvelu",
+        "state": {
+          "branch": "features/service-api",
+          "revision": "ab8cf7ab7b7745e686c94ea57432c703ffb1e89f",
+          "version": null
+        }
+      },
+      {
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
@@ -170,15 +161,6 @@
           "branch": null,
           "revision": "37760e9a52030bb9011972c5213c3350fa9d41fd",
           "version": "1.0.0"
-        }
-      },
-      {
-        "package": "SwiftyRequest",
-        "repositoryURL": "https://github.com/IBM-Swift/SwiftyRequest.git",
-        "state": {
-          "branch": null,
-          "revision": "82d49d1bde19c4acfc63c276b67c8a25ac434e52",
-          "version": "1.1.2"
         }
       },
       {

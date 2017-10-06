@@ -2,7 +2,7 @@ import Foundation
 
 /// # Configuration
 /// Manages the configuration for `Naamio`. 
-public class Config {
+public struct Config {
 
     /// MARK: - Static Properties
     
@@ -21,7 +21,7 @@ public class Config {
     ///   - path: Path of configuration file as a `String`.
     ///
     /// TODO: Complete this.
-    public class func load(from path: String) {
+    public static func load(from path: String) {
         Log.warn("Cannot load configuration from file yet. Specify configuration by parameters instead.")
     }
     
