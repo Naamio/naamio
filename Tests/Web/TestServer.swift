@@ -45,8 +45,9 @@ class TestServer: XCTestCase {
     // MARK: - Test Boilerplate
 
     private func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
-        Server.mode = .test
-        Server.start()
+        Configuration.settings.mode = .test
+        Configuration.settings.logs = "naamio.log"
+        server.run()
 
         let requestQueue = DispatchQueue(label: "Request queue")
 
@@ -59,7 +60,7 @@ class TestServer: XCTestCase {
 
         waitExpectation(timeout: 10) { error in
             // blocks test until request completes
-            Server.stop()
+            self.server.stop()
             XCTAssertNil(error)
         }
     }

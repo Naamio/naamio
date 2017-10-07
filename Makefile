@@ -29,7 +29,7 @@ build: clean
 
 test: clean
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
-	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/* ${TEST_RESOURCES_DIRECTORY}
+	cp -r ./Tests/Web/WebTestContent/* ${TEST_RESOURCES_DIRECTORY}
 	export NAAMIO_TEMPLATES=${TEST_RESOURCES_DIRECTORY}_templates/ && \
 	echo Testing template at $${NAAMIO_TEMPLATES} && \
 	swift test
@@ -37,7 +37,7 @@ test: clean
 
 run: build
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
-	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/* ${TEST_RESOURCES_DIRECTORY}
+	cp -r ./Tests/Web/WebTestContent/* ${TEST_RESOURCES_DIRECTORY}
 	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)_templates/ && \
 	echo Testing template at "$${NAAMIO_TEMPLATES}" && \
 	./.build/debug/Naamio

@@ -18,10 +18,21 @@ public func setEnvironmentVar(name: String, value: String, overwrite: Bool = tru
 
 public class Environment {
     public static func readArgs() {
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_ENV") ?? "development", forKey: "naamio.env")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_LOGS") ?? "/var/log/naamio.log", forKey: "naamio.logs")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_TEMPLATES") ?? "_templates/leaf/", forKey: "naamio.templates")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_SOURCE") ?? "public", forKey: "naamio.source")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_PORT") ?? "8090", forKey: "naamio.port")
+        let runModeEnv = getEnvironmentVar("NAAMIO_ENV") ?? "development"
+        let portEnv = getEnvironmentVar("NAAMIO_PORT") ?? "8090"
+
+        guard case Configuration.settings.mode = RunMode(rawValue: runModeEnv) else {
+            Log.error("Run mode '\(runModeEnv)' not valid")
+            return
+        }
+
+        Configuration.settings.logs = getEnvironmentVar("NAAMIO_LOGS") ?? "/var/log/naamio.log"
+        Configuration.settings.web.templates = getEnvironmentVar("NAAMIO_TEMPLATES") ?? "_templates/leaf/"
+        Configuration.settings.web.source = getEnvironmentVar("NAAMIO_SOURCE") ?? "public"
+        
+        guard case Configuration.settings.web.port = Int(portEnv) else {
+            Log.error("Port number '\(portEnv)' not valid")
+            return
+        }
     }
 }

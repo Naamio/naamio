@@ -98,7 +98,7 @@ class Routes {
     }
 
     class func defineTemplateRoutes() {
-        let templatesPath = Config.settings["naamio.templates"] as! String
+        let templatesPath = Configuration.settings.web.templates
 
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")
@@ -107,7 +107,7 @@ class Routes {
     }
 
     private func definePagesRoutes() {
-        let sourcePath = Config.settings["naamio.source"] as! String
+        let sourcePath = Configuration.settings.web.source
         let pagesPath = sourcePath + "_/pages"
 
         if (FileManager.default.fileExists(atPath: pagesPath)) {
@@ -116,7 +116,7 @@ class Routes {
     }
 
     class func definePostsRoutes() {
-        let sourcePath = Config.settings["naamio.source"] as! String
+        let sourcePath = Configuration.settings.web.source
         let postsPath = sourcePath + "_/posts"
 
         if (FileManager.default.fileExists(atPath: postsPath)) {
@@ -125,7 +125,7 @@ class Routes {
     }
 
     class func defineAssetsRoutes() {
-        let sourcePath = Config.settings["naamio.source"] as! String
+        let sourcePath = Configuration.settings.web.source
         let assetsPath = sourcePath + "/assets"
 
         if (FileManager.default.fileExists(atPath: assetsPath)) {
@@ -135,7 +135,7 @@ class Routes {
     }
 
     class func defineContentRoutes() {
-        let sourcePath = Config.settings["naamio.source"] as! String
+        let sourcePath = Configuration.settings.web.source
 
         if (FileManager.default.fileExists(atPath: sourcePath + "/content")) {
             Log.info("Content folder /content found. Loading static file server at '/content'")

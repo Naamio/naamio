@@ -83,7 +83,8 @@ let package = Package(
             name: "NaamioWeb",
             dependencies: [
                 .byNameItem(name: "KituraMarkdown"),
-                .target(name: "NaamioTemplateEngine")
+                .target(name: "NaamioTemplateEngine"),
+                .byNameItem(name: "Palvelu")
             ],
             path: getSourcePath("Web")
         ),

@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura.git",
         "state": {
           "branch": null,
-          "revision": "a6370711527d6e46c3b61e9c6693e7ee179b6176",
-          "version": "2.3.1"
+          "revision": "aff3fc174dc75b341c65bcfd89de719b732cb029",
+          "version": "2.3.2"
         }
       },
       {
@@ -123,7 +123,7 @@
         "repositoryURL": "/Users/pjlaszkowicz/Workspaces/Omnijar/Naamio/palvelu",
         "state": {
           "branch": "features/service-api",
-          "revision": "ab8cf7ab7b7745e686c94ea57432c703ffb1e89f",
+          "revision": "cb851d0f6c83d822a644f54e09473859cc91ad92",
           "version": null
         }
       },

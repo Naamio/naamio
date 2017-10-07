@@ -15,7 +15,7 @@ public class Log {
         Loki.addDestination(console)
 
         let file = FileDestination() 
-        file.url = URL(fileURLWithPath: Config.settings["naamio.log"] as? String ?? "/var/log/naamio.log")
+        file.url = URL(fileURLWithPath: Configuration.settings.logs)
         Loki.addDestination(file)   // log to file
     }
 

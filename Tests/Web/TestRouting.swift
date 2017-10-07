@@ -25,14 +25,15 @@ class TestRouting: XCTestCase {
         super.setUp()
 
         Environment.readArgs()
-        Server.mode = .test
-        Server.start()
+        Configuration.settings.mode = .test
+        Configuration.settings.logs = "naamio.log"
+        server.run()
     }
 
     override func tearDown() {
         super.tearDown()
 
-        Server.stop()
+        server.stop()
     }
 
     /*func testParameter() {

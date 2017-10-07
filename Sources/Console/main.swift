@@ -8,8 +8,10 @@ setEnvironmentVar(name: "NAAMIO_SOURCE", value: "public", overwrite: false)
 setEnvironmentVar(name: "NAAMIO_TEMPLATES", value: "_templates/leaf", overwrite: false)
 setEnvironmentVar(name: "NAAMIO_PORT", value: "8090", overwrite: false)
 
-let configPath = Config.settings["naamio.templates"] as? String ?? "public"
-Config.load(from: "\(configPath)/naamio.yml")
+let configPath = Configuration.settings.web.templates
+Configuration.load(from: "\(configPath)/naamio.yml")
 
 Console.loadConfig()
-Server.start()
+
+let server = Server()
+server.run()
