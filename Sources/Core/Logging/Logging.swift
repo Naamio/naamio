@@ -12,6 +12,7 @@ public class Log {
 
         let console = ConsoleDestination()      // define console destination (stdout)
         console.minLevel = logLevel
+        console.format = "$L: $M"
         Loki.addDestination(console)
 
         let file = FileDestination() 

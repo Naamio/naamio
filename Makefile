@@ -1,7 +1,8 @@
 SHELL := /bin/bash
 
-CONTAINER_URL = naamio/naamio:0.0
-CONTAINER_NAME = naamio
+PRODUCT_NAME = naamio
+PRODUCT_VERSION = 0.0
+CONTAINER_URL = naamio/$(PRODUCT_NAME):$(PRODUCT_VERSION)
 
 UNAME = ${shell uname}
 
@@ -18,6 +19,8 @@ endif
 
 RUN_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}
 
+all: build-container
+
 clean:
 	if	[ -d ".build" ]; then \
 		rm -rf .build ; \
@@ -27,7 +30,7 @@ build: clean
 	@echo --- Building Naamio
 	swift build
 
-test: clean
+test: 
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
 	cp -r ./Tests/Web/WebTestContent/* ${TEST_RESOURCES_DIRECTORY}
 	export NAAMIO_TEMPLATES=${TEST_RESOURCES_DIRECTORY}_templates/ && \
@@ -43,12 +46,12 @@ run: build
 	./.build/debug/Naamio
 
 build-release: clean
-	docker run -v $$(pwd):/tmp/naamio -w /tmp/naamio -it ibmcom/swift-ubuntu:4.1 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib -Xswiftc -whole-module-optimization
+	docker run -v $$(pwd):/tmp/$(PRODUCT_NAME) -w /tmp/$(PRODUCT_NAME) -it ibmcom/swift-ubuntu:4.1 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib -Xswiftc -whole-module-optimization
 
 clean-container:
 
-	-docker stop $(CONTAINER_NAME)
-	-docker rm $(CONTAINER_NAME)
+	-docker stop $(PRODUCT_NAME)
+	-docker rm $(PRODUCT_NAME)
 	-docker rmi $(CONTAINER_URL)
 
 build-container: clean-container build-release

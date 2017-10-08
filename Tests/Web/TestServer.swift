@@ -20,12 +20,24 @@ class TestServer: XCTestCase {
         ]
     }
     
-    private let server:NaamioWeb.Server = Server()
+        private static let server:NaamioWeb.Server = Server()
+
+    class override func setUp() {
+        super.setUp()
+
+        Environment.readArgs()
+        Configuration.settings.mode = .test
+        Configuration.settings.logs = "naamio.log"
+    }
+
+    class override func tearDown() {
+        server.stop()
+    }
 
     override func setUp() {
         super.setUp()
 
-        Environment.readArgs()
+       
     }
 
     override func tearDown() {
@@ -47,7 +59,7 @@ class TestServer: XCTestCase {
     private func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
         Configuration.settings.mode = .test
         Configuration.settings.logs = "naamio.log"
-        server.run()
+        TestServer.server.run()
 
         let requestQueue = DispatchQueue(label: "Request queue")
 
@@ -60,7 +72,7 @@ class TestServer: XCTestCase {
 
         waitExpectation(timeout: 10) { error in
             // blocks test until request completes
-            self.server.stop()
+            TestServer.server.stop()
             XCTAssertNil(error)
         }
     }

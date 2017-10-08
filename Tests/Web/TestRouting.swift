@@ -19,21 +19,30 @@ class TestRouting: XCTestCase {
         ]
     }
 
-    private let server:NaamioWeb.Server = Server()
+    private static let server:NaamioWeb.Server = Server()
 
-    override func setUp() {
+    class override func setUp() {
         super.setUp()
 
         Environment.readArgs()
         Configuration.settings.mode = .test
         Configuration.settings.logs = "naamio.log"
+
         server.run()
+    }
+
+    class override func tearDown() {
+        server.stop()
+    }
+
+    override func setUp() {
+        
     }
 
     override func tearDown() {
         super.tearDown()
 
-        server.stop()
+        
     }
 
     /*func testParameter() {
