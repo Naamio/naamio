@@ -1,5 +1,6 @@
 import NaamioAPI
 import NaamioCore
+import NaamioMetrics
 
 /// Public API for retrieving metrics data.
 public class MetricsQueryService {
@@ -21,5 +22,11 @@ extension MetricsQueryService: MetricsServiceQueryable {
         let response = MetricsQueryResponse(from: metrics)
 
         return response
+    }
+}
+
+extension MetricsQueryResponse {
+    public convenience init(from model: MetricsModel) {
+        self.init()
     }
 }
