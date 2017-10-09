@@ -32,8 +32,6 @@ class Routes {
         
         let routeHandler = RouteHandler(withRouter: router)
         
-        var name: String?
-        
         defineAuthMiddleware() 
         defineHeadersMiddleware()
         defineTemplateRoutes()

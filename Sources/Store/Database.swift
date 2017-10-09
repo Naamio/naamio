@@ -26,7 +26,7 @@ public class Database {
 
                 Database.pagesTable.create(connection: connection) { result in
                     if result.success == false {
-                        Log.error("Error \(result.asError)")
+                        Log.error("\(String(describing: result.asError))")
                         return
                     }
                     else {

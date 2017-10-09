@@ -73,14 +73,6 @@ let package = Package(
             path: getSourcePath("Core")
         ),
         .target(
-            name: "NaamioData",
-            dependencies: [
-                .target(name: "NaamioCore"),
-                .byNameItem(name: "SwiftKuerySQLite")
-            ],
-            path: getSourcePath("Data")
-        ),
-        .target(
             name: "NaamioService",
             dependencies: [
                 .target(name: "NaamioAPI"),
@@ -88,6 +80,14 @@ let package = Package(
                 .byNameItem(name: "Palvelu"),
             ],
             path: getSourcePath("Service")
+        ),
+        .target(
+            name: "NaamioStore",
+            dependencies: [
+                .target(name: "NaamioCore"),
+                .byNameItem(name: "SwiftKuerySQLite")
+            ],
+            path: getSourcePath("Store")
         ),
         .target(
             name: "NaamioTemplateEngine",
@@ -113,9 +113,9 @@ let package = Package(
             path: getTestPath("Console")
         ),
         .testTarget(
-            name: "NaamioDataTests",
-            dependencies: ["NaamioData"],
-            path: getTestPath("Data")
+            name: "NaamioStoreTests",
+            dependencies: ["NaamioStore"],
+            path: getTestPath("Store")
         ),
         .testTarget(
             name: "NaamioWebTests",
