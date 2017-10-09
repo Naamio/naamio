@@ -90,6 +90,14 @@ let package = Package(
             path: getSourcePath("Service")
         ),
         .target(
+            name: "NaamioStore",
+            dependencies: [
+                .target(name: "NaamioCore"),
+                .byNameItem(name: "SwiftKuerySQLite")
+            ],
+            path: getSourcePath("Store")
+        ),
+        .target(
             name: "NaamioTemplateEngine",
             dependencies: [
                 .byNameItem(name: "Kitura"),
@@ -113,9 +121,9 @@ let package = Package(
             path: getTestPath("Console")
         ),
         .testTarget(
-            name: "NaamioDataTests",
-            dependencies: ["NaamioData"],
-            path: getTestPath("Data")
+            name: "NaamioStoreTests",
+            dependencies: ["NaamioStore"],
+            path: getTestPath("Store")
         ),
         .testTarget(
             name: "NaamioWebTests",
