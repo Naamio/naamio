@@ -1,11 +1,11 @@
 import XCTest
 
-@testable import NaamioDataTests
+@testable import NaamioStoreTests
 @testable import NaamioWebTests
 
 XCTMain([
-    testCase(TestData.allTests),
-    
+    testCase(TestStore.allTests),
+
     testCase(TestRouting.allTests),
     testCase(TestServer.allTests),
     testCase(TestTemplating.allTests),

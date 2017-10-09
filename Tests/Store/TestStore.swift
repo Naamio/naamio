@@ -1,7 +1,7 @@
 import Foundation
 import XCTest
 
-@testable import NaamioData
+@testable import NaamioStore
 
 protocol Test {
     func expectation(_ index: Int) -> XCTestExpectation
@@ -45,9 +45,9 @@ extension XCTestCase: Test {
     }
 }
 
-class TestData: XCTestCase {
+class TestStore: XCTestCase {
 
-    static var allTests: [(String, (TestData) -> () throws -> Void)] {
+    static var allTests: [(String, (TestStore) -> () throws -> Void)] {
         return [
             ("Test Data Connection", testDataConnection),
         ]
