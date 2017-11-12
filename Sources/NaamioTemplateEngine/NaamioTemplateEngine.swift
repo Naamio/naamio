@@ -1,6 +1,5 @@
 import KituraTemplateEngine
 import Malline
-import PathKit
 import Foundation
 
 public class NaamioTemplateEngine: TemplateEngine {
