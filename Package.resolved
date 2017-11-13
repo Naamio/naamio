@@ -30,7 +30,7 @@
       },
       {
         "package": "Kitura-TemplateEngine",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-TemplateEngine",
+        "repositoryURL": "https://github.com/IBM-Swift/Kitura-TemplateEngine.git",
         "state": {
           "branch": null,
           "revision": "8e75a213bf4dd7b5effd03848335e344535969aa",
@@ -75,7 +75,7 @@
       },
       {
         "package": "Malline",
-        "repositoryURL": "https://github.com/OmnijarStudio/malline",
+        "repositoryURL": "https://github.com/Naamio/malline",
         "state": {
           "branch": null,
           "revision": "2a10467dc98a5abf2a839cc43538f947bc160981",

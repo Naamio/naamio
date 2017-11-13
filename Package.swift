@@ -49,7 +49,7 @@ let package = Package(
         ),
         .testTarget(
             name: "NaamioTests",
-            dependencies: []
+            dependencies: ["NaamioCore"]
         )
     ]
 )
