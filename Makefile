@@ -17,7 +17,7 @@ run: build
 	@echo --- Invoking Naamio executable
 	./.build/debug/Naamio
 
-build-release clean:
+build-release: clean
 	docker run -v $$(pwd):/tmp/naamio -w /tmp/naamio -it ibmcom/swift-ubuntu:4.0 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib
 
 clean-container:
