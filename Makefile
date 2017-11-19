@@ -3,7 +3,7 @@ CONTAINER_NAME = naamio
 
 clean:
 	if	[ -d ".build" ]; then \
-		rm -r .build ; \
+		rm -rf .build ; \
 	fi
 
 build: clean

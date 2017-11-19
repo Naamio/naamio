@@ -2,6 +2,8 @@ import Foundation
 
 import Kitura
 import KituraMarkdown
+
+import NaamioCore
 import NaamioTemplateEngine
 
 class Routes {

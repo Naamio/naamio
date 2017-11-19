@@ -2,6 +2,8 @@ import Foundation
 
 import Kitura
 
+import NaamioCore
+
 /// Available modes for `Naamio` to operate under. 
 public enum ServerMode: String {
 

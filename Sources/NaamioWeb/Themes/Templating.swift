@@ -1,4 +1,5 @@
 import Foundation
+import NaamioCore
 
 /// Templating provides the tools necessary to take content
 /// and provide it in a structured method to the end-user.

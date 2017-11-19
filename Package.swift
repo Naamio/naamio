@@ -6,11 +6,15 @@ let package = Package(
     products: [
         .executable(
             name: "Naamio",
-            targets: ["Naamio", "NaamioCore", "NaamioTemplateEngine"]
+            targets: ["Naamio", "NaamioCore", "NaamioService", "NaamioTemplateEngine", "NaamioWeb"]
         ),
         .executable(
             name: "NaamioCtl",
             targets: ["NaamioControl"]
+        ),
+        .library(
+            name: "NaamioWeb",
+            targets: ["NaamioWeb"]
         )
     ],
     dependencies: [
@@ -24,7 +28,8 @@ let package = Package(
             name: "Naamio",
             dependencies: [
                 .byNameItem(name: "HeliumLogger"),
-                .target(name: "NaamioCore")
+                .target(name: "NaamioCore"),
+                .target(name: "NaamioWeb")
             ]
         ),
         .target(
@@ -41,10 +46,23 @@ let package = Package(
             ]
         ),
         .target(
+            name: "NaamioService",
+            dependencies: [
+                .target(name: "NaamioCore")
+            ]
+        ),
+        .target(
             name: "NaamioTemplateEngine",
             dependencies: [
                 .byNameItem(name: "Kitura"),
                 .byNameItem(name: "Malline")
+            ]
+        ),
+        .target(
+            name: "NaamioWeb",
+            dependencies: [
+                .byNameItem(name: "KituraMarkdown"),
+                .target(name: "NaamioCore")
             ]
         ),
         .testTarget(

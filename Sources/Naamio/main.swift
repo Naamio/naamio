@@ -1,5 +1,6 @@
 import Foundation
 import NaamioCore
+import NaamioWeb
 
 /// Gets the environment variable by name.
 func getEnvironmentVar(_ name: String) -> String? {
