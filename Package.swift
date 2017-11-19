@@ -17,7 +17,7 @@ let package = Package(
           .package(url: "https://github.com/IBM-Swift/HeliumLogger", from: "1.7.1"),
           .package(url: "https://github.com/IBM-Swift/Kitura", from: "2.0.0"),
           .package(url: "https://github.com/IBM-Swift/Kitura-Markdown", from: "0.9.1"),
-          .package(url: "https://github.com/Naamio/malline", from: "0.1.0")
+          .package(url: "https://github.com/Naamio/malline", from: "0.2.0")
     ],
     targets: [
         .target(
