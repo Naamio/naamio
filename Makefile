@@ -1,4 +1,4 @@
-CONTAINER_URL = naamio/naamio:0.2
+CONTAINER_URL = naamio/naamio:0.0
 CONTAINER_NAME = naamio
 
 clean:

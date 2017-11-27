@@ -1,11 +1,11 @@
 # Naamio
 
-[![build status](https://gitlab.com/OmnijarStudio/naamio/badges/master/build.svg)](https://gitlab.com/OmnijarStudio/naamio/commits/master)
+[![build status](https://gitlab.com/Naamio/naamio/badges/master/build.svg)](https://gitlab.com/OmnijarStudio/naamio/commits/master)
 
 Naamio is the primary web app engine for 
 [Omnijar Studio](https://omnijar.studio "Omnijar Studio")
-It can be extended with themes and applets to rapidly
-produce web apps using TypeScript.
+It can be extended with stencils and applets to rapidly
+produce web apps.
 
 ## Features
 
@@ -53,8 +53,8 @@ and cached by the server process.
 
 ## The License
 
-The project is NOT open source, but has been licensed with
+The project is open source, and has been licensed with
 specific conditions to allow its source to be used for 
-educational purposes. Please read 
+commercial and non-profit purposes. Please read 
 [the license](./LICENSE.md "the license") for more 
 information.
