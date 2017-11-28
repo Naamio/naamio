@@ -44,19 +44,12 @@ public class Server {
 
     /// Starts the `Naamio` web application server. 
     public class func start() {        
-        let router = Router()
-
-        Templating.load()
-        
-        // Set default view path to template path.
-        router.viewsPath = Templating.path
-
-        Routes.defineRoutes(router: router)
+        Routes.defineRoutes()
 
         // Add HTTP Server to listen on port 8090
         let port = Config.settings["naamio.port"] as? Int ?? 8090
         
-        Kitura.addHTTPServer(onPort: port, with: router)
+        Kitura.addHTTPServer(onPort: port, with: Routes.routers.view)
 
         // start the framework - the servers added until now will start listening
         Kitura.run()

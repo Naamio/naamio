@@ -6,9 +6,26 @@ import KituraMarkdown
 import NaamioCore
 import NaamioTemplateEngine
 
-class Routes {
+struct Routers {
     
-    class func defineRoutes(router: Router) {
+    let view: Router
+
+    init() {
+        view = Router()
+        Templating.load()
+        
+        // Set default view path to template path.
+        view.viewsPath = Templating.path
+    }
+}
+
+class Routes {
+
+    static let routers = Routers()
+    
+    class func defineRoutes() {
+        let router = Routes.routers.view
+
         let sourcePath = Config.settings["naamio.source"] as! String
         let templatesPath = Config.settings["naamio.templates"] as! String
         let assetsPath = sourcePath + "/assets"
@@ -16,11 +33,9 @@ class Routes {
         
         var name: String?
         
-        // This route executes the echo middleware
-        router.all(middleware: BasicAuthMiddleware())
-        
-        router.all("/*", middleware: HeadersMiddleware())
-        
+        defineAuthMiddleware() 
+        defineHeadersMiddleware()
+
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
@@ -128,8 +143,25 @@ class Routes {
             }
         }
         
+        defineExceptionalRoutes()
+    }
+
+    class func defineAuthMiddleware() {
+        // This route executes the echo middleware
+        Routes.routers.view.all(middleware: BasicAuthMiddleware())
+    }
+
+    class func defineHeadersMiddleware() {
+        Routes.routers.view.all("/*", middleware: HeadersMiddleware())
+    }
+
+    class func defineStaticRoutes() {
+
+    }
+
+    class func defineExceptionalRoutes() {
         // Handles any errors that get set
-        router.error { request, response, next in
+         Routes.routers.view.error { request, response, next in
             response.headers["content-type"] = "text/plain; charset=utf-8"
             let errorDescription: String
             if let error = response.error {
@@ -139,9 +171,9 @@ class Routes {
             }
             try response.send("Caught the error: \(errorDescription)").end()
         }
-        
+
         // A custom Not found handler
-        router.all { request, response, next in
+        Routes.routers.view.all { request, response, next in
             if response.statusCode == .unknown {
                 // Remove this wrapping if statement, if you want to handle requests to / as well
                 if request.originalURL != "/" && request.originalURL != "" {

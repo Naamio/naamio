@@ -53,10 +53,10 @@ public class NaamioTemplateEngine: TemplateEngine {
         path = "/assets" + path
         
         /*
-        if let value = value as? String {
-            return "/assets" + value
-        }
- */
+            if let value = value as? String {
+                return "/assets" + value
+            }
+        */
         
         return path
     }
