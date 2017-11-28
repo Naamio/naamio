@@ -1,5 +1,6 @@
-@testable import NaamioCore
 import XCTest
+
+@testable import NaamioWeb
 
 class TestServer: XCTestCase {
 
