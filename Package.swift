@@ -68,6 +68,10 @@ let package = Package(
         .testTarget(
             name: "NaamioTests",
             dependencies: ["NaamioCore"]
+        ),
+        .testTarget(
+            name: "NaamioWebTests",
+            dependencies: ["NaamioWeb"]
         )
     ]
 )
