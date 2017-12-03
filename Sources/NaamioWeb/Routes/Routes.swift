@@ -24,41 +24,21 @@ class Routes {
     static let routers = Routers()
     
     class func defineRoutes() {
-        let router = Routes.routers.view
-
-        let sourcePath = Config.settings["naamio.source"] as! String
-        let templatesPath = Config.settings["naamio.templates"] as! String
-        let assetsPath = sourcePath + "/assets"
-        let postsPath = sourcePath + "_/posts"
+        let router = Routes.routers.view      
         
         var name: String?
         
         defineAuthMiddleware() 
         defineHeadersMiddleware()
+        defineTemplateRoutes()
+        definePostsRoutes()
+        defineAssetsRoutes()
+        defineContentRoutes()
 
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
         }*/
-        
-        if (FileManager.default.fileExists(atPath: templatesPath)) {
-            Log.info("Templates folder '\(templatesPath)' found. Loading templates")
-            router.setDefault(templateEngine: NaamioTemplateEngine())
-        }
-        
-        if (FileManager.default.fileExists(atPath: postsPath)) {
-            Log.info("Posts folder '\(postsPath)' found. Loading posts at '/posts'")
-        }
-        
-        if (FileManager.default.fileExists(atPath: assetsPath)) {
-            Log.info("Assets folder '\(assetsPath)' found. Loading static file server at '/assets'")
-            router.all("/assets", middleware: StaticFileServer(path: assetsPath))
-        }
-        
-        if (FileManager.default.fileExists(atPath: sourcePath + "/content")) {
-            Log.info("Content folder /content found. Loading static file server at '/content'")
-            router.all("/", middleware: StaticFileServer(path: sourcePath + "/content"))
-        }
         
         router.add(templateEngine: KituraMarkdown())
         
@@ -155,13 +135,50 @@ class Routes {
         Routes.routers.view.all("/*", middleware: HeadersMiddleware())
     }
 
+    class func defineTemplateRoutes() {
+        let templatesPath = Config.settings["naamio.templates"] as! String
+
+        if (FileManager.default.fileExists(atPath: templatesPath)) {
+            Log.info("Templates folder '\(templatesPath)' found. Loading templates")
+            Routes.routers.view.setDefault(templateEngine: NaamioTemplateEngine())
+        }
+    }
+
+    class func definePostsRoutes() {
+        let sourcePath = Config.settings["naamio.source"] as! String
+        let postsPath = sourcePath + "_/posts"
+
+        if (FileManager.default.fileExists(atPath: postsPath)) {
+            Log.info("Posts folder '\(postsPath)' found. Loading posts at '/posts'")
+        }
+    }
+
+    class func defineAssetsRoutes() {
+        let sourcePath = Config.settings["naamio.source"] as! String
+        let assetsPath = sourcePath + "/assets"
+
+        if (FileManager.default.fileExists(atPath: assetsPath)) {
+            Log.info("Assets folder '\(assetsPath)' found. Loading static file server at '/assets'")
+             Routes.routers.view.all("/assets", middleware: StaticFileServer(path: assetsPath))
+        }
+    }
+
+    class func defineContentRoutes() {
+        let sourcePath = Config.settings["naamio.source"] as! String
+
+        if (FileManager.default.fileExists(atPath: sourcePath + "/content")) {
+            Log.info("Content folder /content found. Loading static file server at '/content'")
+             Routes.routers.view.all("/", middleware: StaticFileServer(path: sourcePath + "/content"))
+        }
+    }
+
     class func defineStaticRoutes() {
 
     }
 
     class func defineExceptionalRoutes() {
         // Handles any errors that get set
-         Routes.routers.view.error { request, response, next in
+        Routes.routers.view.error { request, response, next in
             response.headers["content-type"] = "text/plain; charset=utf-8"
             let errorDescription: String
             if let error = response.error {
