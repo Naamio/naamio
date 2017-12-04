@@ -97,4 +97,10 @@ public class Resources {
 
         return nil
     }
+
+    public func getResourceTree(from path: String) {
+        Folder(path: path).makeSubfolderSequence(recursive: true).forEach { folder in
+            print("Name : \(folder.name), parent: \(folder.parent)")
+        }
+    }
 }

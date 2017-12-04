@@ -1,6 +1,13 @@
 # Naamio
 
-[![build status](https://gitlab.com/Naamio/naamio/badges/master/build.svg)](https://gitlab.com/OmnijarStudio/naamio/commits/master)
+<p align="center">
+    <a href="https://swift.org/package-manager">
+        <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
+    </a>
+    <a href="https://twitter.com/omnijarstudio">
+        <img src="https://img.shields.io/badge/contact-@omnijarstudio-blue.svg?style=flat" alt="Twitter: @omnijarstudio" />
+    </a>
+</p>
 
 Naamio is the primary web app engine for 
 [Omnijar Studio](https://omnijar.studio "Omnijar Studio")

@@ -31,6 +31,7 @@ class Routes {
         defineAuthMiddleware() 
         defineHeadersMiddleware()
         defineTemplateRoutes()
+        definePagesRoutes()
         definePostsRoutes()
         defineAssetsRoutes()
         defineContentRoutes()
@@ -141,6 +142,15 @@ class Routes {
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")
             Routes.routers.view.setDefault(templateEngine: NaamioTemplateEngine())
+        }
+    }
+
+    class func definePagesRoutes() {
+        let sourcePath = Config.settings["naamio.source"] as! String
+        let pagesPath = sourcePath + "_/pages"
+
+        if (FileManager.default.fileExists(atPath: pagesPath)) {
+            Log.info("Pages folder '\(pagesPath)' found. Loading pages at '/'")
         }
     }
 
