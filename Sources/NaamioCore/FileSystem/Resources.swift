@@ -1,5 +1,6 @@
 
 import Foundation
+import ViilaFS
 
 /// Resources provides the tools necessary to manage all types of 
 /// files, including templates, images, etc. for the application 
@@ -99,8 +100,9 @@ public class Resources {
     }
 
     public func getResourceTree(from path: String) {
-        Folder(path: path).makeSubfolderSequence(recursive: true).forEach { folder in
-            print("Name : \(folder.name), parent: \(folder.parent)")
+        try! Folder(path: path).makeSubfolderSequence(recursive: true).forEach { folder in
+            // TODO: Provide folder default string value.
+            print("Name : \(folder.name), parent: \(String(describing: folder.parent))")
         }
     }
 }

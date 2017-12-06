@@ -31,7 +31,6 @@ class Routes {
         defineAuthMiddleware() 
         defineHeadersMiddleware()
         defineTemplateRoutes()
-        definePagesRoutes()
         definePostsRoutes()
         defineAssetsRoutes()
         defineContentRoutes()
@@ -145,7 +144,7 @@ class Routes {
         }
     }
 
-    class func definePagesRoutes() {
+    private func definePagesRoutes() {
         let sourcePath = Config.settings["naamio.source"] as! String
         let pagesPath = sourcePath + "_/pages"
 
@@ -223,5 +222,9 @@ class Routes {
             }
             next()
         }
+    }
+
+    init() {
+        self.definePagesRoutes()
     }
 }

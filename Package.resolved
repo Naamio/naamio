@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "CircuitBreaker",
+        "repositoryURL": "https://github.com/IBM-Swift/CircuitBreaker.git",
+        "state": {
+          "branch": null,
+          "revision": "252f7bccb70dc34283f7a05ece624075967d1bb2",
+          "version": "3.0.0"
+        }
+      },
+      {
         "package": "HeliumLogger",
         "repositoryURL": "https://github.com/IBM-Swift/HeliumLogger",
         "state": {
@@ -84,7 +93,7 @@
       },
       {
         "package": "Malline",
-        "repositoryURL": "https://github.com/Naamio/malline",
+        "repositoryURL": "https://github.com/Naamio/Malline",
         "state": {
           "branch": null,
           "revision": "e9ba32acc381ec796bcd962c23e55af885ec146c",
@@ -125,6 +134,24 @@
           "branch": null,
           "revision": "00b126a2c19520bbf51cd26e8c0cc41dacbc5a05",
           "version": "0.12.76"
+        }
+      },
+      {
+        "package": "SwiftyRequest",
+        "repositoryURL": "https://github.com/IBM-Swift/SwiftyRequest.git",
+        "state": {
+          "branch": null,
+          "revision": "4c571be415d71f1f45d5c44ccc92b17a47acde88",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "Viila",
+        "repositoryURL": "https://github.com/Naamio/Viila",
+        "state": {
+          "branch": null,
+          "revision": "bb5ecc42148c4ed4724f706d8e3863a020d398bc",
+          "version": "0.2.0"
         }
       }
     ]
