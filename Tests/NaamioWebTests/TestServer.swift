@@ -4,23 +4,43 @@ import XCTest
 import KituraNet
 
 @testable import NaamioWeb
+@testable import NaamioCore
 
 class TestServer: XCTestCase {
 
-    let server:NaamioWeb.Server = Server()
-
     static var allTests: [(String, (TestServer) -> () throws -> Void)] {
         return [
-            ("Test Server Startup", testServerStartup)
+            ("Test Server Startup", testServerStartup),
+            //("Test Parameter", testParameter),
+            //("Test Parameter with Whitespace", testParameterWithWhiteSpace),
+            ("Test Unknown Path", testUnknownPath)
         ]
     }
     
+    private typealias BodyChecker = (String) -> Void
+
+    private let server:NaamioWeb.Server = Server()
+
     override func setUp() {
         super.setUp()
+
+        Environment.readArgs()
     }
 
     override func tearDown() {
         super.tearDown()
+    }
+
+    /*func testParameter() {
+        runTestParameter(user: "John")
+    }
+
+    func testParameterWithWhiteSpace() {
+        runTestParameter(user: "John Doe")
+    }*/
+
+    func testUnknownPath() {
+        runTestUnknownPath(path: "aaa")
     }
 
     func testServerStartup() {
@@ -50,7 +70,6 @@ class TestServer: XCTestCase {
         }
     }
 
-    
     func performRequest(_ method: String, path: String,  expectation: XCTestExpectation,
                         headers: [String: String]? = nil,
                         requestModifier: ((ClientRequest) -> Void)? = nil,
@@ -92,7 +111,6 @@ class TestServer: XCTestCase {
         }
         dispatchGroup.wait()
     }
-    
 
     func expectation(_ index: Int) -> XCTestExpectation {
         let expectationDescription = "\(type(of: self))-\(index)"
@@ -101,5 +119,44 @@ class TestServer: XCTestCase {
 
     func waitExpectation(timeout t: TimeInterval, handler: XCWaitCompletionHandler?) {
         self.waitForExpectations(timeout: t, handler: handler)
+    }
+
+    private func checkResponse(response: ClientResponse, expectedResponseText: String? = nil,
+        expectedStatusCode: HTTPStatusCode = HTTPStatusCode.OK, bodyChecker: BodyChecker? = nil) {
+        XCTAssertEqual(response.statusCode, expectedStatusCode,
+                       "No success status code returned")
+        if let optionalBody = try? response.readString(), let body = optionalBody {
+            if let expectedResponseText = expectedResponseText {
+                XCTAssertEqual(body, expectedResponseText, "mismatch in body")
+            }
+            bodyChecker?(body)
+        } else {
+            XCTFail("No response body")
+        }
+
+    }
+
+    private func runGetResponseTest(path: String, expectedResponseText: String? = nil,
+                                    expectedStatusCode: HTTPStatusCode = HTTPStatusCode.OK,
+                                    bodyChecker: BodyChecker? = nil) {
+        performServerTest { expectation in
+            self.performRequest("get", path: path, expectation: expectation) { response in
+                self.checkResponse(response: response, expectedResponseText: expectedResponseText,
+                                   expectedStatusCode: expectedStatusCode, bodyChecker: bodyChecker)
+                expectation.fulfill()
+            }
+        }
+    }
+
+    private func runTestParameter(user: String) {
+        let userInPath = user.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? user
+        let responseText = "<!DOCTYPE html><html><body><b>User:</b> \(user)</body></html>\n\n"
+        runGetResponseTest(path: "/users/\(userInPath)", expectedResponseText: responseText)
+    }
+
+    private func runTestUnknownPath(path: String) {
+        runGetResponseTest(path: path,
+                           expectedResponseText: "Route not found in Naamio test application!",
+                           expectedStatusCode: HTTPStatusCode.notFound)
     }
 }

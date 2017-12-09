@@ -2,12 +2,42 @@
 import Foundation
 import ViilaFS
 
+public enum ReaderError: Error {
+    case resourceNotFound
+    case readFailed(Error)
+    case convertToStringFailed
+}
+
 /// Resources provides the tools necessary to manage all types of 
 /// files, including templates, images, etc. for the application 
 /// to run.
 public class Resources {
 
     public init() {}
+
+    public func getResources(resource: String, ofType type: String) throws -> String {
+        #if os(Linux)
+        let bundle = Bundle(path: (Bundle.main.resourcePath ?? ".") + "/app/stencils") ?? Bundle.main
+        #else
+        let bundle = Bundle(for: Swift.type(of: self))
+        #endif
+        
+        print(bundle.resourcePath ?? "no resource path provided")
+        guard let resourcePath = bundle.path(forResource: resource, ofType: type) else {
+            throw ReaderError.resourceNotFound
+        }
+
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: resourcePath))
+            guard let string = String(data: data, encoding: String.Encoding.utf8) else {
+                throw ReaderError.convertToStringFailed
+            }
+
+            return string
+        } catch {
+            throw ReaderError.readFailed(error)
+        }
+    }
     
     public func getResources(from path: String, withSuffix suffix: String) -> [String] {
         let fileManager = FileManager.default
@@ -98,6 +128,8 @@ public class Resources {
 
         return nil
     }
+
+    
 
     public func getResourceTree(from path: String) {
         try! Folder(path: path).makeSubfolderSequence(recursive: true).forEach { folder in

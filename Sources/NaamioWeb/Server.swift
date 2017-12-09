@@ -53,7 +53,6 @@ public class Server {
 
         // start the framework - the servers added until now will start listening
         Kitura.start()
-        ListenerGroup.waitForListeners()
     }
 
     public class func stop() {

@@ -31,7 +31,7 @@ public class NaamioTemplateEngine: TemplateEngine {
     public func render(filePath: String, context: [String: Any]) throws -> String {
         let templatePath = Path(filePath)
         let templateDirectory = templatePath.parent()
-
+        print(templateDirectory)
         let loader = FileSystemLoader(paths: [templateDirectory])
         `extension`.registerTag("asset", parser: AssetTag.parse)
         let environment = Environment(loader: loader, extensions: [`extension`])

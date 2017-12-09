@@ -40,6 +40,7 @@ class Routes {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
         }*/
         
+        router.setDefault(templateEngine: NaamioTemplateEngine())
         router.add(templateEngine: KituraMarkdown())
         
         router.get("/") { _, response, next in
@@ -140,7 +141,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")
-            Routes.routers.view.setDefault(templateEngine: NaamioTemplateEngine())
+            //Routes.routers.view.setDefault(templateEngine: NaamioTemplateEngine())
         }
     }
 
