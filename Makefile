@@ -9,11 +9,11 @@ UNAME = ${shell uname}
 ifeq ($(UNAME), Darwin)
 	PLATFORM = x86_64-apple-macosx10.10
 	EXECUTABLE_DIRECTORY = ./.build/${PLATFORM}/debug
-	TEST_RESOURCES_DIRECTORY = ./.build/${PLATFORM}/debug/NaamioWebTests.xctest/Contents/app
+	TEST_RESOURCES_DIRECTORY = ./.build/${PLATFORM}/debug/NaamioWebTests.xctest/Contents/app/
 else ifeq ($(UNAME), Linux)
 	PLATFORM = x86_64-unknown-linux
 	EXECUTABLE_DIRECTORY = ./.build/${PLATFORM}/debug
-	TEST_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}/app
+	TEST_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}/app/
 endif
 
 RUN_RESOURCES_DIRECTORY = ${EXECUTABLE_DIRECTORY}
@@ -29,8 +29,8 @@ build: clean
 
 test: build
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
-	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/ ${TEST_RESOURCES_DIRECTORY}
-	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)/stencils/ && \
+	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/* ${TEST_RESOURCES_DIRECTORY}
+	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)stencils/ && \
 	echo $${NAAMIO_TEMPLATES} && \
 	swift test
 
