@@ -17,7 +17,7 @@ public class Resources {
 
     public func getResources(resource: String, ofType type: String) throws -> String {
         #if os(Linux)
-        let bundle = Bundle(path: (Bundle.main.resourcePath ?? ".") + "/app/stencils") ?? Bundle.main
+        let bundle = Bundle(path: (Bundle.main.resourcePath ?? ".") + "/app/_stencils") ?? Bundle.main
         #else
         let bundle = Bundle(for: Swift.type(of: self))
         #endif
