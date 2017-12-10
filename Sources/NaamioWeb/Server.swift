@@ -52,7 +52,11 @@ public class Server {
         Kitura.addHTTPServer(onPort: port, with: Routes.routers.view)
 
         // start the framework - the servers added until now will start listening
-        Kitura.run()
+        Kitura.start()
+    }
+
+    public class func stop() {
+        Kitura.stop()
     }
     
     /// Translates the option to the enum value.

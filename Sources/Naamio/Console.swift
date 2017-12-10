@@ -30,11 +30,7 @@ class Console {
     /// configuration file, overriding defaults.
     class func loadConfig() {
         Console.readArgs()
-        
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_ENV") ?? "development", forKey: "naamio.env")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_TEMPLATES") ?? "_templates/leaf", forKey: "naamio.templates")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_SOURCE") ?? "public", forKey: "naamio.source")
-        Config.settings.updateValue(getEnvironmentVar("NAAMIO_PORT") ?? "8090", forKey: "naamio.port")
+        Environment.readArgs()
     }
     
     /// Reads the arguments from the console provided at
