@@ -1,26 +1,80 @@
+// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
     name: "Naamio",
+    products: [
+        .executable(
+            name: "Naamio",
+            targets: ["Naamio", "NaamioCore", "NaamioService", "NaamioTemplateEngine", "NaamioWeb"]
+        ),
+        .executable(
+            name: "NaamioCtl",
+            targets: ["NaamioControl"]
+        ),
+        .library(
+            name: "NaamioWeb",
+            targets: ["NaamioWeb"]
+        )
+    ],
+    dependencies: [
+          .package(url: "https://github.com/IBM-Swift/HeliumLogger", from: "1.7.1"),
+          .package(url: "https://github.com/IBM-Swift/Kitura", from: "2.0.0"),
+          .package(url: "https://github.com/IBM-Swift/Kitura-Markdown", from: "0.9.1"),
+          .package(url: "https://github.com/IBM-Swift/SwiftyRequest.git", .upToNextMajor(from: "1.0.0")),
+          .package(url: "https://github.com/Naamio/Malline", from: "0.2.0"),
+          .package(url: "https://github.com/Naamio/Viila", from: "0.2.0")
+    ],
     targets: [
-        Target(
+        .target(
             name: "Naamio",
             dependencies: [
-                .Target(name: "NaamioCore")
-            ]),
-        Target(
+                .byNameItem(name: "HeliumLogger"),
+                .target(name: "NaamioCore"),
+                .target(name: "NaamioWeb")
+            ]
+        ),
+        .target(
+            name: "NaamioControl",
+            dependencies: [
+                
+            ]
+        ),
+        .target(
             name: "NaamioCore",
             dependencies: [
-                .Target(name: "NaamioTemplateEngine")
-            ]),
-        Target(
+                .byNameItem(name: "Viila"),
+                .byNameItem(name: "KituraMarkdown"),
+                .target(name: "NaamioTemplateEngine")
+            ]
+        ),
+        .target(
+            name: "NaamioService",
+            dependencies: [
+                .target(name: "NaamioCore")
+            ]
+        ),
+        .target(
             name: "NaamioTemplateEngine",
             dependencies: [
-            ])],
-    dependencies: [
-          .Package(url: "https://github.com/IBM-Swift/HeliumLogger", majorVersion: 1, minor: 7),
-          .Package(url: "https://github.com/IBM-Swift/Kitura", majorVersion: 1, minor: 7),
-          .Package(url: "https://github.com/IBM-Swift/Kitura-Markdown", majorVersion: 0, minor: 9),
-          .Package(url: "https://github.com/OmnijarStudio/malline", majorVersion: 0, minor: 2)
-    ],
-    exclude: ["Makefile"])
+                .byNameItem(name: "Kitura"),
+                .byNameItem(name: "Malline")
+            ]
+        ),
+        .target(
+            name: "NaamioWeb",
+            dependencies: [
+                .byNameItem(name: "KituraMarkdown"),
+                .target(name: "NaamioCore")
+            ]
+        ),
+        .testTarget(
+            name: "NaamioTests",
+            dependencies: ["NaamioCore"]
+        ),
+        .testTarget(
+            name: "NaamioWebTests",
+            dependencies: ["NaamioWeb"]
+        )
+    ]
+)

@@ -1,12 +1,45 @@
 
 import Foundation
+import ViilaFS
+
+public enum ReaderError: Error {
+    case resourceNotFound
+    case readFailed(Error)
+    case convertToStringFailed
+}
 
 /// Resources provides the tools necessary to manage all types of 
 /// files, including templates, images, etc. for the application 
 /// to run.
-class Resources {
+public class Resources {
+
+    public init() {}
+
+    public func getResources(resource: String, ofType type: String) throws -> String {
+        #if os(Linux)
+        let bundle = Bundle(path: (Bundle.main.resourcePath ?? ".") + "/app/_stencils") ?? Bundle.main
+        #else
+        let bundle = Bundle(for: Swift.type(of: self))
+        #endif
+        
+        print(bundle.resourcePath ?? "no resource path provided")
+        guard let resourcePath = bundle.path(forResource: resource, ofType: type) else {
+            throw ReaderError.resourceNotFound
+        }
+
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: resourcePath))
+            guard let string = String(data: data, encoding: String.Encoding.utf8) else {
+                throw ReaderError.convertToStringFailed
+            }
+
+            return string
+        } catch {
+            throw ReaderError.readFailed(error)
+        }
+    }
     
-    func getResources(from path: String, withSuffix suffix: String) -> [String] {
+    public func getResources(from path: String, withSuffix suffix: String) -> [String] {
         let fileManager = FileManager.default
         let potentialResource = NSString(string: "\(fileManager.currentDirectoryPath)/\(path)").standardizingPath
         let fileExists = fileManager.fileExists(atPath: potentialResource)
@@ -26,7 +59,7 @@ class Resources {
         return resources
     }
     
-    func getResources(from path: String) -> String {
+    public func getResources(from path: String) -> String {
         let fileManager = FileManager.default
         let potentialResource = NSString(string: "\(fileManager.currentDirectoryPath)/\(path)").standardizingPath
         let fileExists = fileManager.fileExists(atPath: potentialResource)
@@ -41,7 +74,7 @@ class Resources {
 
     /// Returns a resource / file path based on a resource path. This can be
     /// relational, or absolute.
-    func getFilePath(for resource: String) -> String? {
+    public func getFilePath(for resource: String) -> String? {
         let fileManager = FileManager.default
         let potentialResource = getResourcePathBasedOnSourceLocation(for: resource)
         let fileExists = fileManager.fileExists(atPath: potentialResource)
@@ -54,7 +87,7 @@ class Resources {
     }
 
     /// Returns a resource / file path based on the source location.
-    func getResourcePathBasedOnSourceLocation(for resource: String) -> String {
+    public func getResourcePathBasedOnSourceLocation(for resource: String) -> String {
         let fileName = NSString(string: #file)
         let resourceFilePrefixRange: NSRange
         let lastSlash = fileName.range(of: "/", options: .backwards)
@@ -73,7 +106,7 @@ class Resources {
     }
 
     /// Returns a resoure / file path based on the current working directory.
-    func getResourcePathBasedOnCurrentDirectory(for resource: String, withFileManager fileManager: FileManager) -> String? {
+    public func getResourcePathBasedOnCurrentDirectory(for resource: String, withFileManager fileManager: FileManager) -> String? {
         do {
             let packagePath = fileManager.currentDirectoryPath + "/Packages"
 
@@ -94,5 +127,14 @@ class Resources {
         }
 
         return nil
+    }
+
+    
+
+    public func getResourceTree(from path: String) {
+        try! Folder(path: path).makeSubfolderSequence(recursive: true).forEach { folder in
+            // TODO: Provide folder default string value.
+            print("Name : \(folder.name), parent: \(String(describing: folder.parent))")
+        }
     }
 }

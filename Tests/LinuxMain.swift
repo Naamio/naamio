@@ -1,6 +1,6 @@
 import XCTest
 
-@testable import NaamioTests
+@testable import NaamioWebTests
 
 XCTMain([
     testCase(TestServer.allTests)

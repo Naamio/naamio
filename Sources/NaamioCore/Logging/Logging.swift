@@ -13,22 +13,22 @@ public class Log {
     }
     
     // Prints a trace message to the relevant IO stream(s).
-    static func trace(_ msg: String) {
+    public static func trace(_ msg: String) {
         LogAPI.debug(msg)
     }
     
     // Prints an information message to the relevant IO stream(s).
-    static func info(_ msg: String) {
+    public static func info(_ msg: String) {
         LogAPI.info(msg)
     }
     
     // Prints a warning message to the reelvant IO stream(s).
-    static func warn(_ msg: String) {
+    public static func warn(_ msg: String) {
         LogAPI.info(msg)
     }
     
     // Prints an error message to the relevant IO stream(s).
-    static func error(_ msg: String) {
+    public static func error(_ msg: String) {
         LogAPI.error(msg)
     }
 }
