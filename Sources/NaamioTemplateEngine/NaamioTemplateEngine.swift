@@ -16,10 +16,36 @@ public class NaamioTemplateEngine: TemplateEngine {
 
     private let `extension`: Extension
     
+    private var cache: [Stencil]
+    
     /// Initializes a new instance of the `NaamioTemplateEngine` with 
     /// the default extension (`.html`).
     public init(extension: Extension = Extension()) {
         self.`extension` = `extension`
+        self.cache = [Stencil]()
+    }
+
+    public func cacheTemplate(filePath: String) throws {
+        let templatePath = Path(filePath)
+        let templateDirectory = templatePath.parent()
+        print(templateDirectory)
+        
+        let loader = FileSystemLoader(paths: [templateDirectory])
+        `extension`.registerTag("asset", parser: AssetTag.parse)
+        let environment = Environment(loader: loader, extensions: [`extension`])
+
+        let template = try environment.loadStencil(names: ["40x.html"])
+        
+        if cache.contains(where: { element in
+            if (template.name == element.name) {
+                return true
+            } else {
+                return false
+            }
+        }) {}
+        else {
+            cache.append(template)
+        }
     }
     
     /// Renders the given template using `Malline`, and the additional tags

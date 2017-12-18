@@ -35,12 +35,15 @@ class Routes {
         defineAssetsRoutes()
         defineContentRoutes()
 
+
+        let naamioTemplateEngine = NaamioTemplateEngine()
+        try! naamioTemplateEngine.cacheTemplate(filePath: "./.build/x86_64-apple-macosx10.10/debug/NaamioWebTests.xctest/Contents/app/_stencils/40x.html")
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
         }*/
         
-        router.setDefault(templateEngine: NaamioTemplateEngine())
+        router.setDefault(templateEngine: naamioTemplateEngine)
         router.add(templateEngine: KituraMarkdown())
         
         router.get("/") { _, response, next in
