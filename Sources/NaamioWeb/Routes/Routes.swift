@@ -37,7 +37,7 @@ class Routes {
 
 
         let naamioTemplateEngine = NaamioTemplateEngine()
-        try! naamioTemplateEngine.cacheTemplate(filePath: "./.build/x86_64-apple-macosx10.10/debug/NaamioWebTests.xctest/Contents/app/_stencils/40x.html")
+        try! naamioTemplateEngine.cacheTemplate(filePath: "\(Config.settings["naamio.templates"] as! String)/40x.html")
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
