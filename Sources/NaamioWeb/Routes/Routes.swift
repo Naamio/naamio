@@ -35,12 +35,16 @@ class Routes {
         defineAssetsRoutes()
         defineContentRoutes()
 
+
+        let naamioTemplateEngine = NaamioTemplateEngine()
+        try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
+        
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
         }*/
         
-        router.setDefault(templateEngine: NaamioTemplateEngine())
+        router.setDefault(templateEngine: naamioTemplateEngine)
         router.add(templateEngine: KituraMarkdown())
         
         router.get("/") { _, response, next in
