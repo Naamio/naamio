@@ -37,7 +37,8 @@ class Routes {
 
 
         let naamioTemplateEngine = NaamioTemplateEngine()
-        try! naamioTemplateEngine.cacheTemplate(filePath: "\(Config.settings["naamio.templates"] as! String)/40x.html")
+        try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
+        
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
