@@ -1,27 +1,14 @@
 # Naamio
 
-<p align="center">
-    <a href="https://swift.org/package-manager">
-        <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
-    </a>
-    <a href="https://img.shields.io/badge/os-macOS-green.svg?style=flag">
-        <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flag" alt="macOS" />
-    </a>
-    <a href="https://img.shields.io/badge/os-linux-green.svg?style=flag">
-        <img src="https://img.shields.io/badge/os-linux-green.svg?style=flag" alt="Linux" />
-    </a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat" alt="License: MIT" />
-    </a>
-    <a href="https://twitter.com/omnijarstudio">
-        <img src="https://img.shields.io/badge/contact-@omnijarstudio-blue.svg?style=flat" alt="Twitter: @omnijarstudio" />
-    </a>
-</p>
+[![Swift Package Manager](https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager)
+[![macOS](https://img.shields.io/badge/os-macOS-green.svg?style=flat)]()
+[![Linux](https://img.shields.io/badge/os-linux-green.svg?style=flat)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)](https://opensource.org/licenses/MIT)
+[![Twitter: @omnijarstudio](https://img.shields.io/badge/contact-@omnijarstudio-blue.svg?style=flat)](https://twitter.com/omnijarstudio)
 
 Naamio is the primary web app engine for 
 [Omnijar Studio](https://omnijar.studio "Omnijar Studio")
-It can be extended with stencils and applets to rapidly
-produce web apps.
+It can be extended with stencils and applets to rapidly produce web apps.
 
 ## Features
 
@@ -38,8 +25,6 @@ on the server.
 
 ## The License
 
-The project is open source, and has been licensed with
-specific conditions to allow its source to be used for 
-commercial and non-profit purposes. Please read 
-[the license](./LICENSE.md "the license") for more 
-information.
+The project is open source, and has been licensed with specific conditions 
+to allow its source to be used for commercial and non-profit purposes. Please 
+read [the license](./LICENSE.md "the license") for more information.

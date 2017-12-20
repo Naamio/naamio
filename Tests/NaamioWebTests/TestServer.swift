@@ -32,6 +32,8 @@ class TestServer: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: - Tests
+
     /*func testParameter() {
         runTestParameter(user: "John")
     }
@@ -52,7 +54,9 @@ class TestServer: XCTestCase {
         }
     }
 
-    func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
+    // MARK: - Test Boilerplate
+
+    private func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
         Server.start()
 
         let requestQueue = DispatchQueue(label: "Request queue")
@@ -71,7 +75,7 @@ class TestServer: XCTestCase {
         }
     }
 
-    func performRequest(_ method: String, path: String,  expectation: XCTestExpectation,
+    private func performRequest(_ method: String, path: String,  expectation: XCTestExpectation,
                         headers: [String: String]? = nil,
                         requestModifier: ((ClientRequest) -> Void)? = nil,
                         callback: @escaping (ClientResponse) -> Void) {
@@ -100,7 +104,7 @@ class TestServer: XCTestCase {
         req.end()
     }
 
-    func performRequestSynchronous(_ method: String, path: String,  expectation: XCTestExpectation,
+    private func performRequestSynchronous(_ method: String, path: String,  expectation: XCTestExpectation,
                         headers: [String: String]? = nil,
                         requestModifier: ((ClientRequest) -> Void)? = nil,
                         callback: @escaping (ClientResponse, DispatchGroup) -> Void) {
@@ -113,12 +117,12 @@ class TestServer: XCTestCase {
         dispatchGroup.wait()
     }
 
-    func expectation(_ index: Int) -> XCTestExpectation {
+    private func expectation(_ index: Int) -> XCTestExpectation {
         let expectationDescription = "\(type(of: self))-\(index)"
         return self.expectation(description: expectationDescription)
     }
 
-    func waitExpectation(timeout t: TimeInterval, handler: XCWaitCompletionHandler?) {
+    private func waitExpectation(timeout t: TimeInterval, handler: XCWaitCompletionHandler?) {
         self.waitForExpectations(timeout: t, handler: handler)
     }
 
