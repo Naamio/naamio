@@ -35,7 +35,6 @@ class Routes {
         defineAssetsRoutes()
         defineContentRoutes()
 
-
         let naamioTemplateEngine = NaamioTemplateEngine()
         try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
         
