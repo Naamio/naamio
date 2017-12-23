@@ -9,6 +9,7 @@ class Templating {
     
     private let templateSuffix = "html"
     
+    /// List of templates within Templating instance.
     var templates: [String] = [String]()
 
     /// The path of the templates.
