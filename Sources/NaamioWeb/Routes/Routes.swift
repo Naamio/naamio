@@ -12,10 +12,9 @@ struct Routers {
 
     init() {
         view = Router()
-        Templating.load()
         
         // Set default view path to template path.
-        view.viewsPath = Templating.path
+        view.viewsPath = Templating.default.path
     }
 }
 
@@ -70,7 +69,7 @@ class Routes {
             }
         }
         
-        for template in Templating.templates {
+        for template in Templating.default.templates {
             let templateName = NSString(string: template).deletingPathExtension
             
             Log.info("Registering template '/\(templateName)")
