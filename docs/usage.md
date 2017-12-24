@@ -12,6 +12,29 @@ Command-line parameters are not supported at length as it is generally
 considered bad practice to pass settings into the executable at the time
 of invocation.
 
+## Command-line Configuration
+
+To run Naamio with a single invocation, whilst still using the environment
+variable method of configuration, it is recommended you run the following:
+
+```
+    $ env NAAMIO_PORT='8090' \
+    $     bash -c 'Naamio'  
+    # The environment variable NAAMIO_PORT will be set to 8090, at the time
+    # of invocation via bash. 
+```
+
+## Configuration File
+
+# Docker
+
+We prefer to invoke **Naamio** via **Docker**. In fact, this is how we run 
+**Naamio** in development, test, staging, and live environments, and have 
+our own **Docker** image for this very purpose. You can either use our image
+as-is, or you can extend it and customize it as you see fit.
+
+## Kubernetes
+
 ```
     $ naamio --theme <theme-path>
     # Naamio will load with a specific theme from the <theme-path> folder.
