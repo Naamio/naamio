@@ -22,8 +22,8 @@ let package = Package(
           .package(url: "https://github.com/IBM-Swift/Kitura", from: "2.0.0"),
           .package(url: "https://github.com/IBM-Swift/Kitura-Markdown", from: "0.9.1"),
           .package(url: "https://github.com/IBM-Swift/SwiftyRequest.git", .upToNextMajor(from: "1.0.0")),
-          .package(url: "https://github.com/Naamio/Malline", from: "0.2.0"),
-          .package(url: "https://github.com/Naamio/Viila", from: "0.2.0")
+          .package(url: "https://github.com/Naamio/Malline", .upToNextMajor(from: "0.2.0")),
+          .package(url: "https://github.com/Naamio/Viila", .upToNextMajor(from: "0.2.0"))
     ],
     targets: [
         .target(
@@ -43,8 +43,9 @@ let package = Package(
         .target(
             name: "NaamioCore",
             dependencies: [
+                .byNameItem(name: "Kitura"),
+                .byNameItem(name: "KituraMarkdown"),
                 .byNameItem(name: "Viila"),
-                .byNameItem(name: "KituraMarkdown")
             ]
         ),
         .target(
