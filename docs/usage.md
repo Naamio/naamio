@@ -30,8 +30,9 @@ variable method of configuration, it is recommended you run the following:
 
 We prefer to invoke **Naamio** via **Docker**. In fact, this is how we run 
 **Naamio** in development, test, staging, and live environments, and have 
-our own **Docker** image for this very purpose. You can either use our image
-as-is, or you can extend it and customize it as you see fit.
+[our own **Docker** image](https://hub.docker.com/r/naamio/naamio/) for this 
+very purpose. You can either use our image as-is, or you can extend it and 
+customize it as you see fit.
 
 ## Kubernetes
 
