@@ -1,6 +1,13 @@
-import KituraTemplateEngine
-import Malline
 import Foundation
+
+import KituraTemplateEngine
+
+import Malline
+
+
+public enum NaamioTemplateEngineError: Swift.Error {
+    case rootPathsEmpty
+}
 
 /// NaamioTemplateEngine is the base templating system for `Naamio`.
 /// It utilizes `Kitura` and `Malline`, extending base functionality 
@@ -15,6 +22,8 @@ public class NaamioTemplateEngine: TemplateEngine {
     public var fileExtension: String { return "html" }
 
     private let `extension`: Extension
+
+    private var rootPaths: [Path] = []
     
     private var cache: [(Stencil, Path)]
     
@@ -32,6 +41,10 @@ public class NaamioTemplateEngine: TemplateEngine {
         for template in templates {
             try self.cacheTemplate(filePath: template.string)
         }
+    }
+
+    public func setRootPaths(rootPaths: [String]) {
+        self.rootPaths = rootPaths.map { Path($0) }
     }
 
     public func cacheTemplate(filePath: String) throws {
@@ -84,6 +97,20 @@ public class NaamioTemplateEngine: TemplateEngine {
         context["loader"] = loader
         
         return try environment.renderStencil(name: templatePath.lastComponent,  context: context)
+    }
+
+    public func render(filePath: String, context: [String: Any], options: RenderingOptions,
+                       templateName: String) throws -> String {
+        if rootPaths.isEmpty {
+            throw NaamioTemplateEngineError.rootPathsEmpty
+        }
+
+        let loader = FileSystemLoader(paths: rootPaths)
+        `extension`.registerTag("asset", parser: AssetTag.parse)
+        let environment = Environment(loader: loader, extensions: [`extension`])
+        var context = context
+        context["loader"] = loader
+        return try environment.renderStencil(name: templateName,  context: context)
     }
     
     func assetsFilter(value: Any?, arguments: [Any?]) throws -> Any? {
