@@ -99,6 +99,14 @@ public class NaamioTemplateEngine: TemplateEngine {
         return try environment.renderStencil(name: templatePath.lastComponent,  context: context)
     }
 
+    /// Renders the given template using `Malline`, and the additional tags
+    /// provided to the parser by the `NaamioTemplateEngine`.
+    ///
+    ///  - parameter filePath: The path of the file in relation to the root project.
+    ///  - parameter context: The meta information for the current page session.
+    ///  - parameter options: Rendering options for `Malline` to render the template.
+    ///  - parameter templateName: Name to use for the template.
+    ///  - returns: The resulting file post-render.
     public func render(filePath: String, context: [String: Any], options: RenderingOptions,
                        templateName: String) throws -> String {
         if rootPaths.isEmpty {
