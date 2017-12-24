@@ -44,8 +44,7 @@ let package = Package(
             name: "NaamioCore",
             dependencies: [
                 .byNameItem(name: "Viila"),
-                .byNameItem(name: "KituraMarkdown"),
-                .target(name: "NaamioTemplateEngine")
+                .byNameItem(name: "KituraMarkdown")
             ]
         ),
         .target(
@@ -65,7 +64,8 @@ let package = Package(
             name: "NaamioWeb",
             dependencies: [
                 .byNameItem(name: "KituraMarkdown"),
-                .target(name: "NaamioCore")
+                .target(name: "NaamioCore"),
+                .target(name: "NaamioTemplateEngine")
             ]
         ),
         .testTarget(
