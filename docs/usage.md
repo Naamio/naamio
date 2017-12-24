@@ -34,6 +34,22 @@ We prefer to invoke **Naamio** via **Docker**. In fact, this is how we run
 very purpose. You can either use our image as-is, or you can extend it and 
 customize it as you see fit.
 
+When invoking in Docker, we typically use `systemd`. However, the simple
+command to use, regardless of the underlying invocation methodology is:
+
+```
+    $ docker run -d \
+            --name naamio \
+            --restart always \
+            -v /etc/naamio:/etc/naamio:ro \
+            -v /var/log/naamio:/var/log/naamio \
+            -p 8090:8090 \
+            naamio/naamio:latest  
+    # We mount two volumes. One for the configuration, and one for logs. 
+    # These are useful for the most complex setups (in our test case: 
+    # using Container Linux).
+```
+
 ## Kubernetes
 
 ```
