@@ -83,7 +83,7 @@ build:container:
   only: 
     - release
   dependencies:
-    - build:release
+    - build:linux
 
 #release-image:
 #  image: docker:latest
