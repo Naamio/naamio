@@ -75,8 +75,8 @@ build:container:
   script:
     - echo -n $DOCKER_HUB_SECRET | docker login -u $DOCKER_HUB_USERNAME --password-stdin
     - docker build --pull -t $CONTAINER_TEST_IMAGE -f Dockerfile .
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_IMAGE:latest
-    - docker push $CONTAINER_IMAGE:latest
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
   when: manual
   tags:
     - docker
@@ -84,13 +84,21 @@ build:container:
     - release
   dependencies:
     - build:linux
-
-#deploy:
-#  image: ibmcom/swift-ubuntu:latest
-#  stage: deploy
-#  script:
-#    - ./deploy.sh
-#  only:
-#    - master
-
  
+tag:container:
+  image: docker:latest
+  stage: deploy
+  services:
+    - docker:dind
+  script:
+    - echo -n $DOCKER_HUB_SECRET | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+    - docker build --pull -t $CONTAINER_TEST_IMAGE -f Dockerfile .
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_IMAGE:$CI_BUILD_REF_NAME
+    - docker push $CONTAINER_IMAGE:$CI_BUILD_REF_NAME
+  when: manual
+  tags:
+    - docker
+  only: 
+    - tags
+  dependencies:
+    - build:linux
