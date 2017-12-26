@@ -4,16 +4,9 @@ variables:
   CONTAINER_TEST_IMAGE: $CONTAINER_IMAGE:$CI_BUILD_REF_NAME #$CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
   CONTAINER_RELEASE_IMAGE: $CONTAINER_IMAGE:latest #$CI_REGISTRY_IMAGE:latest
 
-cache:
-  key: "$CI_PROJECT_NAME"
-  untracked: false
-  policy: push
-  #paths:
-   # - .build/
-
 stages:
-  - build
   - test
+  - build
   - deploy
 
 before_script:
@@ -31,36 +24,8 @@ before_script:
   - mkdir -p ~/.ssh
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
-build-app:
+test:
   image: ibmcom/swift-ubuntu:4.0
-  stage: build
-  script:
-    - echo "Building release artifact."
-    - swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib 
-  artifacts:
-    paths:
-    - .build/release
-    expire_in: 1 week
-  tags:
-    - docker
-  when: manual
-  only:
-    - release   
-
-review-app:
-  image: ibmcom/swift-ubuntu:4.0
-  stage: test
-  script:
-    - echo "Reviewing service" 
-    - make build
-    - make test
-  only:
-    - branches
-  except: 
-    - master
-
-test-app:
-  image: ibmcom/swift-ubuntu:latest
   stage: test
   script:
     - echo "Testing service"
@@ -69,18 +34,46 @@ test-app:
     - docker
   only:
     - master
+    - release
   artifacts:
     paths:
     - .build/debug
 
-release-image:
+review:
+  image: ibmcom/swift-ubuntu:4.0
+  stage: test
+  script:
+    - echo "Reviewing service" 
+    - make test
+  only:
+    - branches
+  except: 
+    - master
+    - release
+
+build:linux:
+  image: ibmcom/swift-ubuntu:4.0
+  stage: build
+  script:
+    - echo "Building release artifact."
+    - swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib 
+  artifacts:
+    paths:
+      - .build/release
+    expire_in: 1 week
+  tags:
+    - docker
+  when: manual
+  only:
+    - release   
+
+build:container:
   image: docker:latest
   stage: deploy
   services:
     - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
   script:
+    - echo -n $DOCKER_HUB_SECRET | docker login -u $DOCKER_HUB_USERNAME --password-stdin
     - docker build --pull -t $CONTAINER_TEST_IMAGE -f Dockerfile .
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_IMAGE:latest
     - docker push $CONTAINER_IMAGE:latest
@@ -89,6 +82,8 @@ release-image:
     - docker
   only: 
     - release
+  dependencies:
+    - build:release
 
 #release-image:
 #  image: docker:latest
