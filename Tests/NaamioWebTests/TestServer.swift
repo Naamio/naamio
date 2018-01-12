@@ -80,16 +80,20 @@ class TestServer: XCTestCase {
                         requestModifier: ((ClientRequest) -> Void)? = nil,
                         callback: @escaping (ClientResponse) -> Void) {
         var allHeaders = [String: String]()
+
         if  let headers = headers {
             for  (headerName, headerValue) in headers {
                 allHeaders[headerName] = headerValue
             }
         }
+
         if allHeaders["Content-Type"] == nil {
             allHeaders["Content-Type"] = "text/plain"
         }
+
         let options: [ClientRequest.Options] =
             [.method(method), .hostname("localhost"), .port(8090), .path(path), .headers(allHeaders)]
+
         let req = HTTP.request(options) { response in
             guard let response = response else {
                 XCTFail("response object is nil")
@@ -98,6 +102,7 @@ class TestServer: XCTestCase {
             }
             callback(response)
         }
+
         if let requestModifier = requestModifier {
             requestModifier(req)
         }
@@ -108,12 +113,15 @@ class TestServer: XCTestCase {
                         headers: [String: String]? = nil,
                         requestModifier: ((ClientRequest) -> Void)? = nil,
                         callback: @escaping (ClientResponse, DispatchGroup) -> Void) {
+        
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
+        
         performRequest(method, path: path, expectation: expectation, headers: headers,
                        requestModifier: requestModifier) { response in
                         callback(response, dispatchGroup)
         }
+        
         dispatchGroup.wait()
     }
 

@@ -47,7 +47,7 @@ class Console {
             case "s":
                 setEnvironmentVar(name: "NAAMIO_SOURCE", value: CommandLine.arguments[index+1], overwrite: false)
             case "t":
-                setEnvironmentVar(name: "NAAMIO_TEMPLATES", value: CommandLine.arguments[index+1], overwrite: false)
+                setEnvironmentVar(name: "NAAMIO_STENCILS", value: CommandLine.arguments[index+1], overwrite: false)
             case "p":
                 setEnvironmentVar(name: "NAAMIO_PORT", value: CommandLine.arguments[index+1], overwrite: false)
             default: break
