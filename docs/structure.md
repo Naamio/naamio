@@ -27,6 +27,15 @@ a little inspiration from Jekyll's documentation):
     ├── _posts
     |   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
     |   └── 2009-04-26-barcamp-boston-4-roundup.md
+    ├── _stencils
+    |   ├── layouts
+    |   |   ├── default.html
+    |   |   └── post.html
+    |   ├── partials
+    |   |   ├── footer.html
+    |   |   └── header.html
+    |   ├── home.html
+    |   └── contact.html
     ├── assets
     |   ├── scripts
     |   |   ├── js
@@ -43,15 +52,6 @@ a little inspiration from Jekyll's documentation):
     |       |   ├── base.css
     |       |   └── screen.css
     |       └── fonts
-    ├── stencils
-    |       ├── layouts
-    |       |   ├── default.html
-    |       |   └── post.html
-    |       ├── partials
-    |       |   ├── footer.html
-    |       |   └── header.html
-    |       ├── home.html
-    |       └── contact.html
     └── .metadata
 ```
 
@@ -126,16 +126,13 @@ An overview of each of these folders and files is as follows:
         </td>
     </tr>
     <tr>
-        <td>themes</td>
+        <td>_stencils</td>
         <td>
-            The themes folder allows the designer to select a single
-            theme when running <code>Naamio</code>. If only one theme exists within
-            this folder, then that theme is selected by default. No further
-            configuration is necessary. However, if a designer wishes
-            to design a new theme, whilst retaining an older theme until
-            finished, then both can exist in parallel, with one being 
-            set on the live environment, and the other being set 
-            on the local host. 
+            The stencils folder allows the designer to deploy a single
+            theme, consisting of multiple components, when running <code>Naamio</code>. 
+            No further configuration is necessary. <code>layouts</code> is used 
+            for master stencils, and <code>partials</code> is used for individual 
+            sections of stencils.
         </td>
     </tr>
 </table>
