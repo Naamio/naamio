@@ -4,7 +4,6 @@ import KituraTemplateEngine
 
 import Malline
 
-
 public enum NaamioTemplateEngineError: Swift.Error {
     case rootPathsEmpty
 }
@@ -25,13 +24,13 @@ public class NaamioTemplateEngine: TemplateEngine {
 
     private var rootPaths: [Path] = []
     
-    private var cache: [(Stencil, Path)]
+    private var cache: [(stencil: Stencil, path: Path)]
     
     /// Initializes a new instance of the `NaamioTemplateEngine` with 
     /// the default extension (`.html`).
     public init(extension: Extension = Extension()) {
         self.`extension` = `extension`
-        self.cache = [(Stencil, Path)]()
+        self.cache = [(stencil: Stencil, path: Path)]()
     }
     
     public func cacheTemplates(from path: String) throws {
@@ -66,8 +65,8 @@ public class NaamioTemplateEngine: TemplateEngine {
         let template = try environment.loadStencil(names: [templatePath.lastComponent])
         
         if cache.contains(where: { cachedItem in
-            if (template.name == cachedItem.0.name) &&
-                (templatePath == cachedItem.1) {
+            if (template.name == cachedItem.stencil.name) &&
+                (templatePath == cachedItem.path) {
                 return true
             } else {
                 return false
@@ -75,7 +74,7 @@ public class NaamioTemplateEngine: TemplateEngine {
         }) {}
         else {
             print("Template is new. Caching.")
-            cache.append((template, templatePath))
+            cache.append((stencil: template, path: templatePath))
         }
     }
     
