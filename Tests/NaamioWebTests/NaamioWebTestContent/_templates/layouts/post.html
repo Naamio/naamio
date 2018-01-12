@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="en" 
+      xmlns:svg="http://www.w3.org/2000/svg" 
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+<head>
+    <title>Omnijar Studio</title>
+    <meta charset="UTF-8" />
+    <script src="{% asset "/scripts/js/app.js" %}" async="async" defer="defer"></script>
+</head>
+
+<body>
+    {% if partials.header %}
+        {% block header %}
+            {% include "partials/header.html" %}
+        {% endblock %}
+    {% endif %}
+    {% block aside %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% if partials.footer %}
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock %}
+    {% endif %}
+</body>
+</html>
