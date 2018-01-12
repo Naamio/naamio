@@ -58,7 +58,7 @@ build:linux:
     - swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib 
   artifacts:
     paths:
-      - .build/release
+      - .build/release/*
     expire_in: 1 week
   tags:
     - docker
