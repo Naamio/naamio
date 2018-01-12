@@ -35,7 +35,7 @@ class Routes {
         defineContentRoutes()
 
         let naamioTemplateEngine = NaamioTemplateEngine()
-        try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.stencils"] as! String)")
+        try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
         
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
@@ -139,7 +139,7 @@ class Routes {
     }
 
     class func defineTemplateRoutes() {
-        let templatesPath = Config.settings["naamio.stencils"] as! String
+        let templatesPath = Config.settings["naamio.templates"] as! String
 
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")

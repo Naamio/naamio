@@ -20,6 +20,6 @@ class Templating {
         let resources = Resources()
         
         templates = resources.getResources(from: path, withSuffix: templateSuffix)
-        path = Config.settings["naamio.stencils"] as? String ?? "_stencils"
+        path = Config.settings["naamio.templates"] as? String ?? "_templates"
     }
 }
