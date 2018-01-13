@@ -14,6 +14,11 @@ struct NaamioTemplateCache {
     var path: Path
 }
 
+struct NaamioTemplateCache {
+    var stencil: Stencil
+    var path: Path
+}
+
 /// NaamioTemplateEngine is the base templating system for `Naamio`.
 /// It utilizes `Kitura` and `Malline`, extending base functionality 
 /// to support additional tags and functions, specific to `Naamio`.
