@@ -8,6 +8,11 @@ public enum NaamioTemplateEngineError: Swift.Error {
     case rootPathsEmpty
 }
 
+struct NaamioTemplateCache {
+    var stencil: Stencil
+    var path: Path
+}
+
 /// NaamioTemplateEngine is the base templating system for `Naamio`.
 /// It utilizes `Kitura` and `Malline`, extending base functionality 
 /// to support additional tags and functions, specific to `Naamio`.
@@ -24,13 +29,13 @@ public class NaamioTemplateEngine: TemplateEngine {
 
     private var rootPaths: [Path] = []
     
-    private var cache: [(stencil: Stencil, path: Path)]
+    private var cache: [NaamioTemplateCache]
     
     /// Initializes a new instance of the `NaamioTemplateEngine` with 
     /// the default extension (`.html`).
     public init(extension: Extension = Extension()) {
         self.`extension` = `extension`
-        self.cache = [(stencil: Stencil, path: Path)]()
+        self.cache = [NaamioTemplateCache]()
     }
     
     public func cacheTemplates(from path: String) throws {
@@ -63,7 +68,7 @@ public class NaamioTemplateEngine: TemplateEngine {
         let environment = Environment(loader: loader, extensions: [`extension`])
 
         let template = try environment.loadStencil(names: [templatePath.lastComponent])
-        
+
         if cache.contains(where: { cachedItem in
             if (template.name == cachedItem.stencil.name) &&
                 (templatePath == cachedItem.path) {
@@ -74,7 +79,7 @@ public class NaamioTemplateEngine: TemplateEngine {
         }) {}
         else {
             print("Template is new. Caching.")
-            cache.append((stencil: template, path: templatePath))
+            cache.append(NaamioTemplateCache(stencil: template, path: templatePath))
         }
     }
     

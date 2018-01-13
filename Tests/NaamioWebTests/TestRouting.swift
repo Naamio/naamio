@@ -7,20 +7,16 @@ import KituraNet
 @testable import NaamioWeb
 @testable import NaamioCore
 
-class TestServer: XCTestCase {
+class TestRouting: XCTestCase {
 
     typealias BodyChecker = (String) -> Void
 
-
-    static var allTests: [(String, (TestServer) -> () throws -> Void)] {
+    static var allTests: [(String, (TestRouting) -> () throws -> Void)] {
         return [
-            ("Test Server Startup", testServerStartup),
-            //("Test Parameter", testParameter),
-            //("Test Parameter with Whitespace", testParameterWithWhiteSpace),
-            ("Test Unknown Path", testUnknownPath)
+            ("Test Unknown Route", testUnknownRoute),
         ]
     }
-    
+
     private let server:NaamioWeb.Server = Server()
 
     override func setUp() {
@@ -33,8 +29,6 @@ class TestServer: XCTestCase {
         super.tearDown()
     }
 
-    // MARK: - Tests
-
     /*func testParameter() {
         runTestParameter(user: "John")
     }
@@ -43,16 +37,8 @@ class TestServer: XCTestCase {
         runTestParameter(user: "John Doe")
     }*/
 
-    func testUnknownPath() {
+    func testUnknownRoute() {
         self.runTestUnknownPath(path: "aaa")
-    }
-
-    func testServerStartup() {
-        performServerTest { expectation in
-            self.performRequest("get", path: "/", expectation: expectation) { response in
-                expectation.fulfill()
-            }
-        }
     }
 
     // MARK: - Test Boilerplate
