@@ -13,6 +13,7 @@ class TestRouting: XCTestCase {
 
     static var allTests: [(String, (TestRouting) -> () throws -> Void)] {
         return [
+            ("Test Known Route", testKnownRoute),
             ("Test Unknown Route", testUnknownRoute),
             ("Test Known Route", testKnownRoute),
             ("Test Known Sub-Route", testKnownSubRoute),
