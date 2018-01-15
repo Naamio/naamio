@@ -13,6 +13,7 @@ class TestRouting: XCTestCase {
 
     static var allTests: [(String, (TestRouting) -> () throws -> Void)] {
         return [
+            ("Test Known Route", testKnownRoute),
             ("Test Unknown Route", testUnknownRoute),
         ]
     }
@@ -36,6 +37,11 @@ class TestRouting: XCTestCase {
     func testParameterWithWhiteSpace() {
         runTestParameter(user: "John Doe")
     }*/
+
+    func testKnownRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>User:</b> </body></html>"
+        runGetResponseTest(path: "/users", expectedResponseText: responseText)
+    }
 
     func testUnknownRoute() {
         self.runTestUnknownPath(path: "aaa")

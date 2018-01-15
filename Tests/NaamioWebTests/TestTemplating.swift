@@ -33,7 +33,7 @@ class TestTemplating: XCTestCase {
         XCTAssertNotNil(Templating.default)
         XCTAssertNotNil(Templating.default.templates)
         XCTAssertNotNil(Templating.default.path)
-        XCTAssertEqual(Templating.default.templates.count, 0)
+        XCTAssertEqual(Templating.default.templates.count, 2)
         print(Templating.default.path)
     }
 }

@@ -19,7 +19,7 @@ class Templating {
     init() {
         let resources = Resources()
         
-        templates = resources.getResources(from: path, withSuffix: templateSuffix)
         path = Config.settings["naamio.templates"] as? String ?? "_templates"
+        templates = resources.getResources(from: path, withSuffix: templateSuffix)
     }
 }

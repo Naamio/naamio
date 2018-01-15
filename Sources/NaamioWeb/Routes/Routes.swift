@@ -21,6 +21,8 @@ struct Routers {
 class Routes {
 
     static let routers = Routers()
+
+    static let naamioTemplateEngine = NaamioTemplateEngine()
     
     class func defineRoutes() {
         let router = Routes.routers.view      
@@ -33,8 +35,7 @@ class Routes {
         definePostsRoutes()
         defineAssetsRoutes()
         defineContentRoutes()
-
-        let naamioTemplateEngine = NaamioTemplateEngine()
+        
         try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
         
         /*
@@ -68,11 +69,13 @@ class Routes {
                 Log.error("Failed to render template \(error)")
             }
         }
+
+       print("\(Templating.default.templates.count) templates found")
         
         for template in Templating.default.templates {
             let templateName = NSString(string: template).deletingPathExtension
             
-            Log.info("Registering template '/\(templateName)")
+            print("Registering template '/\(templateName)")
             
             router.get("/\(templateName)") { request, response, next in
                 defer {
@@ -143,7 +146,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")
-            Routes.routers.view.setDefault(templateEngine: NaamioTemplateEngine())
+            Routes.routers.view.setDefault(templateEngine: naamioTemplateEngine)
         }
     }
 
@@ -171,7 +174,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: assetsPath)) {
             Log.info("Assets folder '\(assetsPath)' found. Loading static file server at '/assets'")
-             Routes.routers.view.all("/assets", middleware: StaticFileServer(path: assetsPath))
+            Routes.routers.view.all("/assets", middleware: StaticFileServer(path: assetsPath))
         }
     }
 
@@ -180,7 +183,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: sourcePath + "/content")) {
             Log.info("Content folder /content found. Loading static file server at '/content'")
-             Routes.routers.view.all("/", middleware: StaticFileServer(path: sourcePath + "/content"))
+            Routes.routers.view.all("/", middleware: StaticFileServer(path: sourcePath + "/content"))
         }
     }
 
