@@ -18,6 +18,10 @@ struct Routers {
     }
 }
 
+/**
+ Routes provides the mechanism for defining routes through
+ context.
+ */
 class Routes {
 
     static let routers = Routers()
@@ -70,12 +74,12 @@ class Routes {
             }
         }
 
-       print("\(Templating.default.templates.count) templates found")
+        Log.info("\(Templating.default.templates.count) templates found")
         
         for template in Templating.default.templates {
-            let templateName = NSString(string: template).deletingPathExtension
+            let templateName = NSString(string: template.name).deletingPathExtension
             
-            print("Registering template '/\(templateName)")
+            print("Routing template '/\(templateName)")
             
             router.get("/\(templateName)") { request, response, next in
                 defer {
