@@ -8,12 +8,6 @@ import Malline
 
 
 import Malline
-import ViilaFS
-
-struct Template {
-    var name: String
-    var source: String?
-}
 
 /// Templating provides the tools necessary to take content
 /// and provide it in a structured method to the end-user.
