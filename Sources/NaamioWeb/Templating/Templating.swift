@@ -1,6 +1,7 @@
 import Foundation
 
 import NaamioCore
+import NaamioTemplateEngine
 
 import Malline
 
@@ -10,30 +11,42 @@ class Templating {
     
     static let `default` = Templating()
     
+    let engine = NaamioTemplateEngine()
+    
     /// List of templates within Templating instance.
     var templates: Templatable?
     
-    /// The path of the templates.
-    var path: String = ""
+    var cache: [TemplateCachable]?
     
-    init() {
-        /*path = Config.settings["naamio.templates"] as? String ?? "_templates"
-         
-         templates = try! Path(path).recursiveChildren()
-         .filter({ $0.extension == templateSuffix })
-         .map { normalizeTemplatePath(from: $0) }*/
-        path = Config.settings["naamio.templates"] as? String ?? "_templates"
-        
-        do {
-            templates = try TemplateLoader(withPath: path).load()
-        } catch {
-            print("Cannot load templates")
+    var path: String {
+        get {
+            return (templates?.base)!
         }
     }
     
-    func normalizeTemplatePath(from path:Path) -> String {
-        let resources = Resources()
+    init() {
+        let path = Config.settings["naamio.templates"] as? String ?? "_templates"
         
-        return resources.getResources(from: path.string)
+        do {
+            templates = try TemplateLoader(withPath: path).load()
+            try self.cacheTemplates()
+        } catch {
+            print("Cannot load templates")
+        }
+        
+    }
+    
+    private func cacheTemplates() throws {
+        print("Caching templates")
+
+        let _ = try templates?.routable.map( {
+            try cacheTemplate(template: $0)
+        } )
+    }
+    
+    private func cacheTemplate( template: Template) throws {
+        print("Caching " + path + template.location! + "/" + template.name)
+        let stencil: Stencil = try engine.cacheTemplate(filePath: path + template.location! + "/" + template.name)
+        cache?.append(TemplateCachedItem(template: template, stencil: stencil))
     }
 }

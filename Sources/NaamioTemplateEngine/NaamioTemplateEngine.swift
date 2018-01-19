@@ -6,6 +6,7 @@ import Malline
 
 public enum NaamioTemplateEngineError: Swift.Error {
     case rootPathsEmpty
+    case notValidTemplate
 }
 
 struct NaamioTemplateCache {
@@ -51,12 +52,11 @@ public class NaamioTemplateEngine: TemplateEngine {
         self.rootPaths = rootPaths.map { Path($0) }
     }
 
-    public func cacheTemplate(filePath: String) throws {
+    public func cacheTemplate(filePath: String) throws -> Stencil {
         let templatePath = Path(filePath)
         
         guard templatePath.isFile else {
-            print("\(templatePath.string) is not a template")
-            return
+            throw NaamioTemplateEngineError.notValidTemplate
         }
         
         let templateDirectory = templatePath.parent()
@@ -76,10 +76,12 @@ public class NaamioTemplateEngine: TemplateEngine {
             } else {
                 return false
             }
-        }) {}
+        }) {
+            return template
+        }
         else {
             print("Template is new. Caching.")
-            cache.append(NaamioTemplateCache(stencil: template, path: templatePath))
+            return template
         }
     }
     

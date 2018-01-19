@@ -4,7 +4,6 @@ import Kitura
 import KituraMarkdown
 
 import NaamioCore
-import NaamioTemplateEngine
 
 struct Routers {
     
@@ -26,8 +25,6 @@ class Routes {
 
     static let routers = Routers()
 
-    static let naamioTemplateEngine = NaamioTemplateEngine()
-    
     class func defineRoutes() {
         let router = Routes.routers.view      
         
@@ -40,14 +37,12 @@ class Routes {
         defineAssetsRoutes()
         defineContentRoutes()
         
-        try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
-        
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
         }*/
         
-        router.setDefault(templateEngine: naamioTemplateEngine)
+        router.setDefault(templateEngine: Templating.default.engine)
         router.add(templateEngine: KituraMarkdown())
         
         router.get("/") { _, response, next in
@@ -79,9 +74,9 @@ class Routes {
         for template in Templating.default.templates!.routable {
             let templateName = NSString(string: template.name).deletingPathExtension
             
-            print("Routing template '\(template.source!)/\(templateName)'")
+            print("Routing template '\(template.location!)/\(templateName)'")
             
-            router.get("\(template.source!)/\(templateName)") { request, response, next in
+            router.get("\(template.location!)/\(templateName)") { request, response, next in
                 defer {
                     next()
                 }
@@ -150,7 +145,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")
-            Routes.routers.view.setDefault(templateEngine: naamioTemplateEngine)
+            Routes.routers.view.setDefault(templateEngine: Templating.default.engine)
         }
     }
 
