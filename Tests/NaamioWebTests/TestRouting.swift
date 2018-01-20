@@ -40,7 +40,10 @@ class TestRouting: XCTestCase {
 
     func testKnownRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>User:</b> </body></html>"
-        runGetResponseTest(path: "/users", expectedResponseText: responseText)
+
+        measure {
+            runGetResponseTest(path: "/users", expectedResponseText: responseText)
+        }
     }
 
     func testUnknownRoute() {
