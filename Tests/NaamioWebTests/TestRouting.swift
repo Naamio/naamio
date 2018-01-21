@@ -24,10 +24,13 @@ class TestRouting: XCTestCase {
         super.setUp()
 
         Environment.readArgs()
+        Server.start()
     }
 
     override func tearDown() {
         super.tearDown()
+
+        Server.stop()
     }
 
     /*func testParameter() {
@@ -47,14 +50,14 @@ class TestRouting: XCTestCase {
     }
 
     func testUnknownRoute() {
-        self.runTestUnknownPath(path: "aaa")
+        measure {
+            self.runTestUnknownPath(path: "aaa")
+        }
     }
 
     // MARK: - Test Boilerplate
 
     private func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
-        Server.start()
-
         let requestQueue = DispatchQueue(label: "Request queue")
 
         for (index, asyncTask) in asyncTasks.enumerated() {
@@ -66,7 +69,6 @@ class TestRouting: XCTestCase {
 
         waitExpectation(timeout: 10) { error in
             // blocks test until request completes
-            Server.stop()
             XCTAssertNil(error)
         }
     }
