@@ -14,10 +14,9 @@ class TestServer: XCTestCase {
 
     static var allTests: [(String, (TestServer) -> () throws -> Void)] {
         return [
-            ("Test Server Startup", testServerStartup),
+            ("Test Server Startup", testServerStartup)
             //("Test Parameter", testParameter),
             //("Test Parameter with Whitespace", testParameterWithWhiteSpace),
-            ("Test Unknown Path", testUnknownPath)
         ]
     }
     
@@ -35,22 +34,12 @@ class TestServer: XCTestCase {
 
     // MARK: - Tests
 
-    /*func testParameter() {
-        runTestParameter(user: "John")
-    }
-
-    func testParameterWithWhiteSpace() {
-        runTestParameter(user: "John Doe")
-    }*/
-
-    func testUnknownPath() {
-        self.runTestUnknownPath(path: "aaa")
-    }
-
     func testServerStartup() {
-        performServerTest { expectation in
-            self.performRequest("get", path: "/", expectation: expectation) { response in
-                expectation.fulfill()
+        measure {
+            performServerTest { expectation in
+                self.performRequest("get", path: "/", expectation: expectation) { response in
+                    expectation.fulfill()
+                }
             }
         }
     }
