@@ -13,8 +13,9 @@ class TestRouting: XCTestCase {
 
     static var allTests: [(String, (TestRouting) -> () throws -> Void)] {
         return [
-            ("Test Known Route", testKnownRoute),
             ("Test Unknown Route", testUnknownRoute),
+            ("Test Known Route", testKnownRoute),
+            ("Test Known Sub-Route", testKnownSubRoute),
         ]
     }
 
@@ -49,6 +50,14 @@ class TestRouting: XCTestCase {
         }
     }
 
+    func testKnownSubRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>Tauno:</b> </body></html>"
+
+        measure {
+            runGetResponseTest(path: "/profiles/tauno", expectedResponseText: responseText)
+        }
+    }
+
     func testUnknownRoute() {
         measure {
             self.runTestUnknownPath(path: "aaa")
@@ -79,7 +88,7 @@ class TestRouting: XCTestCase {
                         callback: @escaping (ClientResponse) -> Void) {
         var allHeaders = [String: String]()
 
-        if  let headers = headers {
+        if let headers = headers {
             for  (headerName, headerValue) in headers {
                 allHeaders[headerName] = headerValue
             }

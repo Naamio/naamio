@@ -73,10 +73,11 @@ class Routes {
         
         for template in Templating.default.templates!.routable {
             let templateName = NSString(string: template.name).deletingPathExtension
-            
-            print("Routing template '\(template.location!)/\(templateName)'")
-            
-            router.get("\(template.location!)/\(templateName)") { request, response, next in
+            let path = "\(template.location!)/\(templateName)"
+            print("Routing template '\(path)'")
+
+            router.get("\(path)") { request, response, next in
+                print("Template route '\(path)'")
                 defer {
                     next()
                 }
@@ -94,13 +95,14 @@ class Routes {
                         ]
                     ]
                     
-                    try response.render(templateName, context: context).end()
+                    try response.render(".\(path)", context: context).end()
                 } catch {
+                    print("Couldn't render \(path) because of \(error)")
                     Log.error("Failed to render template \(error)")
                 }
             }
             
-            router.get("/\(templateName)/:id") { request, response, next in
+            router.get("/\(path)/:id") { request, response, next in
                 defer {
                     next()
                 }
@@ -222,6 +224,7 @@ class Routes {
                         ]
                     ]
                     
+                    print("404'd on URL: \(request.originalURL)")
                     try response.status(.notFound).render("40x", context: context).end()
                 }
             }

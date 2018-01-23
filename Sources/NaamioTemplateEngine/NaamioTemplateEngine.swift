@@ -68,7 +68,8 @@ public class NaamioTemplateEngine: TemplateEngine {
         let environment = Environment(loader: loader, extensions: [`extension`])
 
         let template = try environment.loadStencil(names: [templatePath.lastComponent])
-
+        print("Template '\(String(describing: template.name))' loaded")
+        
         if cache.contains(where: { cachedItem in
             if (template.name == cachedItem.stencil.name) &&
                 (templatePath == cachedItem.path) {
@@ -118,7 +119,7 @@ public class NaamioTemplateEngine: TemplateEngine {
         if rootPaths.isEmpty {
             throw NaamioTemplateEngineError.rootPathsEmpty
         }
-
+        print("Rendering \(templateName) from '\(filePath)'")
         let loader = FileSystemLoader(paths: rootPaths)
         `extension`.registerTag("asset", parser: AssetTag.parse)
         let environment = Environment(loader: loader, extensions: [`extension`])
