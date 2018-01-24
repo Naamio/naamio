@@ -5,8 +5,12 @@ import KituraMarkdown
 
 import NaamioCore
 
+/// Routers contains the different types of routers usable
+/// within a Naamio application.
 struct Routers {
     
+    /// The view router manages all of the renderable web
+    /// pages within an application, including components.
     let view: Router
 
     init() {
@@ -17,16 +21,16 @@ struct Routers {
     }
 }
 
-/**
- Routes provides the mechanism for defining routes through
- context.
- */
+/// Routes provides the mechanism for defining routes through
+/// context.
 class Routes {
 
     static let routers = Routers()
 
     class func defineRoutes() {
-        let router = Routes.routers.view      
+        let router = Routes.routers.view
+        
+        let routeHandler = RouteHandler()
         
         var name: String?
         
@@ -51,18 +55,17 @@ class Routes {
             }
             do {
                 let context: [String: Any] = [
-                    "meta": [
-                        "title": "Naamio"
-                    ],
-                    "page": [
-                        "title": "Home"
-                    ],
-                    "partials": [
-                        "header": true,
-                        "footer": true
+                        "meta": [
+                            "title": "Naamio"
+                        ],
+                        "page": [
+                            "title": "Naamio"
+                        ],
+                        "partials": [
+                            "header": true,
+                            "footer": true
+                        ]
                     ]
-                ]
-                
                 try response.render("index", context: context).end()
             } catch {
                 Log.error("Failed to render template \(error)")
@@ -74,33 +77,9 @@ class Routes {
         for template in Templating.default.templates!.routable {
             let templateName = NSString(string: template.name).deletingPathExtension
             let path = "\(template.location!)/\(templateName)"
-            print("Routing template '\(path)'")
+            print("Routing id template '\(path)'")
 
-            router.get("\(path)") { request, response, next in
-                print("Template route '\(path)'")
-                defer {
-                    next()
-                }
-                do {
-                    let context: [String: Any] = [
-                        "meta": [
-                            "title": "Naamio"
-                        ],
-                        "page": [
-                            "title": templateName
-                        ],
-                        "partials": [
-                            "header": true,
-                            "footer": true
-                        ]
-                    ]
-                    
-                    try response.render(".\(path)", context: context).end()
-                } catch {
-                    print("Couldn't render \(path) because of \(error)")
-                    Log.error("Failed to render template \(error)")
-                }
-            }
+            router.get("\(path)", handler: routeHandler.getPage)
             
             router.get("/\(path)/:id") { request, response, next in
                 defer {
@@ -125,7 +104,7 @@ class Routes {
                     
                     try response.render(templateName, context: context).end()
                 } catch {
-                    Log.error("Failed to render template \(error)")
+                    Log.error("Failed to render id template \(error)")
                 }
             }
         }
