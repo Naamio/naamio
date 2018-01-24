@@ -5,6 +5,8 @@ import NaamioTemplateEngine
 
 import Malline
 
+
+
 /// Templating provides the tools necessary to take content
 /// and provide it in a structured method to the end-user.
 class Templating {
