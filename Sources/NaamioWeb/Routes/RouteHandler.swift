@@ -76,7 +76,7 @@ internal class RouteHandler {
         }
     }
 //(name: Name, completion: (Name?, Error?) -> Void) {
-    func getPost(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) -> Void {
+    internal func getPost(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) -> Void {
         
     }
 
