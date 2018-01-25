@@ -4,7 +4,7 @@ import Kitura
 import NaamioCore
 
 class RouteHandler {
-    func getPage(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
+    internal func getPage(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
         guard let path = request.route else {
             // FIXME: Custom errors needed for RouteHandler.
             return
@@ -35,11 +35,13 @@ class RouteHandler {
         }
     }
 //(name: Name, completion: (Name?, Error?) -> Void) {
-    func getPost(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) -> Void {
+    internal func getPost(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) -> Void {
         
     }
 
-
+    private func render(_ path: String, context: [String: Any]) throws {
+        
+    }
 }
 
 struct Page: Codable, Identifier {
