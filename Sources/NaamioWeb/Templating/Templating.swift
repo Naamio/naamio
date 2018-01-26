@@ -18,7 +18,7 @@ class Templating {
     /// List of templates within Templating instance.
     var templates: Templatable?
     
-    var cache: [StencilCachable]?
+    var cache: [TemplateCachable]?
     
     var path: String {
         get {
@@ -27,7 +27,7 @@ class Templating {
     }
     
     init() {
-        let path = Config.settings["naamio.stencils"] as? String ?? "_stencils"
+        let path = Config.settings["naamio.templates"] as? String ?? "_templates"
         
         do {
             templates = try TemplateLoader(withPath: path).load()

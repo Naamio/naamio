@@ -42,7 +42,7 @@ struct Template {
     }
 }
 
-struct TemplateCachedItem: StencilCachable {
+struct TemplateCachedItem: TemplateCachable {
     
     var template: Template
     
