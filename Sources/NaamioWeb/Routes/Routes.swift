@@ -30,7 +30,7 @@ class Routes {
     class func defineRoutes() {
         let router = Routes.routers.view
         
-        let routeHandler = RouteHandler()
+        let routeHandler = RouteHandler(withRouter: router)
         
         var name: String?
         
@@ -79,7 +79,7 @@ class Routes {
             let path = "\(template.location!)/\(templateName)"
             print("Routing id template '\(path)'")
 
-            router.get("\(path)", handler: routeHandler.getPage)
+            routeHandler.get(page: "\(path)")
             
             router.get("/\(path)/:id") { request, response, next in
                 defer {

@@ -3,8 +3,19 @@ import Kitura
 
 import NaamioCore
 
-class RouteHandler {
-    internal func getPage(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
+internal class RouteHandler {
+
+    let router: Router
+
+    init(withRouter router: Router) {
+        self.router = router
+    }
+
+    func get(page: String) {
+        self.router.get("\(page)", handler: self.getPage)
+    }
+
+    func getPage(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
         guard let path = request.route else {
             // FIXME: Custom errors needed for RouteHandler.
             return
@@ -35,7 +46,7 @@ class RouteHandler {
         }
     }
 //(name: Name, completion: (Name?, Error?) -> Void) {
-    internal func getPost(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) -> Void {
+    func getPost(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) -> Void {
         
     }
 
