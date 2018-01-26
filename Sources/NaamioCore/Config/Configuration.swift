@@ -12,7 +12,7 @@ public class Config {
     public static var settings: [String: Any] = ["naamio.env"        :  "development",
                                                  "naamio.port"       :  8090,
                                                  "naamio.source"     :  "public",
-                                                 "naamio.templates"   :  "_templates"]
+                                                 "naamio.stencils"   :  "_stencils"]
     
     /// Loads the specified configuration file.
     ///
