@@ -27,7 +27,7 @@ class Templating {
     }
     
     init() {
-        let path = Config.settings["naamio.templates"] as? String ?? "_templates"
+        let path = Config.settings["naamio.stencils"] as? String ?? "_stencils"
         
         do {
             templates = try TemplateLoader(withPath: path).load()
