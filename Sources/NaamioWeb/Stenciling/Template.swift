@@ -1,6 +1,6 @@
 import Malline
 
-protocol TemplateCachable {
+protocol StencilCachable {
     
     var template: Template { get set }
     
@@ -14,7 +14,7 @@ struct Template {
     let location: String?
 }
 
-struct TemplateCachedItem: TemplateCachable {
+struct TemplateCachedItem: StencilCachable {
     
     var template: Template
     
