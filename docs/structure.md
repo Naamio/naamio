@@ -27,7 +27,7 @@ a little inspiration from Jekyll's documentation):
     ├── _posts
     |   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
     |   └── 2009-04-26-barcamp-boston-4-roundup.md
-    ├── _stencils
+    ├── _templates
     |   ├── _layouts
     |   |   ├── default.html
     |   |   └── post.html
@@ -126,9 +126,9 @@ An overview of each of these folders and files is as follows:
         </td>
     </tr>
     <tr>
-        <td>_stencils</td>
+        <td>_templates</td>
         <td>
-            The <code>_stencils</code> folder allows the designer to deploy a single
+            The <code>_templates</code> folder allows the designer to deploy a single
             theme, consisting of multiple components, when running <code>Naamio</code>. 
             No further configuration is necessary. <code>layouts</code> is used 
             for master templates, and <code>partials</code> is used for individual 
