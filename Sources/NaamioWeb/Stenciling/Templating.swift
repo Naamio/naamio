@@ -18,7 +18,7 @@ class Templating {
     /// List of templates within Templating instance.
     var templates: Templatable?
     
-    var cache: [TemplateCachable]?
+    var cache: [StencilCachable]?
     
     var path: String {
         get {
