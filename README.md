@@ -8,10 +8,11 @@
 
 Naamio is the primary web app engine for 
 [Omnijar Studio](https://omnijar.studio "Omnijar Studio")
-It can be extended with stencils and applets to rapidly produce web apps.
+It can be extended with templates and applets to rapidly produce web apps.
 
 ## Features
 
+* [ActivityPub](https://www.w3.org/TR/activitypub)
 * [Activity Streams](http://activitystrea.ms/)
 * HMAC Support
 * Salmon Protocol

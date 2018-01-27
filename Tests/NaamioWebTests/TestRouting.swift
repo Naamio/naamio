@@ -7,48 +7,80 @@ import KituraNet
 @testable import NaamioWeb
 @testable import NaamioCore
 
-class TestServer: XCTestCase {
+class TestRouting: XCTestCase {
 
     typealias BodyChecker = (String) -> Void
 
-
-    static var allTests: [(String, (TestServer) -> () throws -> Void)] {
+    static var allTests: [(String, (TestRouting) -> () throws -> Void)] {
         return [
-            ("Test Server Startup", testServerStartup)
-            //("Test Parameter", testParameter),
-            //("Test Parameter with Whitespace", testParameterWithWhiteSpace),
+            ("Test Unknown Route", testUnknownRoute),
+            ("Test Known Route", testKnownRoute),
+            ("Test Known Sub-Route", testKnownSubRoute),
         ]
     }
-    
+
     private let server:NaamioWeb.Server = Server()
 
     override func setUp() {
         super.setUp()
 
         Environment.readArgs()
+        Server.start()
     }
 
     override func tearDown() {
         super.tearDown()
+
+        Server.stop()
     }
 
-    // MARK: - Tests
+    /*func testParameter() {
+        runTestParameter(user: "John")
+    }
 
-    func testServerStartup() {
+    func testParameterWithWhiteSpace() {
+        runTestParameter(user: "John Doe")
+    }*/
+
+    func testKnownRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>User:</b> </body></html>"
+
         measure {
-            performServerTest { expectation in
-                self.performRequest("get", path: "/", expectation: expectation) { response in
-                    expectation.fulfill()
-                }
-            }
+            runGetResponseTest(path: "/users", expectedResponseText: responseText)
+        }
+    }
+
+    func testKnownSubRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>Tauno:</b> </body></html>"
+
+        measure {
+            runGetResponseTest(path: "/profiles/tauno", expectedResponseText: responseText)
+        }
+    }
+
+    func testKnownSubRootRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>Profiles:</b> </body></html>"
+
+        measure {
+            runGetResponseTest(path: "/profiles", expectedResponseText: responseText)
+        }
+    }
+
+    func testRootRoute() {
+        measure {
+            runGetResponseTest(path: "/")
+        }
+    }
+
+    func testUnknownRoute() {
+        measure {
+            self.runTestUnknownPath(path: "aaa")
         }
     }
 
     // MARK: - Test Boilerplate
 
     private func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
-        Server.start()
-
         let requestQueue = DispatchQueue(label: "Request queue")
 
         for (index, asyncTask) in asyncTasks.enumerated() {
@@ -60,7 +92,6 @@ class TestServer: XCTestCase {
 
         waitExpectation(timeout: 10) { error in
             // blocks test until request completes
-            Server.stop()
             XCTAssertNil(error)
         }
     }
@@ -71,7 +102,7 @@ class TestServer: XCTestCase {
                         callback: @escaping (ClientResponse) -> Void) {
         var allHeaders = [String: String]()
 
-        if  let headers = headers {
+        if let headers = headers {
             for  (headerName, headerValue) in headers {
                 allHeaders[headerName] = headerValue
             }

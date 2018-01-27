@@ -56,6 +56,7 @@ public class Server {
     }
 
     public class func stop() {
+        Log.trace("Stopping server")
         Kitura.stop()
     }
     

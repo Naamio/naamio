@@ -14,30 +14,6 @@ public enum ReaderError: Error {
 public class Resources {
 
     public init() {}
-
-    public func getResources(resource: String, ofType type: String) throws -> String {
-        #if os(Linux)
-        let bundle = Bundle(path: (Bundle.main.resourcePath ?? ".") + "/app/_stencils") ?? Bundle.main
-        #else
-        let bundle = Bundle(for: Swift.type(of: self))
-        #endif
-        
-        print(bundle.resourcePath ?? "no resource path provided")
-        guard let resourcePath = bundle.path(forResource: resource, ofType: type) else {
-            throw ReaderError.resourceNotFound
-        }
-
-        do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: resourcePath))
-            guard let string = String(data: data, encoding: String.Encoding.utf8) else {
-                throw ReaderError.convertToStringFailed
-            }
-
-            return string
-        } catch {
-            throw ReaderError.readFailed(error)
-        }
-    }
     
     public func getResources(from path: String, withSuffix suffix: String) -> [String] {
         let fileManager = FileManager.default

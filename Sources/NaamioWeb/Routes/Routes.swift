@@ -4,10 +4,13 @@ import Kitura
 import KituraMarkdown
 
 import NaamioCore
-import NaamioTemplateEngine
 
+/// Routers contains the different types of routers usable
+/// within a Naamio application.
 struct Routers {
     
+    /// The view router manages all of the renderable web
+    /// pages within an application, including components.
     let view: Router
 
     init() {
@@ -18,12 +21,16 @@ struct Routers {
     }
 }
 
+/// Routes provides the mechanism for defining routes through
+/// context.
 class Routes {
 
     static let routers = Routers()
-    
+
     class func defineRoutes() {
-        let router = Routes.routers.view      
+        let router = Routes.routers.view
+        
+        let routeHandler = RouteHandler(withRouter: router)
         
         var name: String?
         
@@ -33,72 +40,25 @@ class Routes {
         definePostsRoutes()
         defineAssetsRoutes()
         defineContentRoutes()
-
-        let naamioTemplateEngine = NaamioTemplateEngine()
-        try! naamioTemplateEngine.cacheTemplates(from: "\(Config.settings["naamio.templates"] as! String)")
         
         /*
         if (FileManager.default.fileExists(atPath: sourcePath)) {
             router.all("/", middleware: StaticFileServer(path: sourcePath))
         }*/
         
-        router.setDefault(templateEngine: naamioTemplateEngine)
+        router.setDefault(templateEngine: Templating.default.engine)
         router.add(templateEngine: KituraMarkdown())
+
+        print("\(Templating.default.templates!.routable.count) templates found")
         
-        router.get("/") { _, response, next in
-            defer {
-                next()
-            }
-            do {
-                let context: [String: Any] = [
-                    "meta": [
-                        "title": "Naamio"
-                    ],
-                    "page": [
-                        "title": "Home"
-                    ],
-                    "partials": [
-                        "header": true,
-                        "footer": true
-                    ]
-                ]
-                
-                try response.render("index", context: context).end()
-            } catch {
-                Log.error("Failed to render template \(error)")
-            }
-        }
-        
-        for template in Templating.default.templates {
-            let templateName = NSString(string: template).deletingPathExtension
+        for template in Templating.default.templates!.routable {
+            let templateName = template.nameWithoutExtension
+            let path = "\(template.location!)/\(templateName)"
+            print("Routing id template '\(path)'")
+
+            routeHandler.get(template: template)
             
-            Log.info("Registering template '/\(templateName)")
-            
-            router.get("/\(templateName)") { request, response, next in
-                defer {
-                    next()
-                }
-                do {
-                    let context: [String: Any] = [
-                        "meta": [
-                            "title": "Naamio"
-                        ],
-                        "page": [
-                            "title": templateName
-                        ],
-                        "partials": [
-                            "header": true,
-                            "footer": true
-                        ]
-                    ]
-                    
-                    try response.render(templateName, context: context).end()
-                } catch {
-                    Log.error("Failed to render template \(error)")
-                }
-            }
-            
-            router.get("/\(templateName)/:id") { request, response, next in
+            router.get("/\(path)/:id") { request, response, next in
                 defer {
                     next()
                 }
@@ -121,7 +81,7 @@ class Routes {
                     
                     try response.render(templateName, context: context).end()
                 } catch {
-                    Log.error("Failed to render template \(error)")
+                    Log.error("Failed to render id template \(error)")
                 }
             }
         }
@@ -143,7 +103,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: templatesPath)) {
             Log.info("Templates folder '\(templatesPath)' found. Loading templates")
-            //Routes.routers.view.setDefault(templateEngine: NaamioTemplateEngine())
+            Routes.routers.view.setDefault(templateEngine: Templating.default.engine)
         }
     }
 
@@ -171,7 +131,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: assetsPath)) {
             Log.info("Assets folder '\(assetsPath)' found. Loading static file server at '/assets'")
-             Routes.routers.view.all("/assets", middleware: StaticFileServer(path: assetsPath))
+            Routes.routers.view.all("/assets", middleware: StaticFileServer(path: assetsPath))
         }
     }
 
@@ -180,7 +140,7 @@ class Routes {
 
         if (FileManager.default.fileExists(atPath: sourcePath + "/content")) {
             Log.info("Content folder /content found. Loading static file server at '/content'")
-             Routes.routers.view.all("/", middleware: StaticFileServer(path: sourcePath + "/content"))
+            Routes.routers.view.all("/", middleware: StaticFileServer(path: sourcePath + "/content"))
         }
     }
 
@@ -220,6 +180,7 @@ class Routes {
                         ]
                     ]
                     
+                    print("404'd on URL: \(request.originalURL)")
                     try response.status(.notFound).render("40x", context: context).end()
                 }
             }

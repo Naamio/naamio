@@ -4,9 +4,14 @@ import KituraTemplateEngine
 
 import Malline
 
-
 public enum NaamioTemplateEngineError: Swift.Error {
     case rootPathsEmpty
+    case notValidTemplate
+}
+
+struct NaamioTemplateCache {
+    var stencil: Stencil
+    var path: Path
 }
 
 /// NaamioTemplateEngine is the base templating system for `Naamio`.
@@ -25,13 +30,13 @@ public class NaamioTemplateEngine: TemplateEngine {
 
     private var rootPaths: [Path] = []
     
-    private var cache: [(Stencil, Path)]
+    private var cache: [NaamioTemplateCache]
     
     /// Initializes a new instance of the `NaamioTemplateEngine` with 
     /// the default extension (`.html`).
     public init(extension: Extension = Extension()) {
         self.`extension` = `extension`
-        self.cache = [(Stencil, Path)]()
+        self.cache = [NaamioTemplateCache]()
     }
     
     public func cacheTemplates(from path: String) throws {
@@ -47,12 +52,11 @@ public class NaamioTemplateEngine: TemplateEngine {
         self.rootPaths = rootPaths.map { Path($0) }
     }
 
-    public func cacheTemplate(filePath: String) throws {
+    public func cacheTemplate(filePath: String) throws -> Stencil {
         let templatePath = Path(filePath)
         
         guard templatePath.isFile else {
-            print("\(templatePath.string) is not a template")
-            return
+            throw NaamioTemplateEngineError.notValidTemplate
         }
         
         let templateDirectory = templatePath.parent()
@@ -64,18 +68,21 @@ public class NaamioTemplateEngine: TemplateEngine {
         let environment = Environment(loader: loader, extensions: [`extension`])
 
         let template = try environment.loadStencil(names: [templatePath.lastComponent])
+        print("Template '\(String(describing: template.name))' loaded")
         
         if cache.contains(where: { cachedItem in
-            if (template.name == cachedItem.0.name) &&
-                (templatePath == cachedItem.1) {
+            if (template.name == cachedItem.stencil.name) &&
+                (templatePath == cachedItem.path) {
                 return true
             } else {
                 return false
             }
-        }) {}
+        }) {
+            return template
+        }
         else {
             print("Template is new. Caching.")
-            cache.append((template, templatePath))
+            return template
         }
     }
     
@@ -112,7 +119,7 @@ public class NaamioTemplateEngine: TemplateEngine {
         if rootPaths.isEmpty {
             throw NaamioTemplateEngineError.rootPathsEmpty
         }
-
+        print("Rendering \(templateName) from '\(filePath)'")
         let loader = FileSystemLoader(paths: rootPaths)
         `extension`.registerTag("asset", parser: AssetTag.parse)
         let environment = Environment(loader: loader, extensions: [`extension`])
