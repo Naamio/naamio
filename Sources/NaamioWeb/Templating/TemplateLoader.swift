@@ -76,7 +76,10 @@ class TemplateLoader {
     
     func registerRootTemplate(_ file: File, fromPath path: String) {
         print("Root template is \(file.name)")
-        templates.routable.append(Template(name: file.name, location: path))
+
+        let newPath = (path.hasPrefix("/") || (path.count == 0)) ? path : "/\(path)"
+
+        templates.routable.append(Template(name: file.name, location: newPath))
     }
     
     func registerSingleTemplate(_ file: File, fromPath path: String) {

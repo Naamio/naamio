@@ -75,11 +75,12 @@ class Routes {
         print("\(Templating.default.templates!.routable.count) templates found")
         
         for template in Templating.default.templates!.routable {
-            let templateName = NSString(string: template.name).deletingPathExtension
+            let templateName = template.nameWithoutExtension
             let path = "\(template.location!)/\(templateName)"
             print("Routing id template '\(path)'")
 
-            routeHandler.get(page: "\(path)")
+            routeHandler.get(template: template)
+            //routeHandler.get(page: "\(path)")
             
             router.get("/\(path)/:id") { request, response, next in
                 defer {

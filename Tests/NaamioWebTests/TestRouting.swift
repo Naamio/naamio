@@ -58,6 +58,20 @@ class TestRouting: XCTestCase {
         }
     }
 
+    func testKnownSubRootRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>Profiles:</b> </body></html>"
+
+        measure {
+            runGetResponseTest(path: "/profiles", expectedResponseText: responseText)
+        }
+    }
+
+    func testRootRoute() {
+        measure {
+            runGetResponseTest(path: "/")
+        }
+    }
+
     func testUnknownRoute() {
         measure {
             self.runTestUnknownPath(path: "aaa")
