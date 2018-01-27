@@ -17,9 +17,15 @@ protocol TemplateCachable {
 
 struct Template {
     
-    let name: String
+    var name: String {
+        get {
+            return NSString(string: self.fileName).deletingPathExtension
+        }
+    }
     
     let location: String?
+    
+    let fileName: String
 
     var nameWithoutExtension: String {
         return NSString(string: self.name).deletingPathExtension

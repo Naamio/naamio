@@ -48,29 +48,6 @@ class Routes {
         
         router.setDefault(templateEngine: Templating.default.engine)
         router.add(templateEngine: KituraMarkdown())
-        
-        router.get("/") { _, response, next in
-            defer {
-                next()
-            }
-            do {
-                let context: [String: Any] = [
-                        "meta": [
-                            "title": "Naamio"
-                        ],
-                        "page": [
-                            "title": "Naamio"
-                        ],
-                        "partials": [
-                            "header": true,
-                            "footer": true
-                        ]
-                    ]
-                try response.render("index", context: context).end()
-            } catch {
-                Log.error("Failed to render template \(error)")
-            }
-        }
 
         print("\(Templating.default.templates!.routable.count) templates found")
         
@@ -80,7 +57,6 @@ class Routes {
             print("Routing id template '\(path)'")
 
             routeHandler.get(template: template)
-            //routeHandler.get(page: "\(path)")
             
             router.get("/\(path)/:id") { request, response, next in
                 defer {

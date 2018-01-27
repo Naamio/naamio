@@ -66,12 +66,12 @@ class TemplateLoader {
     
     func registerTemplate(_ file: File, fromPath path: String) {
         print("Template is \(file.name)")
-        templates.routable.append(Template(name: file.name, location: path))
+        templates.routable.append(Template(location: path, fileName: file.name))
     }
     
     func registerQueryableTemplate(_ file: File, fromPath path: String) {
         print("Queryable template is \(file.name)")
-        templates.routable.append(Template(name: file.name, location: path))
+        templates.routable.append(Template( location: path, fileName: file.name))
     }
     
     func registerRootTemplate(_ file: File, fromPath path: String) {
@@ -79,7 +79,7 @@ class TemplateLoader {
 
         let newPath = (path.hasPrefix("/") || (path.count == 0)) ? path : "/\(path)"
 
-        templates.routable.append(Template(name: file.name, location: newPath))
+        templates.routable.append(Template(location: newPath, fileName: file.name))
     }
     
     func registerSingleTemplate(_ file: File, fromPath path: String) {
@@ -87,7 +87,7 @@ class TemplateLoader {
         
         let newPath = (path.hasPrefix("/") || (path.count == 0)) ? path : "/\(path)"
         
-        templates.routable.append(Template(name: file.name, location: newPath))
+        templates.routable.append(Template(location: newPath, fileName: file.name))
     }
 }
 
