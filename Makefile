@@ -30,8 +30,8 @@ build: clean
 test: build
 	mkdir -p ${TEST_RESOURCES_DIRECTORY}
 	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/* ${TEST_RESOURCES_DIRECTORY}
-	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)_stencils/ && \
-	echo Testing templates at "$${NAAMIO_TEMPLATES}" && \
+	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)_templates/ && \
+	echo Testing template at "$${NAAMIO_TEMPLATES}" && \
 	swift test
 
 run: build

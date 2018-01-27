@@ -13,14 +13,14 @@
 <body>
     {% if partials.header %}
         {% block header %}
-            {% include "partials/header.html" %}
+            {% include "_partials/header.html" %}
         {% endblock %}
     {% endif %}
     {% block aside %}{% endblock %}
     {% block content %}{% endblock %}
     {% if partials.footer %}
         {% block footer %}
-            {% include "partials/footer.html" %}
+            {% include "_partials/footer.html" %}
         {% endblock %}
     {% endif %}
 </body>

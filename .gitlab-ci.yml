@@ -22,7 +22,7 @@ test:
     - release
   artifacts:
     paths:
-    - .build/debug
+    - .build/debug/*
 
 review:
   image: ibmcom/swift-ubuntu:4.0

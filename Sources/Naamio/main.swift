@@ -10,7 +10,7 @@ setEnvironmentVar(name: "NAAMIO_PORT", value: "8090", overwrite: false)
 
 Log.logger = ConsoleLogger()
 
-let configPath = Config.settings["naamio.source"] as? String ?? "public"
+let configPath = Config.settings["naamio.templates"] as? String ?? "public"
 Config.load(from: "\(configPath)/naamio.yml")
 
 Console.loadConfig()
