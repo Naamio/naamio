@@ -25,6 +25,7 @@ class TestRouting: XCTestCase {
         super.setUp()
 
         Environment.readArgs()
+        Server.mode = .test
         Server.start()
     }
 

@@ -47,6 +47,7 @@ class TestServer: XCTestCase {
     // MARK: - Test Boilerplate
 
     private func performServerTest(asyncTasks: (XCTestExpectation) -> Void...) {
+        Server.mode = .test
         Server.start()
 
         let requestQueue = DispatchQueue(label: "Request queue")

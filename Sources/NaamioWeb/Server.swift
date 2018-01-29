@@ -7,6 +7,11 @@ import NaamioCore
 /// Available modes for `Naamio` to operate under. 
 public enum ServerMode: String {
 
+    /// Test executes the process without attaching to STDIN
+    /// to allow for tests to execute before the process exits
+    /// normally.
+    case test = "test"
+
     /// Production is the most lightweight and performant mode, with
     /// minimal verbosity.
     case production = "production"
@@ -17,6 +22,7 @@ public enum ServerMode: String {
     
     init(value: String) {
         switch value {
+        case "test": self = .test
         case "development": self = .development
         case "production": self = .production
         default: self = .development
@@ -34,7 +40,11 @@ public class Server {
     /// development purposes as the server can be used as
     /// an instant feedback agent whilst designing and developing
     /// aspects of an application.
-    public static var mode: ServerMode = .development
+    public static var mode: ServerMode = .development {
+        didSet {
+            print("Server mode changed to \(mode.rawValue)")
+        }
+    }
 
     /// Initializes the `Server` object, configuring logging and 
     /// miscellaneous settings.
@@ -51,8 +61,14 @@ public class Server {
         
         Kitura.addHTTPServer(onPort: port, with: Routes.routers.view)
 
-        // start the framework - the servers added until now will start listening
-        Kitura.start()
+        if mode == .test {
+            print("Starting in test mode")
+            Kitura.start()
+        } else {
+            // start the framework - the servers added until now will start listening
+            print("Starting server")
+            Kitura.run()
+        }
     }
 
     public class func stop() {
