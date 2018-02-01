@@ -11,21 +11,12 @@
         }
       },
       {
-        "package": "CEpoll",
-        "repositoryURL": "https://github.com/IBM-Swift/CEpoll.git",
-        "state": {
-          "branch": null,
-          "revision": "7b65f0adfe5a1f36fc16b16760f5f99cfd3a4e1a",
-          "version": "0.1.1"
-        }
-      },
-      {
         "package": "CircuitBreaker",
         "repositoryURL": "https://github.com/IBM-Swift/CircuitBreaker.git",
         "state": {
           "branch": null,
-          "revision": "252f7bccb70dc34283f7a05ece624075967d1bb2",
-          "version": "3.0.0"
+          "revision": "81581e3fb094ab4879aa2c5ce54201f1dbce0a7f",
+          "version": "5.0.1"
         }
       },
       {
@@ -42,8 +33,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura",
         "state": {
           "branch": null,
-          "revision": "57a46cc4a12b368208c0572eb6172cf3cb95991b",
-          "version": "2.0.2"
+          "revision": "3d42897fa83537b97592512a7a85af61e9ce53ea",
+          "version": "2.2.0"
         }
       },
       {
@@ -60,8 +51,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
         "state": {
           "branch": null,
-          "revision": "96c196ef01533f199642e7d39cff51dd50c05faf",
-          "version": "1.7.20"
+          "revision": "d781655dcee403504e4f1eeaf3f62b12d78d8230",
+          "version": "2.0.1"
         }
       },
       {
@@ -69,8 +60,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/KituraContracts.git",
         "state": {
           "branch": null,
-          "revision": "385c5698b5c6ffb3416f810dd71c317be40076cc",
-          "version": "0.0.15"
+          "revision": "4195ce3e6748420ff5c659d5ebba7b5dd4434df0",
+          "version": "0.0.18"
         }
       },
       {
@@ -92,6 +83,15 @@
         }
       },
       {
+        "package": "Loki",
+        "repositoryURL": "https://github.com/Naamio/Loki",
+        "state": {
+          "branch": null,
+          "revision": "4ce1ac1360cc2639833fcc4220886b9c4f8f3abe",
+          "version": "0.2.0"
+        }
+      },
+      {
         "package": "Malline",
         "repositoryURL": "https://github.com/Naamio/Malline",
         "state": {
@@ -101,30 +101,12 @@
         }
       },
       {
-        "package": "OpenSSL",
-        "repositoryURL": "https://github.com/IBM-Swift/OpenSSL.git",
-        "state": {
-          "branch": null,
-          "revision": "95c405c18a071a1c13616e984ba1b3c6091ca6ca",
-          "version": "0.3.7"
-        }
-      },
-      {
         "package": "SSLService",
         "repositoryURL": "https://github.com/IBM-Swift/BlueSSLService.git",
         "state": {
           "branch": null,
-          "revision": "7f08ff22d8f50b2c25c2bb969a683cdf279a6af4",
-          "version": "0.12.67"
-        }
-      },
-      {
-        "package": "Signals",
-        "repositoryURL": "https://github.com/IBM-Swift/BlueSignals.git",
-        "state": {
-          "branch": null,
-          "revision": "0fab5a9f166e96f17bb9646dc56cd22a6f3c3757",
-          "version": "0.9.50"
+          "revision": "05ece03dcfc6683ff05c9db446948793fc5dd68e",
+          "version": "0.12.80"
         }
       },
       {
@@ -132,8 +114,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
         "state": {
           "branch": null,
-          "revision": "f33e2d3e6da0b5b286073e7091eefd0ca56ebc63",
-          "version": "0.12.78"
+          "revision": "fbd08641c8689626a65d7eb0e826085cf4c54788",
+          "version": "0.12.90"
         }
       },
       {
@@ -141,8 +123,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/SwiftyRequest.git",
         "state": {
           "branch": null,
-          "revision": "4c571be415d71f1f45d5c44ccc92b17a47acde88",
-          "version": "1.0.0"
+          "revision": "3fb065123864051f6c93fea88bdee67858215715",
+          "version": "1.1.1"
         }
       },
       {
