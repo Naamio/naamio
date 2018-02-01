@@ -1,6 +1,4 @@
 import Foundation
-import HeliumLogger
-import LoggerAPI
 import NaamioCore
 
 /// Possible options via the console for the system.
@@ -75,28 +73,5 @@ class Console {
     /// Translates the option to the enum value.
     func getOption(_ option: String) -> (option: OptionType, value: String) {
         return (OptionType(value: option), option)
-    }
-}
-
-/// Custom console logger for printing the output of the logs
-/// to the console and any system logs. Uses `HeliumLogger`
-/// under the hood whilst abstracting to allow additional
-/// functionality to be added.
-class ConsoleLogger : Logger {
-    
-    // Uses `HeliumLogger` to simplify text stream logging.
-    private let logger = HeliumLogger(.entry)
-    
-    init() {
-        logger.format = "(%msg)"
-    }
-    
-    func log(_ type: LoggerMessageType, msg: String,
-             functionName: String, lineNum: Int, fileName: String) {
-        logger.log(type, msg: msg, functionName: functionName, lineNum: lineNum, fileName: fileName)
-    }
-    
-    func isLogging(_ level: LoggerMessageType) -> Bool {
-        return logger.isLogging(level)
     }
 }

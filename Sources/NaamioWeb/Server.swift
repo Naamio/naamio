@@ -42,7 +42,7 @@ public class Server {
     /// aspects of an application.
     public static var mode: ServerMode = .development {
         didSet {
-            print("Server mode changed to \(mode.rawValue)")
+            Log.trace("Server mode changed to \(mode.rawValue)")
         }
     }
 
@@ -62,11 +62,12 @@ public class Server {
         Kitura.addHTTPServer(onPort: port, with: Routes.routers.view)
 
         if mode == .test {
-            print("Starting in test mode")
+            Log.start()
+            Log.trace("Starting in test mode")
             Kitura.start()
         } else {
             // start the framework - the servers added until now will start listening
-            print("Starting server")
+            Log.trace("Starting server")
             Kitura.run()
         }
     }
