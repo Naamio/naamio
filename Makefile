@@ -35,7 +35,10 @@ test: build
 	swift test
 
 run: build
-	@echo --- Invoking Naamio executable
+	mkdir -p ${TEST_RESOURCES_DIRECTORY}
+	cp -r ./Tests/NaamioWebTests/NaamioWebTestContent/* ${TEST_RESOURCES_DIRECTORY}
+	export NAAMIO_TEMPLATES=$(TEST_RESOURCES_DIRECTORY)_templates/ && \
+	echo Testing template at "$${NAAMIO_TEMPLATES}" && \
 	./.build/debug/Naamio
 
 build-release: clean
