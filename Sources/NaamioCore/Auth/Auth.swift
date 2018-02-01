@@ -10,7 +10,7 @@ public class BasicAuthMiddleware: RouterMiddleware {
     
     public func handle(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) {
         let authString = request.headers["Authorization"]
-        Log.info("Authorization: \(String(describing: authString))")
+        Log.trace("Authorization: \(String(describing: authString))")
         // Check authorization string in database to approve the request if fail
         // response.error = NSError(domain: "AuthFailure", code: 1, userInfo: [:])
         next()

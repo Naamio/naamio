@@ -46,6 +46,7 @@ let package = Package(
             dependencies: [
                 .byNameItem(name: "Kitura"),
                 .byNameItem(name: "KituraMarkdown"),
+                .byNameItem(name: "Loki"),
                 .byNameItem(name: "Viila"),
             ]
         ),
