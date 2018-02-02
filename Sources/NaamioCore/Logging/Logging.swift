@@ -14,7 +14,7 @@ public class Log {
         let console = ConsoleDestination()      // define console destination (stdout)
         Loki.addDestination(console)
 
-        if let file = FileDestination(inPath: "/tmp/naamio.log") {
+        if let file = FileDestination(inPath: Config.settings["naamio.log"] as? String ?? "/var/log/naamio.log") {
             Loki.addDestination(file)   // log to file
         }
 
