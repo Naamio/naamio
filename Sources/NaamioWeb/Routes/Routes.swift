@@ -49,12 +49,12 @@ class Routes {
         router.setDefault(templateEngine: Templating.default.engine)
         router.add(templateEngine: KituraMarkdown())
 
-        print("\(Templating.default.templates!.routable.count) templates found")
+        Log.trace("\(Templating.default.templates!.routable.count) templates found")
         
         for template in Templating.default.templates!.routable {
             let templateName = template.nameWithoutExtension
             let path = "\(template.location!)/\(templateName)"
-            print("Routing id template '\(path)'")
+            Log.trace("Routing id template '\(path)'")
 
             routeHandler.get(template: template)
             
@@ -180,7 +180,7 @@ class Routes {
                         ]
                     ]
                     
-                    print("404'd on URL: \(request.originalURL)")
+                    Log.trace("404'd on URL: \(request.originalURL)")
                     try response.status(.notFound).render("40x", context: context).end()
                 }
             }

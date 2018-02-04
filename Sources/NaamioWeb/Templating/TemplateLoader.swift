@@ -1,5 +1,7 @@
 import ViilaFS
 
+import NaamioCore
+
 /// Loads templates
 class TemplateLoader {
     
@@ -10,7 +12,7 @@ class TemplateLoader {
     }
     
     func load() throws -> Templatable {
-        print("Loading templates from '\(templates.base)'")
+        Log.trace("Loading templates from '\(templates.base)'")
 
         self.registerTemplateFolder(fromPath: "")
         self.registerTemplates(fromPath: "")
@@ -22,7 +24,7 @@ class TemplateLoader {
         do {
             let folder = try Folder(path: templates.base + path)
             
-            print("Registering template folder '\(folder.name)'")
+            Log.trace("Registering template folder '\(folder.name)'")
             let _ = folder.subfolders
                 .filter { !$0.name.hasPrefix("_") }
                 .map { registerTemplateFolder( fromPath: "\(path)\($0.name)" ) }
@@ -31,13 +33,13 @@ class TemplateLoader {
                 .filter { !$0.name.hasPrefix("_") }
                 .map { registerTemplates( fromPath: "\(path)\($0.name)" ) }
         } catch {
-            print("Templates (\(path)) could not be loaded")
+            Log.warn("Templates (\(path)) could not be loaded")
         }
     }
     
     func registerTemplates(fromPath path: String) {
         let fullPath = "\(templates.base)\(path)"
-        print("Registering templates from path '\(path)' (at '\(fullPath)')")
+        Log.trace("Registering templates from path '\(path)' (at '\(fullPath)')")
         
         do {
             let folder = try Folder(path: fullPath)
@@ -46,12 +48,12 @@ class TemplateLoader {
                 .filter({ templates.extensions.contains($0.extension!) })
                 .map({ try registerTemplate($0.name, fromPath: path ) })
         } catch {
-            print("Templates at '\(path)' could not be loaded")
+            Log.warn("Templates at '\(path)' could not be loaded")
         }
     }
     
     func registerTemplate(_ name: String, fromPath path: String) throws {
-        print("Registering template '\(name)' from '\(path)'")
+        Log.trace("Registering template '\(name)' from '\(path)'")
         let file = try File(path: "\(templates.base)\(path)/\(name)")
         
         switch file.nameExcludingExtension {
@@ -65,17 +67,17 @@ class TemplateLoader {
     }
     
     func registerTemplate(_ file: File, fromPath path: String) {
-        print("Template is \(file.name)")
+        Log.trace("Template is \(file.name)")
         templates.routable.append(Template(location: path, fileName: file.name))
     }
     
     func registerQueryableTemplate(_ file: File, fromPath path: String) {
-        print("Queryable template is \(file.name)")
+        Log.trace("Queryable template is \(file.name)")
         templates.routable.append(Template( location: path, fileName: file.name))
     }
     
     func registerRootTemplate(_ file: File, fromPath path: String) {
-        print("Root template is \(file.name)")
+        Log.trace("Root template is \(file.name)")
 
         let newPath = (path.hasPrefix("/") || (path.count == 0)) ? path : "/\(path)"
 
@@ -83,7 +85,7 @@ class TemplateLoader {
     }
     
     func registerSingleTemplate(_ file: File, fromPath path: String) {
-        print("Single template is \(file.name) at \(path)")
+        Log.trace("Single template is \(file.name) at \(path)")
         
         let newPath = (path.hasPrefix("/") || (path.count == 0)) ? path : "/\(path)"
         
