@@ -39,7 +39,6 @@ internal class RouteHandler {
                 
                 try response.render(".\(template.location!)/\(template.nameWithoutExtension)", context: context).end()
             } catch {
-                print("Couldn't render '\(path)': \(error)")
                 Log.error("Failed to render template \(error)")
             }
         }
@@ -51,7 +50,6 @@ internal class RouteHandler {
             return
         }
         
-        print("Template route '\(path)'")
         defer {
             next()
         }
@@ -71,7 +69,6 @@ internal class RouteHandler {
             
             try response.render(".\(path)", context: context).end()
         } catch {
-            print("Couldn't render '\(path)': \(error)")
             Log.error("Failed to render template \(error)")
         }
     }

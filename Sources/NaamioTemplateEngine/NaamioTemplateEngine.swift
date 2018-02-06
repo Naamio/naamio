@@ -44,7 +44,7 @@ public class NaamioTemplateEngine: TemplateEngine {
         let templates = try! Path(path).recursiveChildren()
         
         for template in templates {
-            try self.cacheTemplate(filePath: template.string)
+            _ = try self.cacheTemplate(filePath: template.string)
         }
     }
 
@@ -95,7 +95,6 @@ public class NaamioTemplateEngine: TemplateEngine {
     public func render(filePath: String, context: [String: Any]) throws -> String {
         let templatePath = Path(filePath)
         let templateDirectory = templatePath.parent()
-        print(templateDirectory)
     
         let loader = FileSystemLoader(paths: [templateDirectory])
         `extension`.registerTag("asset", parser: AssetTag.parse)
@@ -119,7 +118,9 @@ public class NaamioTemplateEngine: TemplateEngine {
         if rootPaths.isEmpty {
             throw NaamioTemplateEngineError.rootPathsEmpty
         }
+        
         print("Rendering \(templateName) from '\(filePath)'")
+        
         let loader = FileSystemLoader(paths: rootPaths)
         `extension`.registerTag("asset", parser: AssetTag.parse)
         let environment = Environment(loader: loader, extensions: [`extension`])

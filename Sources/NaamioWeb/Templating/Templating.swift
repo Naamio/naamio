@@ -33,13 +33,13 @@ class Templating {
             templates = try TemplateLoader(withPath: path).load()
             try self.cacheTemplates()
         } catch {
-            print("Cannot load templates")
+            Log.error("Cannot load templates")
         }
         
     }
     
     private func cacheTemplates() throws {
-        print("Caching templates")
+        Log.trace("Caching templates")
 
         let _ = try templates?.routable.map( {
             try cacheTemplate(template: $0)
@@ -47,7 +47,7 @@ class Templating {
     }
     
     private func cacheTemplate( template: Template) throws {
-        print("Caching " + path + template.location! + "/" + template.name)
+        Log.trace("Caching " + path + template.location! + "/" + template.name)
         let stencil: Stencil = try engine.cacheTemplate(filePath: path + template.location! + "/" + template.name)
         cache?.append(TemplateCachedItem(template: template, stencil: stencil))
     }

@@ -110,7 +110,7 @@ public class Resources {
     public func getResourceTree(from path: String) {
         try! Folder(path: path).makeSubfolderSequence(recursive: true).forEach { folder in
             // TODO: Provide folder default string value.
-            print("Name : \(folder.name), parent: \(String(describing: folder.parent))")
+            Log.trace("Name : \(folder.name), parent: \(String(describing: folder.parent))")
         }
     }
 }

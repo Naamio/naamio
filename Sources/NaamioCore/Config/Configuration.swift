@@ -10,9 +10,10 @@ public class Config {
     /// Settings are static configuration parameters 
     /// used during the programs runtime.
     public static var settings: [String: Any] = ["naamio.env"        :  "development",
+                                                 "naamio.logs"       :  "/var/log/naamio.log",
                                                  "naamio.port"       :  8090,
                                                  "naamio.source"     :  "public",
-                                                 "naamio.templates"   :  "_templates"]
+                                                 "naamio.templates"  :  "_templates"]
     
     /// Loads the specified configuration file.
     ///

@@ -19,6 +19,7 @@ public func setEnvironmentVar(name: String, value: String, overwrite: Bool = tru
 public class Environment {
     public static func readArgs() {
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_ENV") ?? "development", forKey: "naamio.env")
+        Config.settings.updateValue(getEnvironmentVar("NAAMIO_LOGS") ?? "/var/log/naamio.log", forKey: "naamio.logs")
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_TEMPLATES") ?? "_templates/leaf/", forKey: "naamio.templates")
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_SOURCE") ?? "public", forKey: "naamio.source")
         Config.settings.updateValue(getEnvironmentVar("NAAMIO_PORT") ?? "8090", forKey: "naamio.port")
