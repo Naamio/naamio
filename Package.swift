@@ -60,14 +60,14 @@ let package = Package(
             name: "NaamioTemplateEngine",
             dependencies: [
                 .byNameItem(name: "Kitura"),
-                .byNameItem(name: "Malline")
+                .byNameItem(name: "Malline"),
+                .target(name: "NaamioCore")
             ]
         ),
         .target(
             name: "NaamioWeb",
             dependencies: [
                 .byNameItem(name: "KituraMarkdown"),
-                .target(name: "NaamioCore"),
                 .target(name: "NaamioTemplateEngine")
             ]
         ),
