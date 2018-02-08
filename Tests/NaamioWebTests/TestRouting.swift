@@ -55,7 +55,7 @@ class TestRouting: XCTestCase {
         let responseText = "<!DOCTYPE html><html><body><b>Tauno:</b> </body></html>"
 
         measure {
-            runGetResponseTest(path: "/profiles/tauno", expectedResponseText: responseText)
+            runGetResponseTest(path: "/products/tauno", expectedResponseText: responseText)
         }
     }
 

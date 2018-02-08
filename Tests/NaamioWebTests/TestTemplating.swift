@@ -33,6 +33,6 @@ class TestTemplating: XCTestCase {
         XCTAssertNotNil(Templating.default)
         XCTAssertNotNil(Templating.default.templates)
         XCTAssertNotNil(Templating.default.path)
-        XCTAssertEqual(Templating.default.templates!.routable.count, 6)
+        XCTAssertEqual(Templating.default.templates!.routable.count, 7)
     }
 }
