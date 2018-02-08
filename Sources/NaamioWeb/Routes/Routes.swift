@@ -54,11 +54,10 @@ class Routes {
         for template in Templating.default.templates!.routable {
             let templateName = template.nameWithoutExtension
             let path = "\(template.location!)/\(templateName)"
-            Log.trace("Routing id template '\(path)'")
 
             routeHandler.get(template: template)
             
-            router.get("/\(path)/:id") { request, response, next in
+            /*router.get("/\(path)/:id") { request, response, next in
                 defer {
                     next()
                 }
@@ -83,7 +82,7 @@ class Routes {
                 } catch {
                     Log.error("Failed to render id template \(error)")
                 }
-            }
+            }*/
         }
         
         defineExceptionalRoutes()

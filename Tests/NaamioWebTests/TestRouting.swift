@@ -59,6 +59,22 @@ class TestRouting: XCTestCase {
         }
     }
 
+    func testKnownIdRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>Bob:</b> </body></html>"
+
+        measure {
+            runGetResponseTest(path: "/profiles/bob", expectedResponseText: responseText)
+        }
+    }
+
+    func testKnownSubSubRoute() {
+        let responseText = "<!DOCTYPE html><html><body><b>Tauno:</b> </body></html>"
+
+        measure {
+            runGetResponseTest(path: "/components/acme/acme-button")
+        }
+    }
+
     func testKnownSubRootRoute() {
         let responseText = "<!DOCTYPE html><html><body><b>Profiles:</b> </body></html>"
 

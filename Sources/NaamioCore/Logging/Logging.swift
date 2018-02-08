@@ -7,9 +7,9 @@ typealias LogAPI = Loki
 // Log provides direct access to log messages.
 public class Log {
 
-    public static func start() {
+    public static func start(_ logLevel: LogLevel = .info) {
         Loki.sourceName = "Naamio"  // Name of the app (optional)
-        Loki.logLevel = .info       // default (supports 4 other levels)
+        Loki.logLevel = logLevel      // default (supports 4 other levels)
 
         let console = ConsoleDestination()      // define console destination (stdout)
         Loki.addDestination(console)
