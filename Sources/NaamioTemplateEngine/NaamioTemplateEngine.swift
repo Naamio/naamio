@@ -4,6 +4,8 @@ import KituraTemplateEngine
 
 import Malline
 
+import NaamioCore
+
 public enum NaamioTemplateEngineError: Swift.Error {
     case rootPathsEmpty
     case notValidTemplate
@@ -40,7 +42,7 @@ public class NaamioTemplateEngine: TemplateEngine {
     }
     
     public func cacheTemplates(from path: String) throws {
-        print("Caching templates in \(path)")
+        Log.trace("Caching templates in \(path)")
         let templates = try! Path(path).recursiveChildren()
         
         for template in templates {
@@ -61,14 +63,14 @@ public class NaamioTemplateEngine: TemplateEngine {
         
         let templateDirectory = templatePath.parent()
         
-        print("\(templatePath.string) is loading")
+        Log.trace("\(templatePath.string) is loading")
         
         let loader = FileSystemLoader(paths: [templateDirectory])
         `extension`.registerTag("asset", parser: AssetTag.parse)
         let environment = Environment(loader: loader, extensions: [`extension`])
 
         let template = try environment.loadStencil(names: [templatePath.lastComponent])
-        print("Template '\(String(describing: template.name))' loaded")
+        Log.trace("Template '\(String(describing: template.name))' loaded")
         
         if cache.contains(where: { cachedItem in
             if (template.name == cachedItem.stencil.name) &&
@@ -81,7 +83,7 @@ public class NaamioTemplateEngine: TemplateEngine {
             return template
         }
         else {
-            print("Template is new. Caching.")
+            Log.trace("Template is new. Caching.")
             return template
         }
     }
@@ -119,7 +121,7 @@ public class NaamioTemplateEngine: TemplateEngine {
             throw NaamioTemplateEngineError.rootPathsEmpty
         }
         
-        print("Rendering \(templateName) from '\(filePath)'")
+        Log.trace("Rendering \(templateName) from '\(filePath)'")
         
         let loader = FileSystemLoader(paths: rootPaths)
         `extension`.registerTag("asset", parser: AssetTag.parse)

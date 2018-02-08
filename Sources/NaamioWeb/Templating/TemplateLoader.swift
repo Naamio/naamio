@@ -27,13 +27,14 @@ class TemplateLoader {
             Log.trace("Registering template folder '\(folder.name)'")
             let _ = folder.subfolders
                 .filter { !$0.name.hasPrefix("_") }
-                .map { registerTemplateFolder( fromPath: "\(path)\($0.name)" ) }
+                .map { registerTemplateFolder( fromPath: "\(path)\($0.name)/" ) }
             
             let _ = folder.subfolders
                 .filter { !$0.name.hasPrefix("_") }
                 .map { registerTemplates( fromPath: "\(path)\($0.name)" ) }
         } catch {
             Log.warn("Templates (\(path)) could not be loaded")
+            Log.error("\(error)")
         }
     }
     
@@ -73,7 +74,10 @@ class TemplateLoader {
     
     func registerQueryableTemplate(_ file: File, fromPath path: String) {
         Log.trace("Queryable template is \(file.name)")
-        templates.routable.append(Template( location: path, fileName: file.name))
+
+        let newPath = (path.hasPrefix("/") || (path.count == 0)) ? path : "/\(path)"
+
+        templates.routable.append(Template(location: newPath, fileName: file.name))
     }
     
     func registerRootTemplate(_ file: File, fromPath path: String) {

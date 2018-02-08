@@ -17,8 +17,10 @@ internal class RouteHandler {
 
     func get(template: Template) {
         let path = template.routeAs == .page ? "\(template.location!)/\(template.nameWithoutExtension)" : "\(template.location!)"
+        
+        let uri = template.routeAs == .id ? path + "/:id" : path
 
-        self.router.get("\(path)") {
+        self.router.get("\(uri)") {
             request, response, next in
             defer {
                 next()
@@ -37,7 +39,11 @@ internal class RouteHandler {
                     ]
                 ]
                 
-                try response.render(".\(template.location!)/\(template.nameWithoutExtension)", context: context).end()
+                if template.routeAs == .id {
+                    try response.render(".\(template.location!)/\(template.nameWithoutExtension)", context: context).end()
+                } else {
+                    try response.render(".\(template.location!)/\(template.nameWithoutExtension)", context: context).end()
+                }
             } catch {
                 Log.error("Failed to render template \(error)")
             }

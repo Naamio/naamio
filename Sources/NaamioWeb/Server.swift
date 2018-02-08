@@ -53,17 +53,18 @@ public class Server {
     }
 
     /// Starts the `Naamio` web application server. 
-    public class func start() {        
+    public class func start() {
+        Log.start(mode == .test ? .debug : .info)
+        
         Routes.defineRoutes()
 
         // Add HTTP Server to listen on port 8090
         let port = Config.settings["naamio.port"] as? Int ?? 8090
         
         Kitura.addHTTPServer(onPort: port, with: Routes.routers.view)
-
+        
         if mode == .test {
-            Log.start()
-            Log.trace("Starting in test mode")
+            Log.trace("Starting test server")
             Kitura.start()
         } else {
             // start the framework - the servers added until now will start listening
