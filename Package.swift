@@ -30,14 +30,23 @@ let package = Package(
         )
     ],
     dependencies: [
-          .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.3.0"),
-          .package(url: "https://github.com/IBM-Swift/Kitura-Markdown.git", from: "1.0.0"),
-          .package(url: "../palvelu", .branch("features/service-api")),
-          .package(url: "https://github.com/Naamio/Loki.git", .upToNextMajor(from: "0.4.0")),
-          .package(url: "https://github.com/Naamio/Malline.git", .upToNextMajor(from: "0.4.0")),
-          .package(url: "https://github.com/Naamio/Viila.git", .upToNextMajor(from: "0.2.3"))
+          .package(url: "https://github.com/ibm-swift/kitura", from: "2.3.0"),
+          .package(url: "https://github.com/ibm-swift/swift-kuery-sqlite", .upToNextMajor(from: "1.0.0")),
+          .package(url: "https://github.com/ibm-swift/kitura-markdown", from: "1.0.0"),
+          .package(url: "https://github.com/naamio/palvelu", .branch("master")),
+          .package(url: "https://github.com/naamio/loki", .upToNextMajor(from: "0.4.0")),
+          .package(url: "https://github.com/naamio/malline", .upToNextMajor(from: "0.4.0")),
+          .package(url: "https://github.com/naamio/viila", .upToNextMajor(from: "0.2.3"))
     ],
     targets: [
+        .target(
+            name: "NaamioAPI",
+            dependencies: [
+                .target(name: "NaamioCore"),
+                .byNameItem(name: "Palvelu")
+            ],
+            path: getSourcePath("API")
+        ),
         .target(
             name: "NaamioConsole",
             dependencies: [
@@ -64,9 +73,19 @@ let package = Package(
             path: getSourcePath("Core")
         ),
         .target(
+            name: "NaamioData",
+            dependencies: [
+                .target(name: "NaamioCore"),
+                .byNameItem(name: "SwiftKuerySQLite")
+            ],
+            path: getSourcePath("Data")
+        ),
+        .target(
             name: "NaamioService",
             dependencies: [
-                .target(name: "NaamioCore")
+                .target(name: "NaamioAPI"),
+                .target(name: "NaamioCore"),
+                .byNameItem(name: "Palvelu"),
             ],
             path: getSourcePath("Service")
         ),
@@ -92,6 +111,11 @@ let package = Package(
             name: "NaamioConsoleTests",
             dependencies: ["NaamioConsole"],
             path: getTestPath("Console")
+        ),
+        .testTarget(
+            name: "NaamioDataTests",
+            dependencies: ["NaamioData"],
+            path: getTestPath("Data")
         ),
         .testTarget(
             name: "NaamioWebTests",

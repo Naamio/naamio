@@ -51,8 +51,6 @@ public struct Configuration {
     public static func load(from path: String) {
         Log.warn("Cannot load configuration from file yet. Specify configuration by parameters instead.")
     }
-
-    
     
     /// MARK: - Instance Properties
 
@@ -69,8 +67,6 @@ public struct Configuration {
     public var api = ServiceConfiguration()
 
 }
-
-
 
 public struct ServiceConfiguration: ServiceConfigurable {
 
