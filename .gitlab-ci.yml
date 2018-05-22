@@ -10,7 +10,7 @@ stages:
   - deploy
 
 test:
-  image: ibmcom/swift-ubuntu:4.1
+  image: naamio/swift:4.1
   stage: test
   script:
     - echo "Testing service"
@@ -25,7 +25,7 @@ test:
     - .build/debug/*
 
 review:
-  image: ibmcom/swift-ubuntu:4.1
+  image: naamio/swift:4.1
   stage: test
   script:
     - echo "Reviewing service" 
@@ -37,7 +37,7 @@ review:
     - release
 
 build:linux:
-  image: ibmcom/swift-ubuntu:4.1
+  image: naamio/swift:4.1
   stage: build
   before_script:
     # install ssh-agent
