@@ -10,8 +10,11 @@ stages:
   - deploy
 
 test:
-  image: ibmcom/swift-ubuntu:4.0
+  image: swift:4.2
   stage: test
+  before_script:
+    # Install dependencies
+    - apt-get update -y && apt-get install sqlite3 libsqlite3-dev
   script:
     - echo "Testing service"
     - make test
@@ -25,8 +28,11 @@ test:
     - .build/debug/*
 
 review:
-  image: ibmcom/swift-ubuntu:4.0
+  image: swift:4.2
   stage: test
+  before_script:
+    # Install dependencies
+    - apt-get update -y && apt-get install sqlite3 libsqlite3-dev
   script:
     - echo "Reviewing service" 
     - make test
@@ -37,7 +43,7 @@ review:
     - release
 
 build:linux:
-  image: ibmcom/swift-ubuntu:4.0
+  image: swift:4.2
   stage: build
   before_script:
     # install ssh-agent
