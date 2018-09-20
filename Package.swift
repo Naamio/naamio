@@ -215,7 +215,7 @@ let package = Package(
         )
     ],
     dependencies: [
-          .package(url: "https://github.com/ibm-swift/kitura", from: "2.3.0"),
+          .package(url: "https://github.com/ibm-swift/kitura", from: "2.5.0"),
           .package(url: "https://github.com/ibm-swift/swift-kuery-sqlite", .upToNextMajor(from: "1.0.0")),
           .package(url: "https://github.com/ibm-swift/kitura-markdown", from: "1.0.0"),
           .package(url: "https://github.com/naamio/palvelu", .branch("master")),

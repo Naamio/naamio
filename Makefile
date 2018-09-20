@@ -46,7 +46,7 @@ run: build
 	./.build/debug/Naamio
 
 build-release: clean
-	docker run -v $$(pwd):/tmp/$(PRODUCT_NAME) -w /tmp/$(PRODUCT_NAME) -it ibmcom/swift-ubuntu:4.1 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib -Xswiftc -whole-module-optimization
+	docker run -v $$(pwd):/tmp/$(PRODUCT_NAME) -w /tmp/$(PRODUCT_NAME) -it ibmcom/swift-ubuntu:4.2 swift build -c release -Xcc -fblocks -Xlinker -L/usr/local/lib -Xswiftc -whole-module-optimization
 
 clean-container:
 

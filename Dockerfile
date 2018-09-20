@@ -1,4 +1,4 @@
-FROM ibmcom/swift-ubuntu-runtime:4.1
+FROM ibmcom/swift-ubuntu-runtime:4.2
 
 ADD .build/release/ /usr/share/naamio/
 

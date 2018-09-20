@@ -1,44 +1,33 @@
 import Foundation
 
-import KituraTemplateEngine
-
 import Malline
 
 import NaamioCore
 
-public enum NaamioTemplateEngineError: Swift.Error {
-    case rootPathsEmpty
-    case notValidTemplate
-}
-
-struct NaamioTemplateCache {
-    var stencil: Stencil
-    var path: Path
-}
 
 /// NaamioTemplateEngine is the base templating system for `Naamio`.
 /// It utilizes `Kitura` and `Malline`, extending base functionality 
 /// to support additional tags and functions, specific to `Naamio`.
 ///
 /// Documentation can be found at [Malline on GitHub](https://github.com/Naamio/malline).
-public class NaamioTemplateEngine: TemplateEngine {
+public class NaamioTemplateEngine {
 
     /// Identifies the specific file extensions to look for.
     /// In the case of `Naamio`, we use `.html` to simplify
     /// adoption and migration use cases.
     public var fileExtension: String { return "html" }
 
-    private let `extension`: Extension
+    let `extension`: Extension
 
-    private var rootPaths: [Path] = []
+    var rootPaths: [Path] = []
     
-    private var cache: [NaamioTemplateCache]
+    private var cache: [TemplateCache]
     
     /// Initializes a new instance of the `NaamioTemplateEngine` with 
     /// the default extension (`.html`).
     public init(extension: Extension = Extension()) {
         self.`extension` = `extension`
-        self.cache = [NaamioTemplateCache]()
+        self.cache = [TemplateCache]()
     }
     
     public func cacheTemplates(from path: String) throws {
@@ -54,6 +43,13 @@ public class NaamioTemplateEngine: TemplateEngine {
         self.rootPaths = rootPaths.map { Path($0) }
     }
 
+    /// Caches the template from the URL of the file to enable more rapid 
+    /// rendering a less expensive file IO requests for each HTTP request.
+    ///
+    ///  - Parameters:
+    ///    - filePath: The URL of the file as a string.
+    ///  - Throws: A rendering Error if the stencil cannot be loaded.
+    ///  - Returns: The complete stencil after loading.
     public func cacheTemplate(filePath: String) throws -> Stencil {
         let templatePath = Path("\(filePath).html")
         
@@ -86,49 +82,6 @@ public class NaamioTemplateEngine: TemplateEngine {
             Log.trace("Template is new. Caching.")
             return template
         }
-    }
-    
-    /// Renders the given template using `Malline`, and the additional tags
-    /// provided to the parser by the `NaamioTemplateEngine`.
-    ///
-    ///  - parameter filePath: The path of the file in relation to the root project.
-    ///  - parameter context: The meta information for the current page session.
-    ///  - returns: The resulting file post-render.
-    public func render(filePath: String, context: [String: Any]) throws -> String {
-        let templatePath = Path(filePath)
-        let templateDirectory = templatePath.parent()
-    
-        let loader = FileSystemLoader(paths: [templateDirectory])
-        `extension`.registerTag("asset", parser: AssetTag.parse)
-        let environment = Environment(loader: loader, extensions: [`extension`])
-        var context = context
-        context["loader"] = loader
-        
-        return try environment.renderStencil(name: templatePath.lastComponent,  context: context)
-    }
-
-    /// Renders the given template using `Malline`, and the additional tags
-    /// provided to the parser by the `NaamioTemplateEngine`.
-    ///
-    ///  - parameter filePath: The path of the file in relation to the root project.
-    ///  - parameter context: The meta information for the current page session.
-    ///  - parameter options: Rendering options for `Malline` to render the template.
-    ///  - parameter templateName: Name to use for the template.
-    ///  - returns: The resulting file post-render.
-    public func render(filePath: String, context: [String: Any], options: RenderingOptions,
-                       templateName: String) throws -> String {
-        if rootPaths.isEmpty {
-            throw NaamioTemplateEngineError.rootPathsEmpty
-        }
-        
-        Log.trace("Rendering \(templateName) from '\(filePath)'")
-        
-        let loader = FileSystemLoader(paths: rootPaths)
-        `extension`.registerTag("asset", parser: AssetTag.parse)
-        let environment = Environment(loader: loader, extensions: [`extension`])
-        var context = context
-        context["loader"] = loader
-        return try environment.renderStencil(name: templateName,  context: context)
     }
     
     func assetsFilter(value: Any?, arguments: [Any?]) throws -> Any? {
